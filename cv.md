@@ -15,14 +15,10 @@ Thesis: *Clusters and Numeral Imprecision in Quasi-Count Nouns* (78/100, Supervi
 
 ## Selected Presentations
 
-- **The Cost of Grouping: A Probabilistic Account of Anti-Duality Inferences from Universal Quantifiers** — *Human and Artificial Rationalities*, Paris, Sep 2026 (refereed, forthcoming)
-- **Silent Classifiers are Strange, and Big Numbers are Stranger** — *ULAB 2025*, UCL, Apr 2025 (refereed)
+- ****Anti-Duality without Conceptual Alternatives? Reasoning over Mental Representations in a Rational Speech Act Model** — *Human and Artificial Rationalities*, Paris, Sep 2026 (accepted)
 - **A MaxEnt Optimality Theory Grammar for Alternatives** — *PALS PhD Day*, UCL, Sep 2026
-- **Anti-Duality without Conceptual Alternatives?** — *CreteLing*, University of Crete, Jul 2026
-- **Anti-Duality Inferences and the Mental Representations of Universal Quantifiers** — *Semantics & Pragmatics Reading Group*, UCL, May 2026
-- **On Conceptual Alternatives** — *Pragmatics Research Seminar*, UCL, Mar 2026
-- **Expressives, Miratives and Conventional Implicature** — *Pragmatics Research Seminar*, UCL, Dec 2025
 - **Clusters and Numeral-Imprecision in Quasi-Count Nouns** — *UCL Linguistics Society*, UCL, May 2025
+- - **Silent Classifiers are Strange, and Big Numbers are Stranger** — *ULAB 2025*, UCL, Apr 2025 (refereed)
 
 ## Teaching
 
