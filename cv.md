@@ -18,7 +18,7 @@ Thesis: *Clusters and Numeral Imprecision in Quasi-Count Nouns* (78/100, Supervi
 - ****Anti-Duality without Conceptual Alternatives? Reasoning over Mental Representations in a Rational Speech Act Model** — *Human and Artificial Rationalities*, Paris, Sep 2026 (accepted)
 - **A MaxEnt Optimality Theory Grammar for Alternatives** — *PALS PhD Day*, UCL, Sep 2026
 - **Clusters and Numeral-Imprecision in Quasi-Count Nouns** — *UCL Linguistics Society*, UCL, May 2025
-- - **Silent Classifiers are Strange, and Big Numbers are Stranger** — *ULAB 2025*, UCL, Apr 2025 (refereed)
+- **Silent Classifiers are Strange, and Big Numbers are Stranger** — *ULAB 2025*, UCL, Apr 2025 (refereed)
 
 ## Teaching
 
