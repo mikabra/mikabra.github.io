@@ -1,7 +1,5 @@
 # Curriculum Vitae
 
-&lt;a href="/assets/pdf/CV.pdf" class="pdf-link"&gt;Download PDF&lt;/a&gt;
-
 ## Education
 
 **MPhil Linguistics**, University College London, 2025–2027  
