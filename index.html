@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mika Bradley</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <nav>
+        <a href="#about" class="nav-link active" data-page="about">About</a>
+        <a href="#cv" class="nav-link" data-page="cv">CV</a>
+      </nav>
+    </header>
+
+    <main id="content">
+      <div class="loading">Loading…</div>
+    </main>
+
+    <footer>
+      <p>© Mika Bradley · <a href="mailto:mika.bradley.22@ucl.ac.uk">mika.bradley.22@ucl.ac.uk</a></p>
+    </footer>
+  </div>
+
+  <script>
+    const contentDiv = document.getElementById('content');
+    const navLinks = document.querySelectorAll('.nav-link');
+
+    async function loadPage(page) {
+      contentDiv.innerHTML = '<div class="loading">Loading…</div>';
+      try {
+        const response = await fetch(`${page}.md`);
+        if (!response.ok) throw new Error('Page not found');
+        const markdown = await response.text();
+        contentDiv.innerHTML = marked.parse(markdown);
+      } catch (err) {
+        contentDiv.innerHTML = `<p>Error loading page: ${err.message}</p>`;
+      }
+    }
+
+    function setActive(page) {
+      navLinks.forEach(link => {
+        link.classList.toggle('active', link.dataset.page === page);
+      });
+    }
+
+    function route() {
+      const hash = window.location.hash.replace('#', '') || 'about';
+      setActive(hash);
+      loadPage(hash);
+    }
+
+    navLinks.forEach(link => {
+      link.addEventListener('click', (e) => {
+        const page = e.target.dataset.page;
+        setActive(page);
+        loadPage(page);
+      });
+    });
+
+    window.addEventListener('hashchange', route);
+    route();
+  </script>
+</body>
+</html>
