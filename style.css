@@ -1,0 +1,182 @@
+:root {
+  --bg: #F0DED4;
+  --text: #0194A8;
+  --text-hover: #017a8a;
+  --surface: #FAF6F3;
+  --divider: rgba(1, 148, 168, 0.15);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--text);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+}
+
+.container {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 3rem 1.5rem 2rem;
+}
+
+header {
+  margin-bottom: 3rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--divider);
+}
+
+nav {
+  display: flex;
+  gap: 2rem;
+}
+
+.nav-link {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 500;
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text);
+  text-decoration: none;
+  opacity: 0.5;
+  transition: opacity 0.2s;
+}
+
+.nav-link:hover,
+.nav-link.active {
+  opacity: 1;
+}
+
+main {
+  min-height: 50vh;
+}
+
+.loading {
+  opacity: 0.5;
+  font-style: italic;
+}
+
+/* Typography */
+h1, h2, h3, h4 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+}
+
+h1 {
+  font-size: 2.2rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  margin-top: 0;
+}
+
+h2 {
+  font-size: 1.4rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  border-bottom: 1px solid var(--divider);
+  padding-bottom: 0.4rem;
+  margin-top: 2.5rem;
+}
+
+h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-top: 1.5rem;
+}
+
+p {
+  margin-bottom: 1rem;
+}
+
+a {
+  color: var(--text);
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+  text-decoration-thickness: 1px;
+}
+
+a:hover {
+  color: var(--text-hover);
+}
+
+/* Lists */
+ul, ol {
+  margin-left: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+li {
+  margin-bottom: 0.4rem;
+}
+
+/* CV specific */
+strong {
+  font-weight: 600;
+}
+
+em {
+  font-style: italic;
+  opacity: 0.85;
+}
+
+/* PDF button */
+.pdf-link {
+  display: inline-block;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 500;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--text);
+  color: var(--text);
+  text-decoration: none;
+  margin: 1rem 0 2rem;
+  transition: all 0.2s;
+}
+
+.pdf-link:hover {
+  background: var(--text);
+  color: var(--bg);
+}
+
+/* Footer */
+footer {
+  margin-top: 4rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--divider);
+  font-size: 0.85rem;
+  opacity: 0.7;
+}
+
+footer a {
+  text-decoration: none;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .container {
+    padding: 2rem 1rem 1.5rem;
+  }
+  
+  h1 {
+    font-size: 1.7rem;
+  }
+  
+  nav {
+    gap: 1.5rem;
+  }
+}
