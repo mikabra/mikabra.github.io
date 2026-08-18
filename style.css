@@ -1,9 +1,9 @@
 :root {
-  --bg: ##2E383C;
-  --text: ##A7C080;
-  --text-hover: ##A7C080;
-  --surface: ##4F5B58;
-  --divider: rgba(167, 192, 128, 0.15);
+  --bg: #FDF6E3;              /* everforest light medium — bg0 */
+  --text: #8DA101;            /* everforest light — accent green */
+  --text-hover: #748401;      /* accent green, darkened ~20% for hover */
+  --surface: #F4F0D9;         /* everforest light medium — bg1 */
+  --divider: rgba(141, 161, 1, 0.15);  /* accent green at low opacity */
 }
 
 * {
