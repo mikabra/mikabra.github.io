@@ -4,6 +4,7 @@
   <img src="assets/mika.jpg" alt="Mika hiking somewhere near the Feldberg in Baden-Württemberg, Germany.">
   <figcaption>Mika hiking somewhere near the Feldberg in Baden-Württemberg, Germany.</figcaption>
 </figure>
+
 Hi! I'm an MPhil student in linguistics at University College London. I'm interested in the logic of natural language, and how it interfaces with the logic of thought and the logic of conversation.
 
 Lately, I've been thinking a lot about the system that generates and selects between alternatives — those expressions left unpronounced that nonetheless seem crucial for sentence interpretation. But I've also worked on the semantics and cognition of quantificational expressions, as well as on game-theoretic and constraint-based models of pragmatic language understanding.
