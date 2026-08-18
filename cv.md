@@ -6,7 +6,7 @@
 Research focus: formal semantics of number and quantification, numerical cognition, probabilistic and decision-theoretic pragmatics, philosophy of language and cognitive science.
 
 **BSc Experimental Linguistics (First Class Honours)**, University College London, 2022–2025  
-Thesis: *Clusters and Numeral Imprecision in Quasi-Count Nouns* (78/100, Supervisor: Prof. Yasutada Sudo)
+Thesis: *Clusters and Numeral Imprecision in Quasi-Count Nouns* (78/100, Supervisor: [Prof. Yasutada Sudo](https://www.homepages.ucl.ac.uk/~ucjtudo/))
 
 ## Research Interests
 
