@@ -33,6 +33,30 @@
     const contentDiv = document.getElementById('content');
     const navLinks = document.querySelectorAll('.nav-link');
 
+    const themeToggle = document.getElementById('theme-toggle');
+
+    function updateToggleLabel() {
+      const stored = localStorage.getItem('theme');
+      const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const isDark = stored ? stored === 'dark' : systemDark;
+      themeToggle.textContent = isDark ? '☀' : '☾';
+      themeToggle.setAttribute('aria-label', isDark ? 'Switch to light theme' : 'Switch to dark theme');
+    }
+    
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) document.documentElement.setAttribute('data-theme', savedTheme);
+    updateToggleLabel();
+    
+    themeToggle.addEventListener('click', () => {
+      const stored = localStorage.getItem('theme');
+      const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const currentIsDark = stored ? stored === 'dark' : systemDark;
+      const next = currentIsDark ? 'light' : 'dark';
+      localStorage.setItem('theme', next);
+      document.documentElement.setAttribute('data-theme', next);
+      updateToggleLabel();
+    });
+
     async function loadPage(page) {
       contentDiv.innerHTML = '<div class="loading">Loading…</div>';
       try {
