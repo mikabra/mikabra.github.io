@@ -1,4 +1,4 @@
-<img src="assets/profile.jpg" alt="Mika Bradley" class="profile-photo">
+<img src="assets/mika.jpg" alt="Mika Bradley" class="profile-photo">
 
 # Mika Bradley
 Hi! I'm an MPhil student in linguistics at University College London. I'm interested in the logic of natural language, and how it interfaces with the logic of thought and the logic of conversation.
