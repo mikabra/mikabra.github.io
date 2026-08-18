@@ -36,74 +36,36 @@ html[data-theme="dark"] {
   --divider: rgba(167, 192, 128, 0.15);
 }
 
-h1, h2, h3, h4 {
-  color: var(--accent);
-}
-
-a {
-  color: var(--accent);
-}
-a:hover {
-  color: var(--accent-hover);
-}
-
-.nav-link {
-  color: var(--text);
-  opacity: 0.5;
-}
-.nav-link:hover,
-.nav-link.active {
-  color: var(--accent);
-  opacity: 1;
-}
-
-.pdf-link {
-  border: 1px solid var(--accent);
-  color: var(--accent);
-}
-.pdf-link:hover {
-  background: var(--accent);
-  color: var(--bg);
-}
-
-body {
-  background: var(--bg);
-  color: var(--text);
-  transition: background-color 0.2s ease, color 0.2s ease;
-}
-
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
-
 body {
-  font-family: 'Ubuntu', -apple-system, BlinkMacSystemFont, sans-serif;  font-weight: 400;
+  font-family: 'Ubuntu', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-weight: 400;
   font-size: 16px;
   line-height: 1.6;
   color: var(--text);
   background: var(--bg);
   -webkit-font-smoothing: antialiased;
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
-
 .container {
   max-width: 760px;
   margin: 0 auto;
   padding: 3rem 1.5rem 2rem;
 }
-
 header {
   margin-bottom: 3rem;
   padding-bottom: 1.5rem;
   border-bottom: 1px solid var(--divider);
 }
-
 nav {
   display: flex;
+  align-items: center;
   gap: 2rem;
 }
-
 .nav-link {
   font-family: 'Ubuntu Mono', monospace;
   font-weight: 700;
@@ -113,39 +75,75 @@ nav {
   color: var(--text);
   text-decoration: none;
   opacity: 0.5;
-  transition: opacity 0.2s;
+  transition: opacity 0.2s, color 0.2s;
 }
-
 .nav-link:hover,
 .nav-link.active {
+  color: var(--accent);
   opacity: 1;
 }
-
+/* Theme switch */
+.theme-switch {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  width: 40px;
+  height: 20px;
+  margin-left: auto;
+  cursor: pointer;
+}
+.theme-switch input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+.theme-switch-track {
+  position: absolute;
+  inset: 0;
+  background: var(--surface);
+  border: 1px solid var(--accent);
+  transition: background-color 0.2s ease;
+}
+.theme-switch-track::before {
+  content: "";
+  position: absolute;
+  height: 12px;
+  width: 12px;
+  left: 2px;
+  top: 2px;
+  background: var(--accent);
+  transition: transform 0.2s ease;
+}
+.theme-switch input:checked + .theme-switch-track::before {
+  transform: translateX(18px);
+}
+.theme-switch input:focus-visible + .theme-switch-track {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
 main {
   min-height: 50vh;
 }
-
 .loading {
   opacity: 0.5;
   font-style: italic;
 }
-
 /* Typography */
 h1, h2, h3, h4 {
   font-family: 'Ubuntu Mono', monospace;
-  font-weight: 700; letter-spacing: -0.02em;
+  font-weight: 700;
+  letter-spacing: -0.02em;
   line-height: 1.2;
   margin-top: 2rem;
   margin-bottom: 0.75rem;
+  color: var(--accent);
 }
-
 h1 {
   font-size: 2.2rem;
-  font-weight: 700;
   letter-spacing: -0.03em;
   margin-top: 0;
 }
-
 h2 {
   font-size: 1.4rem;
   text-transform: uppercase;
@@ -154,48 +152,38 @@ h2 {
   padding-bottom: 0.4rem;
   margin-top: 2.5rem;
 }
-
 h3 {
   font-size: 1.1rem;
-  font-weight: 600;
   margin-top: 1.5rem;
 }
-
 p {
   margin-bottom: 1rem;
 }
-
 a {
-  color: var(--text);
+  color: var(--accent);
   text-decoration: underline;
   text-underline-offset: 0.15em;
   text-decoration-thickness: 1px;
 }
-
 a:hover {
-  color: var(--text-hover);
+  color: var(--accent-hover);
 }
-
 /* Lists */
 ul, ol {
   margin-left: 1.2rem;
   margin-bottom: 1rem;
 }
-
 li {
   margin-bottom: 0.4rem;
 }
-
 /* CV specific */
 strong {
-  font-weight: 600;
+  font-weight: 700;
 }
-
 em {
   font-style: italic;
   opacity: 0.85;
 }
-
 /* PDF button */
 .pdf-link {
   display: inline-block;
@@ -205,18 +193,16 @@ em {
   text-transform: uppercase;
   letter-spacing: 0.06em;
   padding: 0.5rem 1rem;
-  border: 1px solid var(--text);
-  color: var(--text);
+  border: 1px solid var(--accent);
+  color: var(--accent);
   text-decoration: none;
   margin: 1rem 0 2rem;
   transition: all 0.2s;
 }
-
 .pdf-link:hover {
-  background: var(--text);
+  background: var(--accent);
   color: var(--bg);
 }
-
 /* Footer */
 footer {
   margin-top: 4rem;
@@ -225,11 +211,9 @@ footer {
   font-size: 0.85rem;
   opacity: 0.7;
 }
-
 footer a {
   text-decoration: none;
 }
-
 /* Responsive */
 @media (max-width: 600px) {
   .container {
@@ -244,7 +228,7 @@ footer a {
     gap: 1.5rem;
   }
 }
-
+/* Profile photo */
 .profile-photo {
   margin-bottom: 2rem;
 }
@@ -257,23 +241,10 @@ footer a {
 }
 .profile-photo figcaption {
   margin-top: 0.6rem;
-  font-family: 'Space Grotesk', sans-serif;
-  font-weight: 500;
+  font-family: 'Ubuntu Mono', monospace;
+  font-weight: 700;
   font-size: 0.8rem;
   text-transform: uppercase;
   letter-spacing: 0.06em;
   opacity: 0.6;
-}
-
-#theme-toggle {
-  background: none;
-  border: none;
-  color: var(--text);
-  font-size: 1.1rem;
-  cursor: pointer;
-  opacity: 0.6;
-  margin-left: auto;
-}
-#theme-toggle:hover {
-  opacity: 1;
 }
