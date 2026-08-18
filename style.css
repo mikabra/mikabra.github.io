@@ -266,3 +266,16 @@ footer a {
   letter-spacing: 0.06em;
   opacity: 0.6;
 }
+
+#theme-toggle {
+  background: none;
+  border: none;
+  color: var(--text);
+  font-size: 1.1rem;
+  cursor: pointer;
+  opacity: 0.6;
+  margin-left: auto;
+}
+#theme-toggle:hover {
+  opacity: 1;
+}
