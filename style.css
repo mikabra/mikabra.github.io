@@ -1,9 +1,9 @@
 :root {
-  --bg: #f2ece9;
-  --text: #7ebd7f;
-  --text-hover: #94d695;
-  --surface: #FAF6F3;
-  --divider: rgba(1, 148, 168, 0.15);
+  --bg: ##2E383C;
+  --text: ##A7C080;
+  --text-hover: ##A7C080;
+  --surface: ##4F5B58;
+  --divider: rgba(167, 192, 128, 0.15);
 }
 
 * {
