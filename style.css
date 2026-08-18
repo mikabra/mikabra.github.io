@@ -79,8 +79,7 @@ body {
 }
 
 body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  font-weight: 400;
+  font-family: 'Ubuntu', -apple-system, BlinkMacSystemFont, sans-serif;  font-weight: 400;
   font-size: 16px;
   line-height: 1.6;
   color: var(--text);
@@ -106,8 +105,8 @@ nav {
 }
 
 .nav-link {
-  font-family: 'Space Grotesk', sans-serif;
-  font-weight: 500;
+  font-family: 'Ubuntu Mono', monospace;
+  font-weight: 700;
   font-size: 0.95rem;
   text-transform: uppercase;
   letter-spacing: 0.08em;
@@ -133,9 +132,8 @@ main {
 
 /* Typography */
 h1, h2, h3, h4 {
-  font-family: 'Space Grotesk', sans-serif;
-  font-weight: 600;
-  letter-spacing: -0.02em;
+  font-family: 'Ubuntu Mono', monospace;
+  font-weight: 700; letter-spacing: -0.02em;
   line-height: 1.2;
   margin-top: 2rem;
   margin-bottom: 0.75rem;
@@ -201,8 +199,8 @@ em {
 /* PDF button */
 .pdf-link {
   display: inline-block;
-  font-family: 'Space Grotesk', sans-serif;
-  font-weight: 500;
+  font-family: 'Ubuntu Mono', monospace;
+  font-weight: 700;
   font-size: 0.85rem;
   text-transform: uppercase;
   letter-spacing: 0.06em;
