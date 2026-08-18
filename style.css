@@ -182,10 +182,21 @@ footer a {
 }
 
 .profile-photo {
-  width: 160px;
-  height: 160px;
-  border-radius: 50%;
+  margin-bottom: 2rem;
+}
+.profile-photo img {
+  width: 100%;
+  height: auto;
+  max-height: 440px;
   object-fit: cover;
   display: block;
-  margin-bottom: 1.5rem;
+}
+.profile-photo figcaption {
+  margin-top: 0.6rem;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 500;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  opacity: 0.6;
 }
