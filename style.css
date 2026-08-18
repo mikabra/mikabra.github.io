@@ -1,9 +1,75 @@
 :root {
-  --bg: #FDF6E3;              /* everforest light medium — bg0 */
-  --text: #8DA101;            /* everforest light — accent green */
-  --text-hover: #748401;      /* accent green, darkened ~20% for hover */
-  --surface: #F4F0D9;         /* everforest light medium — bg1 */
-  --divider: rgba(141, 161, 1, 0.15);  /* accent green at low opacity */
+  --bg: #FDF6E3;
+  --surface: #F4F0D9;
+  --text: #2D353B;
+  --accent: #8DA101;
+  --accent-hover: #748401;
+  --divider: rgba(141, 161, 1, 0.15);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #2D353B;
+    --surface: #343F44;
+    --text: #D3C6AA;
+    --accent: #A7C080;
+    --accent-hover: #B9CD99;
+    --divider: rgba(167, 192, 128, 0.15);
+  }
+}
+
+html[data-theme="light"] {
+  --bg: #FDF6E3;
+  --surface: #F4F0D9;
+  --text: #2D353B;
+  --accent: #8DA101;
+  --accent-hover: #748401;
+  --divider: rgba(141, 161, 1, 0.15);
+}
+
+html[data-theme="dark"] {
+  --bg: #2D353B;
+  --surface: #343F44;
+  --text: #D3C6AA;
+  --accent: #A7C080;
+  --accent-hover: #B9CD99;
+  --divider: rgba(167, 192, 128, 0.15);
+}
+
+h1, h2, h3, h4 {
+  color: var(--accent);
+}
+
+a {
+  color: var(--accent);
+}
+a:hover {
+  color: var(--accent-hover);
+}
+
+.nav-link {
+  color: var(--text);
+  opacity: 0.5;
+}
+.nav-link:hover,
+.nav-link.active {
+  color: var(--accent);
+  opacity: 1;
+}
+
+.pdf-link {
+  border: 1px solid var(--accent);
+  color: var(--accent);
+}
+.pdf-link:hover {
+  background: var(--accent);
+  color: var(--bg);
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 * {
