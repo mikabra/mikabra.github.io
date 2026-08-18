@@ -11,7 +11,7 @@ Thesis: *Clusters and Numeral Imprecision in Quasi-Count Nouns* (78/100, Supervi
 ## Research Interests
 
 **Broad:** formal semantics & pragmatics, philosophy of language, cognitive psychology, computational linguistics  
-**Narrow:** alternatives and scalar implicature, quantification, formal epistemology, numerical cognition, collective intentionality, speech acts
+**Narrow:** alternatives and implicature, quantification, formal epistemology, numerical cognition, collective intentionality, speech acts
 
 ## Selected Presentations
 
