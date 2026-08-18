@@ -10,5 +10,5 @@ Before my MPhil, I completed my BSc in Experimental Linguistics, also at UCL, wh
 You can reach me at [mika.bradley.22@ucl.ac.uk](mailto:mika.bradley.22@ucl.ac.uk).
 
 ## Links
-- [Google Scholar](#)
-- [GitHub](#)
+- [UCL Profile](https://profiles.ucl.ac.uk/106448-mika-bradley)
+- [LinkedIn](https://www.linkedin.com/in/mika-b-391b8a278/)
