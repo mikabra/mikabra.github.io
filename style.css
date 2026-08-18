@@ -180,3 +180,12 @@ footer a {
     gap: 1.5rem;
   }
 }
+
+.profile-photo {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+  margin-bottom: 1.5rem;
+}
