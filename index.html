@@ -6,7 +6,8 @@
   <title>Mika Bradley</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;700&family=Ubuntu+Mono:wght@400;700&display=swap" rel="stylesheet">  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;700&family=Ubuntu+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 </head>
 <body>
@@ -15,45 +16,38 @@
       <nav>
         <a href="#about" class="nav-link active" data-page="about">About</a>
         <a href="#cv" class="nav-link" data-page="cv">CV</a>
-        <button id="theme-toggle" aria-label="Toggle dark theme"></button>
+        <label class="theme-switch" aria-label="Toggle dark theme">
+          <input type="checkbox" id="theme-toggle">
+          <span class="theme-switch-track"></span>
+        </label>
       </nav>
     </header>
-
     <main id="content">
       <div class="loading">Loading…</div>
     </main>
-
     <footer>
       <p>© Mika Bradley · <a href="mailto:mika.bradley.22@ucl.ac.uk">mika.bradley.22@ucl.ac.uk</a></p>
     </footer>
   </div>
-
   <script>
     const contentDiv = document.getElementById('content');
     const navLinks = document.querySelectorAll('.nav-link');
-
     const themeToggle = document.getElementById('theme-toggle');
 
-    function updateToggleLabel() {
+    function currentIsDark() {
       const stored = localStorage.getItem('theme');
       const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      const isDark = stored ? stored === 'dark' : systemDark;
-      themeToggle.textContent = isDark ? '☀' : '☾';
-      themeToggle.setAttribute('aria-label', isDark ? 'Switch to light theme' : 'Switch to dark theme');
+      return stored ? stored === 'dark' : systemDark;
     }
-    
+
     const savedTheme = localStorage.getItem('theme');
     if (savedTheme) document.documentElement.setAttribute('data-theme', savedTheme);
-    updateToggleLabel();
-    
-    themeToggle.addEventListener('click', () => {
-      const stored = localStorage.getItem('theme');
-      const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      const currentIsDark = stored ? stored === 'dark' : systemDark;
-      const next = currentIsDark ? 'light' : 'dark';
+    themeToggle.checked = currentIsDark();
+
+    themeToggle.addEventListener('change', () => {
+      const next = themeToggle.checked ? 'dark' : 'light';
       localStorage.setItem('theme', next);
       document.documentElement.setAttribute('data-theme', next);
-      updateToggleLabel();
     });
 
     async function loadPage(page) {
@@ -67,19 +61,16 @@
         contentDiv.innerHTML = `<p>Error loading page: ${err.message}</p>`;
       }
     }
-
     function setActive(page) {
       navLinks.forEach(link => {
         link.classList.toggle('active', link.dataset.page === page);
       });
     }
-
     function route() {
       const hash = window.location.hash.replace('#', '') || 'about';
       setActive(hash);
       loadPage(hash);
     }
-
     navLinks.forEach(link => {
       link.addEventListener('click', (e) => {
         const page = e.target.dataset.page;
@@ -87,7 +78,6 @@
         loadPage(page);
       });
     });
-
     window.addEventListener('hashchange', route);
     route();
   </script>
