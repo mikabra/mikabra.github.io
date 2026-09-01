@@ -1,4 +1,4 @@
-# Curriculum Vitae
+# Curriculum Vitae (Condensed)
 
 ## Education
 
