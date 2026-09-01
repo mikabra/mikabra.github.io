@@ -15,15 +15,16 @@ Thesis: *Clusters and Numeral Imprecision in Quasi-Count Nouns* (78/100, Supervi
 
 ## Selected Presentations
 
-- **Anti-Duality without Conceptual Alternatives? Reasoning over Mental Representations in a Rational Speech Act Model** — *Human and Artificial Rationalities*, Paris, Sep 2026 (accepted)
+- **Anti-Duality without Conceptual Alternatives?** — *CreteLing Student Session*, Rethymno, Jul 2026
 - **Clusters and Numeral-Imprecision in Quasi-Count Nouns** — *UCL Linguistics Society*, UCL, May 2025
 - **Silent Classifiers are Strange, and Big Numbers are Stranger** — *ULAB 2025*, UCL, Apr 2025
 
 ## Teaching
 
 - **Interdisciplinary Game Theory** (BASC0017), Teaching Assistant, UCL, Spring 2027
-- **Presuppositions as Anaphora and Proof-Theoretic Semantics**, Guest lecture, UCL, Spring 2026
-- **Pragmatics in a Social Context** (PLIN0017), Teaching Assistant, UCL, Winter 2025
+- **Introduction to Language** (PLIN0006), Teaching Assistant, UCL, Winter 2026
+- **Pragmatics in a Social Context** (PLIN0017), Teaching Assistant, UCL, Spring 2026
+- **Presuppositions as Anaphora and Proof-Theoretic Semantics**, Guest lecture, UCL, Winter 2025
 
 ## Service
 
