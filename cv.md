@@ -32,13 +32,8 @@ Thesis: *Clusters and Numeral Imprecision in Quasi-Count Nouns* (78/100, Supervi
 - Local Chair, ULAB 2025, UCL, 2024–2025
 - Marker, UK Linguistics Olympiad, 2025
 
-## Awards
-
-- PALS Conference Fund (£1,000), UCL, 2026
-- Global Experience Bursary, UCL, 2023 & 2024
-
 ## Skills
 
 **Natural Languages:** English (Native), Polish (Heritage), Japanese (Lower Intermediate), Tagalog (Fieldwork)  
 **Formal Languages & Tools:** Python, R, LaTeX, Haskell; Git, GitHub Actions, Linux CLI, Docker  
-**Research Tools:** Gorilla, Amazon Mechanical Turk, Prolific
+**Research Tools:** Gorilla, Prolific
