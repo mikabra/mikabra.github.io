@@ -15,7 +15,7 @@ Thesis: *Clusters and Numeral Imprecision in Quasi-Count Nouns* (78/100, Supervi
 
 ## Selected Presentations
 
-- **Anti-Duality without Conceptual Alternatives?** — *CreteLing Student Session*, Rethymno, Jul 2026
+- **Anti-Duality without Conceptual Alternatives in a Rational Speech Act model** — *CreteLing Student Session*, Rethymno, Jul 2026
 - **Clusters and Numeral-Imprecision in Quasi-Count Nouns** — *UCL Linguistics Society*, UCL, May 2025
 - **Silent Classifiers are Strange, and Big Numbers are Stranger** — *ULAB 2025*, UCL, Apr 2025
 
