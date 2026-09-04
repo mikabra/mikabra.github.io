@@ -3,7 +3,7 @@
 ## Education
 
 **MPhil Linguistics**, University College London, 2025–2027  
-Research focus: formal semantics of number and quantification, numerical cognition, probabilistic and decision-theoretic pragmatics, philosophy of language and cognitive science.
+Research focus: formal semantics of presupposition and implicature, numerical cognition, probabilistic and decision-theoretic pragmatics, philosophy of language and cognitive science (Supervisors: [Dr. Mario Giulianelli](https://glnmario.github.io/) and [Prof. Yasutada Sudo](https://www.homepages.ucl.ac.uk/~ucjtudo/))
 
 **BSc Experimental Linguistics (First Class Honours)**, University College London, 2022–2025  
 Thesis: *Clusters and Numeral Imprecision in Quasi-Count Nouns* (78/100, Supervisor: [Prof. Yasutada Sudo](https://www.homepages.ucl.ac.uk/~ucjtudo/))
