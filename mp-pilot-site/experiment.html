@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<title>Sentence choice study</title>
+<script src="https://unpkg.com/jspsych@8.3.0"></script>
+<script src="https://unpkg.com/@jspsych/plugin-html-keyboard-response@2.1.0"></script>
+<script src="https://unpkg.com/@jspsych/plugin-html-button-response@2.1.0"></script>
+<script src="https://unpkg.com/@jspsych/plugin-survey-html-form@2.1.0"></script>
+<script src="https://unpkg.com/@jspsych-contrib/plugin-pipe@0.5"></script>
+<link  href="https://unpkg.com/jspsych@8.3.0/css/jspsych.css" rel="stylesheet">
+<script src="stimuli.js?v=b700881c53"></script>
+<script src="exp.js?v=b700881c53"></script>
+<style>
+  body { background:#fff; font-family: "Helvetica Neue", Arial, sans-serif; color:#222; }
+  .jspsych-content { max-width: 760px; }
+  h2 { font-weight:600; font-size:1.25rem; margin-bottom:.6rem; }
+  .body { text-align:left; line-height:1.55; font-size:1rem; color:#333; }
+  /* every trial screen is centred on the same point, so the eye does not have to move */
+  .fix  { font-size:2.4rem; color:#888; }
+  /* context screen and choice screen share one layout; see trialHTML in exp.js */
+  .ctx  { font-size:1.35rem; line-height:1.5; max-width:620px; margin:0 auto 34px; transition:color .15s; }
+  .choice { visibility:hidden; }                   /* reserves the space, so nothing moves */
+  .choosing .choice { visibility:visible; }
+  .choosing .ctx { color:#9aa0a8; }                /* same size and place, just greyed */
+  .frame { font-size:1.35rem; line-height:1.5; margin-bottom:28px; }
+  .gap  { display:inline-block; min-width:3.2em; border-bottom:2px solid #5b6e8c; color:transparent; }
+  .opts { display:flex; gap:40px; justify-content:center; }
+  .opt  { min-width:160px; padding:12px 18px; border:1px solid #d6dbe1; border-radius:8px; }
+  .key  { display:inline-block; font-weight:700; font-size:.75rem; color:#fff; background:#5b6e8c;
+          border-radius:4px; padding:1px 7px; margin-bottom:8px; }
+  .form { font-size:1.25rem; font-weight:600; }
+  .slow { font-size:1.1rem; color:#a33; }
+  kbd   { background:#eee; border:1px solid #ccc; border-radius:3px; padding:1px 5px; }
+</style>
+</head>
+<body></body>
+<div style="position:fixed;right:10px;bottom:8px;font:12px/1.4 'Helvetica Neue',Arial,sans-serif;color:#8a929c;pointer-events:none">
+  Review copy: your data downloads to your computer at the end</div>
+<script>
+// ----------------------------------------------------------------- configuration
+const DATAPIPE_ID = "REPLACE_WITH_DATAPIPE_EXPERIMENT_ID";   // from pipe.jspsych.org
+const COMPLETION_URL = "https://app.prolific.com/submissions/complete?cc=REPLACE_WITH_CODE";
+// "datapipe" posts data to DataPipe; "local" downloads a CSV at the end (use this for testing).
+// While DATAPIPE_ID is still the placeholder, the page runs in local mode regardless.
+const SAVE_MODE_REQUESTED = "datapipe";
+
+const CONFIGURED = !DATAPIPE_ID.startsWith("REPLACE_");
+const SAVE_MODE = "local";   // review copy: never sends data, whatever DATAPIPE_ID says
+
+const params = new URLSearchParams(window.location.search);
+const prolific = {
+  PROLIFIC_PID: params.get("PROLIFIC_PID"),
+  STUDY_ID:     params.get("STUDY_ID"),
+  SESSION_ID:   params.get("SESSION_ID")
+};
+const subject_id = prolific.PROLIFIC_PID || ("anon-" + Math.random().toString(36).slice(2, 10));
+
+function showError(err) {
+  console.error(err);
+  document.body.innerHTML =
+    '<div style="max-width:640px;margin:60px auto;font-family:sans-serif;line-height:1.5">' +
+    '<h2>The experiment could not start</h2>' +
+    '<p>Please report the message below to the researchers.</p>' +
+    '<pre style="white-space:pre-wrap;background:#f4f4f4;padding:12px">' +
+    String(err && err.stack || err) + '</pre></div>';
+}
+
+const jsPsych = initJsPsych({
+  on_finish: () => {
+    if (SAVE_MODE === "local") jsPsych.data.get().localSave("csv", subject_id + ".csv");
+  }
+});
+jsPsych.data.addProperties(Object.assign({ subject_id: subject_id, save_mode: SAVE_MODE }, prolific));
+
+// Four lists. In DataPipe, set the number of conditions for this experiment to 4.
+// DataPipe's getCondition does not throw on failure: on a network error it returns the
+// error object, and on an unknown experiment ID it returns undefined. Validate the result.
+const N_LISTS = 4;
+const randomList = () => 1 + Math.floor(Math.random() * N_LISTS);
+async function assignList() {
+  if (SAVE_MODE !== "datapipe") {
+    // local mode only: ?list=1..4 picks a list (for testing and review); otherwise random
+    const asked = parseInt(params.get("list"), 10);
+    if (asked >= 1 && asked <= N_LISTS) return { list: asked, via: "url parameter (local mode)" };
+    return { list: randomList(), via: "random (local mode)" };
+  }
+  try {
+    const c = await jsPsychPipe.getCondition(DATAPIPE_ID);
+    if (Number.isInteger(c) && c >= 0) return { list: (c % N_LISTS) + 1, via: "datapipe" };
+    console.warn("DataPipe returned no usable condition; assigning at random.", c);
+  } catch (e) {
+    console.warn("DataPipe condition request failed; assigning at random.", e);
+  }
+  return { list: randomList(), via: "random (datapipe fallback)" };
+}
+
+// ----------------------------------------------------------------- run
+async function main() {
+  const { list, via } = await assignList();
+  jsPsych.data.addProperties({ list: list, list_assigned_by: via });
+
+  const { timeline } = buildTimeline(jsPsych, {
+    keyboard: jsPsychHtmlKeyboardResponse,
+    button:   jsPsychHtmlButtonResponse,
+    form:     jsPsychSurveyHtmlForm
+  }, { list: list, stimuli: STIMULI, prolific: prolific, completionURL: COMPLETION_URL,
+       // testing only: shortens presentation durations (never the response deadline)
+       timeScale: Math.min(1, Math.max(0.01, parseFloat(params.get("timescale")) || 1)) });
+
+  if (SAVE_MODE === "datapipe") {
+    timeline.push({
+      type: jsPsychPipe,
+      action: "save",
+      experiment_id: DATAPIPE_ID,
+      filename: subject_id + "_" + Date.now() + ".csv",
+      data_string: () => jsPsych.data.get().csv()
+    });
+  }
+
+  const debrief = `<h2>Thank you</h2>
+      <p class="body">The study looked at how speakers choose between sentences that mean the same
+      thing but carry different background assumptions: for example <em>both</em> versus <em>all</em>,
+      or whether to add <em>too</em>. Other rounds looked at everyday choices, such as whether to say
+      <em>that</em>. Your choices will be compared with the predictions of a constraint-based model
+      of production.</p>`;
+  if (SAVE_MODE === "local") {
+    timeline.push({
+      type: jsPsychHtmlButtonResponse,
+      stimulus: debrief + `<p class="body">Your data will download as a CSV when you click below. Please send it to Mika,
+        with any notes on what you noticed.</p>`,
+      choices: ["Finish and download data"]
+    });
+  } else {
+    timeline.push({
+      type: jsPsychHtmlButtonResponse,
+      stimulus: debrief + `<p class="body">Click below to register your completion on Prolific.</p>`,
+      choices: ["Finish and return to Prolific"],
+      on_finish: () => { window.location = COMPLETION_URL; }
+    });
+  }
+
+  jsPsych.run(timeline);
+}
+main().catch(showError);
+</script>
+</html>
