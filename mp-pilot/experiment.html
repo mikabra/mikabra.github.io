@@ -120,11 +120,9 @@ async function main() {
   }
 
   const debrief = `<h2>Thank you</h2>
-      <p class="body">The study looked at how speakers choose between sentences that mean the same
-      thing but carry different background assumptions: for example <em>both</em> versus <em>all</em>,
+      <p class="body">The study looked at how speakers choose between sentences that are equally informative but carry different background assumptions: for example <em>both</em> versus <em>all</em>,
       or whether to add <em>too</em>. Other rounds looked at everyday choices, such as whether to say
-      <em>that</em>. Your choices will be compared with the predictions of a constraint-based model
-      of production.</p>`;
+      <em>that</em> in cases where it is optional. Your choices will be used to test the predictions of a constraint-based model of production.</p>`;
   if (SAVE_MODE === "local") {
     timeline.push({
       type: jsPsychHtmlButtonResponse,
