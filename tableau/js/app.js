@@ -115,7 +115,7 @@ function renderEditor() {
   const cons = state.constraints;
   const weighted = mode !== 'ot';
   const extraLabel = mode === 'me' ? 'Observed' : 'Winner';
-  const nCols = 2 + cons.length + 3;
+  const nCols = 2 + cons.length + 2; // input, candidate, constraints, winner/observed, row tools
   const h = [];
 
   h.push('<thead><tr>');
@@ -132,12 +132,11 @@ function renderEditor() {
       </div>
     </th>`);
   });
-  h.push(`<th class="col-add"><button type="button" class="ico add-con" data-act="con-add" title="Add a constraint" aria-label="Add a constraint">+</button></th>`);
-  h.push(`<th scope="col">${extraLabel}</th><th class="col-add"></th></tr>`);
+  h.push(`<th scope="col">${extraLabel}</th><th class="row-tools"></th></tr>`);
   if (weighted) {
     h.push('<tr class="row-weights"><th colspan="2" scope="row">Weights</th>');
     cons.forEach((c, i) => h.push(`<td><input type="number" step="any" data-f="weight" data-c="${c.id}" value="${esc(c.weight)}" aria-label="Weight of constraint ${i + 1}"></td>`));
-    h.push('<td class="col-add"></td><td></td><td class="col-add"></td></tr>');
+    h.push('<td></td><td class="row-tools"></td></tr>');
   }
   h.push('</thead>');
 
@@ -161,7 +160,6 @@ function renderEditor() {
         const tied = mode === 'ot' && c.tie && ci < cons.length - 1;
         h.push(`<td class="cell-v${tied ? ' tied' : ''}" data-k="${k.id}" data-c="${c.id}"><input data-f="v" data-col="${c.id}" data-k="${k.id}" data-c="${c.id}" value="${esc(k.viol[c.id] ?? '')}" aria-label="${esc(c.name)} violations for candidate ${letter(ki)}" autocomplete="off" spellcheck="false"></td>`);
       });
-      h.push('<td class="col-add"></td>');
       if (mode === 'me') {
         h.push(`<td class="cell-extra"><input type="text" inputmode="decimal" data-f="obs" data-col="obs" data-k="${k.id}" value="${esc(k.obs)}" aria-label="Observed frequency of candidate ${letter(ki)}" placeholder="0"></td>`);
       } else {
@@ -541,6 +539,13 @@ function renderChrome() {
     else el.setAttribute('data-hidden-mode', '');
   });
   $('#manual').checked = state.manual;
+  const src = $('#source');
+  const s = state.source;
+  src.hidden = !s?.text;
+  if (s?.text) {
+    const link = /^https?:\/\//.test(s.url || '') ? ` <a href="${esc(s.url)}" target="_blank" rel="noopener">Read the paper</a>` : '';
+    src.innerHTML = `<strong>Source:</strong> ${esc(s.text)}${link}`;
+  }
   $('#sigma2').value = state.opts.sigma2;
 }
 
@@ -916,6 +921,7 @@ async function init() {
     s.constraints = [{ id: M.uid('c'), name: 'Con1', weight: 1, tie: false }, { id: M.uid('c'), name: 'Con2', weight: 1, tie: false }];
     s.groups = [{ id: M.uid('g'), input: '', winner: null, candidates: [newCand(), newCand()] }];
     s.opts = { ...state.opts };
+    s.source = null;
     loadState(s, 'New tableau. Undo brings back the old one.');
     $('#editor input[data-f="input"]')?.focus();
   });

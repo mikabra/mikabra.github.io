@@ -124,9 +124,10 @@ export function toOTSoft(state) {
 }
 
 // ---------------------------------------------------------------------------
-// Examples
+// Examples, each reproducing a published tableau. `source` is shown above
+// the editor. Checked against the PDFs linked below.
 
-function build(mode, cons, groups, extra = {}) {
+function build(mode, cons, groups, { opts = {}, source = null } = {}) {
   const s = blankState(mode);
   s.constraints = cons.map(([name, weight = 1, tie = false]) => ({ id: uid('c'), name, weight, tie }));
   s.groups = groups.map(([input, cands]) => ({
@@ -137,36 +138,71 @@ function build(mode, cons, groups, extra = {}) {
       return k;
     }),
   }));
-  Object.assign(s.opts, extra);
+  Object.assign(s.opts, opts);
+  s.source = source;
   return s;
 }
 
+const PATER_2009 = 'https://people.umass.edu/pater/pater-cogsci-2009.pdf';
+const PATER_1999 = 'https://roa.rutgers.edu/files/160-1196/roa-160-pater-5.pdf';
+const ZURAW_HAYES_2017 = 'https://brucehayes.org/papers/ZurawHayes2017IntersectingConstraintFamilies.pdf';
+const NC = '*NC̥';
+
 export const EXAMPLES = [
   {
-    id: 'ot-basic', label: 'OT: coda deletion',
-    make: () => build('ot', [['*Coda'], ['Max'], ['Dep']], [
-      ['/pat/', [['[pat]', [1, 0, 0]], ['[pa]', [0, 1, 0]], ['[pa.tə]', [0, 0, 1]]]],
-    ]),
+    id: 'ot-devoicing', label: 'OT: final devoicing (Pater 2009)',
+    make: () => build('ot', [['*Coda-Voice'], ['Ident-Voice']], [
+      ['/bad/', [['bad', [1, 0]], ['pad', [1, 1]], ['[bat]', [0, 1]], ['pat', [0, 2]]]],
+    ], {
+      source: {
+        text: 'Pater, Joe (2009). Weighted constraints in generative linguistics. Cognitive Science 33: 999–1035. Example (5), p. 1004: final devoicing in OT.',
+        url: PATER_2009,
+      },
+    }),
   },
   {
-    id: 'ot-strata', label: 'OT: unranked constraints, two inputs',
-    make: () => build('ot', [['*NC̥', 1, false], ['Ident-IO[nas]', 1, true], ['Max-IO', 1, false], ['Ident-IO[voi]']], [
-      ['/kampa/', [['[kampa]', [1, 0, 0, 0]], ['[kapa]', [0, 0, 1, 0]], ['[kamba]', [0, 0, 0, 1]], ['[kamma]', [0, 1, 0, 1]]]],
-      ['/tanta/', [['[tanta]', [1, 0, 0, 0]], ['[tada]', [0, 0, 1, 1]], ['[tanda]', [0, 0, 0, 1]]]],
-    ]),
+    id: 'ot-indonesian', label: 'OT: unranked Max and Dep, Indonesian (Pater 1999)',
+    make: () => build('ot', [['Max', 1, true], ['Dep'], [NC]], [
+      ['/əmpat/', [['əmpat', [0, 0, 1]], ['əpat', [1, 0, 0]], ['əməpat', [0, 1, 0]]]],
+    ], {
+      source: {
+        text: 'Pater, Joe (1999). Austronesian nasal substitution and other NC̥ effects. In R. Kager, H. van der Hulst & W. Zonneveld (eds.), The Prosody–Morphology Interface. Cambridge University Press. Example (9): Indonesian əmpat ‘four’. Max and Dep are unranked with respect to each other (dashed line), and both dominate *NC̥. Pater’s Indonesian data are from Lapoliwa (1981).',
+        url: PATER_1999,
+      },
+    }),
   },
   {
-    id: 'hg-gang', label: 'HG: gang effect (Japanese devoicing)',
-    make: () => build('hg', [['Ident-IO(voi)', 3], ['*Voi-Gem', 2], ['OCP(voi)', 2]], [
-      ['/baɡɡu/', [['[baɡɡu]', [0, 1, 1]], ['[bakku]', [1, 0, 0]]]],
-      ['/eɡɡu/', [['[eɡɡu]', [0, 1, 0]], ['[ekku]', [1, 0, 0]]]],
-    ], { layout: 'separate' }),
+    id: 'hg-japanese', label: 'HG: gang effect in Japanese loanwords (Pater 2009)',
+    make: () => build('hg', [['Ident-Voice', 1.5], ['*Vce-Gem', 1], ['OCP-Voice', 1]], [
+      ['/bobu/', [['[bobu]', [0, 0, 1]], ['bopu', [1, 0, 0]]]],
+      ['/webːu/', [['[webːu]', [0, 1, 0]], ['wepːu', [1, 0, 0]]]],
+      ['/dogːu/', [['dogːu', [0, 1, 1]], ['[dokːu]', [1, 0, 0]]]],
+    ], {
+      opts: { layout: 'separate' },
+      source: {
+        text: 'Pater, Joe (2009). Weighted constraints in generative linguistics. Cognitive Science 33: 999–1035. Example (22), p. 1013: Japanese loanword devoicing as cumulative constraint interaction, after Nishimura (2003, 2006), with data from Kawahara (2006). Length is written ː here (Pater writes “:”). Pater’s first two tableaux omit the constraint that neither candidate violates.',
+        url: PATER_2009,
+      },
+    }),
   },
   {
-    id: 'me-var', label: 'MaxEnt: variable t/d-deletion',
-    make: () => build('me', [['*CC', 1.2], ['Max', 1.5], ['Max-Prevocalic', 3.1]], [
-      ['/west ɛnd/', [['[wɛst ɛnd]', [1, 0, 0], 0.7], ['[wɛs ɛnd]', [0, 1, 1], 0.3]]],
-      ['/west lɛɡ/', [['[wɛst lɛɡ]', [2, 0, 0], 0.4], ['[wɛs lɛɡ]', [1, 1, 0], 0.6]]],
-    ], { layout: 'combined', inputHeader: 'Input', candHeader: 'Output' }),
+    id: 'me-tagalog', label: 'MaxEnt: Tagalog nasal substitution (Zuraw & Hayes 2017)',
+    make: () => build('me', [
+      ['NasSub', 2.31], [NC, 4.85], ['*[_{root} m/n/ŋ', 0.00], ['*[_{root} n/ŋ', 2.13], ['*[_{root} ŋ', 1.16],
+      ['Unif-maŋ-_{other}', 0.00], ['Unif-paŋ-red-', 0.82], ['Unif-maŋ-_{adv}', 1.92],
+      ['Unif-maŋ-red-', 2.29], ['Unif-paŋ-_{noun}', 4.06], ['Unif-paŋ-_{res}', 6.01],
+    ], [
+      ['/paŋ_{noun} + t…/', [
+        ['[pa-n…]', [0, 0, 1, 1, 0, 0, 0, 0, 0, 1, 0], 60.5],
+        ['[pan-t…]', [1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0], 29.5],
+      ]],
+    ], {
+      opts: { decimals: 4 },
+      source: {
+        text: 'Zuraw, Kie & Bruce Hayes (2017). Intersecting constraint families: an argument for Harmonic Grammar. Language 93(3). Sample MaxEnt tableau (9), p. 504, using the fitted weights of Table 1, p. 506. Observed: 60.5 words with substitution, 29.5 without. The paper’s predicted probabilities are .73 and .27.',
+        url: ZURAW_HAYES_2017,
+      },
+    }),
   },
 ];
+

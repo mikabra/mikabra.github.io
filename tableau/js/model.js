@@ -71,6 +71,7 @@ export function normalize(state) {
   if ((v < 2 && state.opts.font === 'Charis SIL') || (v < 3 && state.opts.font === 'Atkinson Hyperlegible')) state.opts.font = DEFAULT_OPTS.font;
   state.version = 3;
   state.shade ||= {};
+  state.source ??= null; // citation for a built-in example: { text, url }
   state.view ||= 'tableau';
   state.mode ||= 'ot';
   for (const c of state.constraints) {

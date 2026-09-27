@@ -61,8 +61,10 @@
       </div>
 
       <div class="workspace">
+        <div class="main-col">
         <section class="panel editor-panel" aria-labelledby="ed-h">
           <h2 id="ed-h">Tableau</h2>
+          <p class="source" id="source" hidden></p>
           <div class="editor-scroll">
             <table id="editor" class="editor"></table>
           </div>
@@ -81,7 +83,7 @@
             <summary>Tips for filling in the tableau</summary>
             <ul>
               <li><strong>Violations:</strong> type a number (<code>2</code>) or stars (<code>**</code>). Leave a cell empty for no violations. Enter and the arrow keys move between rows.</li>
-              <li><strong>Constraint names:</strong> <code>Max_{IO}</code> gives a subscript and <code>X^{2}</code> a superscript. Small caps are added automatically.</li>
+              <li><strong>Subscripts and superscripts:</strong> <code>Max_{IO}</code> gives a subscript and <code>X^{2}</code> a superscript, in constraint names, inputs and candidates. Constraint names get small caps automatically.</li>
               <li><strong>Ranking (OT):</strong> the columns are ranked from left to right. The <span class="tie-demo">┆</span> button marks two neighbouring constraints as unranked (dashed line).</li>
               <li><strong>Winners:</strong> ☞ goes on the optimal candidate. Tick <em>Winner</em> to say which candidate <em>should</em> win. If another candidate beats it, that candidate gets ☹. The intended winners also drive the comparative tableau, RCD and the Hasse diagram.</li>
               <li><strong>By hand:</strong> “Edit marks by hand” keeps the current <code>!</code> marks and shading and lets you change them. Type <code>*!</code> into cells, and click cells in the preview to shade them.</li>
@@ -89,20 +91,6 @@
             </ul>
           </details>
         </section>
-
-        <aside class="panel ipa-panel" id="ipa" aria-label="IPA symbols">
-          <div class="ipa-top">
-            <h2>IPA</h2>
-            <button type="button" class="ipa-close btn" aria-label="Close IPA picker">Close</button>
-          </div>
-          <p class="ipa-target" id="ipa-target">Click a field in the tableau, then click a symbol.</p>
-          <input type="search" id="ipa-search" placeholder="Search: schwa, esh, voiced velar…" aria-label="Search IPA symbols by name or X-SAMPA">
-          <div class="ipa-results" id="ipa-results"></div>
-          <div class="ipa-tabs" role="tablist" id="ipa-tabs"></div>
-          <div class="ipa-body" id="ipa-body"></div>
-          <p class="ipa-name" id="ipa-name" aria-live="polite">&nbsp;</p>
-        </aside>
-      </div>
 
       <section class="panel" aria-labelledby="pv-h">
         <div class="panel-head">
@@ -213,6 +201,20 @@
           <button type="button" class="btn" data-dl="hasse-svg">Download SVG</button>
         </div>
       </section>
+      </div>
+        <aside class="panel ipa-panel" id="ipa" aria-label="IPA symbols">
+          <div class="ipa-top">
+            <h2>IPA</h2>
+            <button type="button" class="ipa-close btn" aria-label="Close IPA picker">Close</button>
+          </div>
+          <p class="ipa-target" id="ipa-target">Click a field in the tableau, then click a symbol.</p>
+          <input type="search" id="ipa-search" placeholder="Search: schwa, esh, voiced velar…" aria-label="Search IPA symbols by name or X-SAMPA">
+          <div class="ipa-results" id="ipa-results"></div>
+          <div class="ipa-tabs" role="tablist" id="ipa-tabs"></div>
+          <div class="ipa-body" id="ipa-body"></div>
+          <p class="ipa-name" id="ipa-name" aria-live="polite">&nbsp;</p>
+        </aside>
+      </div>
     </main>
 
     <footer>

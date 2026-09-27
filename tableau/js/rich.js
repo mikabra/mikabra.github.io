@@ -5,7 +5,8 @@
 export const ENSP = String.fromCharCode(0x2002); // en space between mark and letter
 
 export const plain = t => (t ? [{ t }] : []);
-export const form = t => (t ? [{ t, ipa: true }] : []);
+// Inputs and candidates: IPA text with the same _{…} / ^{…} markup as names.
+export const form = t => (t ? parseName(t, false) : []);
 
 // Constraint names: `_{...}` / `_x` for subscripts, `^{...}` / `^x` for
 // superscripts, `\_` and `\^` for literal characters.
