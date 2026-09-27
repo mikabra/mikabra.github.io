@@ -1,7 +1,8 @@
 // Saving and loading: share links, JSON files, OTSoft tab-delimited files,
 // and built-in examples.
 
-import { uid, normalize, blankState, withModeDefaults, parseViol, parseObs } from './model.js';
+import { uid, normalize, blankState, withModeDefaults, parseViol, parseObs, intendedWinners } from './model.js';
+import { freezeAuto } from './grid.js';
 
 const b64url = bytes => {
   let s = '';
@@ -103,7 +104,7 @@ export function fromOTSoft(text, mode) {
   // with 0/1 frequencies (a winner per input), use them as intended winners
   for (const g of groups) {
     const pos = g.candidates.filter(k => parseObs(k.obs) > 0);
-    if (mode !== 'me' && pos.length === 1) g.winner = pos[0].id;
+    if (mode !== 'me' && pos.length === 1) { g.winner = pos[0].id; pos[0].mark = 'hand'; }
   }
   return normalize(withModeDefaults(state, mode));
 }
@@ -114,12 +115,13 @@ export function toOTSoft(state) {
     ['', '', '', ...cons.map(c => c.name)].join('\t'),
     ['', '', '', ...cons.map(c => c.name)].join('\t'),
   ];
-  for (const g of state.groups) {
+  const iw = intendedWinners(state);
+  state.groups.forEach((g, gi) => {
     g.candidates.forEach((k, i) => {
-      const freq = state.mode === 'me' ? String(k.obs ?? '') : (g.winner ? (g.winner === k.id ? '1' : '0') : String(k.obs ?? ''));
+      const freq = state.mode === 'me' ? String(k.obs ?? '') : (iw[gi] === k.id ? '1' : '0');
       lines.push([i === 0 ? g.input : '', k.form, freq, ...cons.map(c => String(parseViol(k.viol[c.id]).n))].join('\t'));
     });
-  }
+  });
   return lines.join('\r\n') + '\r\n';
 }
 
@@ -140,6 +142,9 @@ function build(mode, cons, groups, { opts = {}, source = null } = {}) {
   }));
   Object.assign(s.opts, opts);
   s.source = source;
+  // evaluate once, then keep the result as an ordinary hand-editable tableau
+  s.auto = true;
+  freezeAuto(s);
   return s;
 }
 

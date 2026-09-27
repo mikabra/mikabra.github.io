@@ -1,9 +1,10 @@
 // Tableau maker: UI wiring.
 
 import * as M from './model.js';
-import { buildGrids, markFor } from './grid.js';
+import { buildGrids, markFor, freezeAuto } from './grid.js';
 import { layoutGrid, stackScenes, toSVG, toCanvas, loadFont, embeddedFontCSS } from './render.js';
 import { latexCode, typstCode } from './export.js';
+import { docsCode, markdownCode } from './docs.js';
 import { hasseGraph, layoutHasse, hasseTikz, hasseTypst } from './hasse.js';
 import * as IO from './io.js';
 import * as IPA from './ipa.js';
@@ -15,6 +16,8 @@ const esc = s => String(s ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').re
 
 const STORE_KEY = 'tableau-maker-state';
 let state;
+let shadeMode = false;   // 'Shade cells' tool: clicking violation cells toggles shading
+let page = 'tableau';    // 'tableau' | 'hasse'
 
 // ---------------------------------------------------------------------------
 // History and persistence
@@ -110,12 +113,34 @@ function newCand(form = '') {
 // ---------------------------------------------------------------------------
 // Editor
 
+// Score columns typed by hand (HG/MaxEnt, when not computed automatically).
+function typedExtras() {
+  const o = state.opts;
+  if (state.auto || state.mode === 'ot') return [];
+  const shown = { H: o.showH, eH: o.showEH, P: o.showP };
+  return (state.mode === 'hg' ? ['H'] : ['H', 'eH', 'P']).filter(x => shown[x]);
+}
+const EXTRA_LABEL = { H: '<i>H</i>', eH: 'e<sup>−<i>H</i></sup>', P: '<i>P</i>' };
+
+const MARKS = [['hand', '☞'], ['arrow', '→'], ['frown', '☹'], ['bomb', '💣'], ['cross', '✗']];
+
+function markSelect(k, ki) {
+  const opts = state.auto ? [['auto', 'Auto'], ['none', '—'], ...MARKS] : [['auto', '—'], ...MARKS];
+  const cur = !state.auto && k.mark === 'none' ? 'auto' : k.mark;
+  return `<select class="mark-select" data-f="mark" data-k="${k.id}" aria-label="Mark for candidate ${letter(ki)}" title="Mark shown before the candidate">
+    ${opts.map(([v, l]) => `<option value="${v}"${cur === v ? ' selected' : ''}>${l}</option>`).join('')}
+  </select>`;
+}
+
 function renderEditor() {
   const mode = state.mode;
   const cons = state.constraints;
-  const weighted = mode !== 'ot';
-  const extraLabel = mode === 'me' ? 'Observed' : 'Winner';
-  const nCols = 2 + cons.length + 2; // input, candidate, constraints, winner/observed, row tools
+  const auto = state.auto;
+  const extras = typedExtras();
+  const obsCol = mode === 'me';
+  const intendedCol = auto && mode !== 'me';
+  const tail = extras.length + (obsCol ? 1 : 0) + 1 + (intendedCol ? 1 : 0); // columns after the constraints, before the row tools
+  const nCols = 2 + cons.length + tail + 1;
   const h = [];
 
   h.push('<thead><tr>');
@@ -126,17 +151,21 @@ function renderEditor() {
       <input class="con-name" data-f="con-name" data-c="${c.id}" data-ipa value="${esc(c.name)}" aria-label="Constraint ${i + 1} name" spellcheck="false">
       <div class="con-tools">
         <button type="button" class="ico" data-act="con-left" data-c="${c.id}" title="Move left${mode === 'ot' ? ' (rank higher)' : ''}" aria-label="Move ${esc(c.name)} left"${i === 0 ? ' disabled' : ''}>◀</button>
-        ${mode === 'ot' && i < cons.length - 1 ? `<button type="button" class="ico" data-act="tie" data-c="${c.id}" aria-pressed="${c.tie}" title="${c.tie ? 'Unranked with the next constraint (dashed line). Click to rank it higher.' : 'Ranked above the next constraint. Click to leave them unranked (dashed line).'}" aria-label="Unranked with next constraint">┆</button>` : ''}
+        ${mode === 'ot' && i < cons.length - 1 ? `<button type="button" class="ico" data-act="tie" data-c="${c.id}" aria-pressed="${c.tie}" title="${c.tie ? 'Unranked with the next constraint (dashed line). Click for a solid line.' : 'Click to leave this and the next constraint unranked (dashed line).'}" aria-label="Unranked with next constraint">┆</button>` : ''}
         <button type="button" class="ico" data-act="con-right" data-c="${c.id}" title="Move right${mode === 'ot' ? ' (rank lower)' : ''}" aria-label="Move ${esc(c.name)} right"${i === cons.length - 1 ? ' disabled' : ''}>▶</button>
         <button type="button" class="ico del" data-act="con-del" data-c="${c.id}" title="Delete constraint" aria-label="Delete ${esc(c.name)}">✕</button>
       </div>
     </th>`);
   });
-  h.push(`<th scope="col">${extraLabel}</th><th class="row-tools"></th></tr>`);
-  if (weighted) {
+  extras.forEach(x => h.push(`<th scope="col" class="col-extra">${EXTRA_LABEL[x]}</th>`));
+  if (obsCol) h.push('<th scope="col">Observed</th>');
+  h.push('<th scope="col">Mark</th>');
+  if (intendedCol) h.push('<th scope="col" title="The candidate that should win">Intended</th>');
+  h.push('<th class="row-tools"></th></tr>');
+  if (mode !== 'ot') {
     h.push('<tr class="row-weights"><th colspan="2" scope="row">Weights</th>');
     cons.forEach((c, i) => h.push(`<td><input type="number" step="any" data-f="weight" data-c="${c.id}" value="${esc(c.weight)}" aria-label="Weight of constraint ${i + 1}"></td>`));
-    h.push('<td></td><td class="row-tools"></td></tr>');
+    h.push(`${'<td></td>'.repeat(tail)}<td class="row-tools"></td></tr>`);
   }
   h.push('</thead>');
 
@@ -160,18 +189,12 @@ function renderEditor() {
         const tied = mode === 'ot' && c.tie && ci < cons.length - 1;
         h.push(`<td class="cell-v${tied ? ' tied' : ''}" data-k="${k.id}" data-c="${c.id}"><input data-f="v" data-col="${c.id}" data-k="${k.id}" data-c="${c.id}" value="${esc(k.viol[c.id] ?? '')}" aria-label="${esc(c.name)} violations for candidate ${letter(ki)}" autocomplete="off" spellcheck="false"></td>`);
       });
-      if (mode === 'me') {
-        h.push(`<td class="cell-extra"><input type="text" inputmode="decimal" data-f="obs" data-col="obs" data-k="${k.id}" value="${esc(k.obs)}" aria-label="Observed frequency of candidate ${letter(ki)}" placeholder="0"></td>`);
-      } else {
-        h.push(`<td class="cell-extra"><input type="radio" name="win-${g.id}" data-f="win" data-g="${g.id}" data-k="${k.id}"${g.winner === k.id ? ' checked' : ''} title="Intended winner (click again to clear)" aria-label="Candidate ${letter(ki)} is the intended winner"></td>`);
-      }
-      h.push('<td class="row-tools">');
-      if (state.manual) {
-        h.push(`<select data-f="mark" data-k="${k.id}" aria-label="Mark for candidate ${letter(ki)}">
-          ${[['auto', 'Auto'], ['hand', '☞'], ['arrow', '→'], ['frown', '☹'], ['bomb', '💣'], ['cross', '✗'], ['none', 'None']].map(([v, l]) => `<option value="${v}"${k.mark === v ? ' selected' : ''}>${l}</option>`).join('')}
-        </select>`);
-      }
-      h.push(`<button type="button" class="ico" data-act="cand-up" data-k="${k.id}" title="Move up" aria-label="Move candidate up"${ki === 0 ? ' disabled' : ''}>↑</button>
+      extras.forEach(x => h.push(`<td class="cell-extra"><input type="text" data-f="extra" data-x="${x}" data-col="x-${x}" data-k="${k.id}" value="${esc(k.extra?.[x] ?? '')}" aria-label="${x} for candidate ${letter(ki)}" spellcheck="false"></td>`));
+      if (obsCol) h.push(`<td class="cell-extra"><input type="text" inputmode="decimal" data-f="obs" data-col="obs" data-k="${k.id}" value="${esc(k.obs)}" aria-label="Observed value for candidate ${letter(ki)}" spellcheck="false"></td>`);
+      h.push(`<td class="cell-mark">${markSelect(k, ki)}</td>`);
+      if (intendedCol) h.push(`<td class="cell-extra"><input type="radio" name="win-${g.id}" data-f="win" data-g="${g.id}" data-k="${k.id}"${g.winner === k.id ? ' checked' : ''} title="Intended winner (click again to clear)" aria-label="Candidate ${letter(ki)} is the intended winner"></td>`);
+      h.push(`<td class="row-tools">
+        <button type="button" class="ico" data-act="cand-up" data-k="${k.id}" title="Move up" aria-label="Move candidate up"${ki === 0 ? ' disabled' : ''}>↑</button>
         <button type="button" class="ico" data-act="cand-down" data-k="${k.id}" title="Move down" aria-label="Move candidate down"${ki === g.candidates.length - 1 ? ' disabled' : ''}>↓</button>
         <button type="button" class="ico del" data-act="cand-del" data-k="${k.id}" title="Delete candidate" aria-label="Delete candidate ${letter(ki)}">✕</button>
       </td></tr>`);
@@ -182,7 +205,9 @@ function renderEditor() {
     h.push(`<tr><td class="add-row" colspan="${nCols - 1}"><button type="button" class="ico" data-act="cand-add" data-g="${g.id}">+ Candidate</button></td></tr>`);
     h.push('</tbody>');
   });
-  $('#editor').innerHTML = h.join('');
+  const ed = $('#editor');
+  ed.innerHTML = h.join('');
+  ed.classList.toggle('shade-mode', shadeMode && !state.auto);
 }
 
 // Reflect evaluation results in the editor (marks, fatal cells, shading).
@@ -201,7 +226,7 @@ function decorateEditor(results) {
         if (!td) return;
         const p = M.parseViol(k.viol[c.id]);
         let fatal = false, shade = false;
-        if (state.manual) {
+        if (!state.auto) {
           fatal = p.bang >= 0;
           shade = !!state.shade[`${k.id}:${c.id}`];
         } else if (state.mode === 'ot') {
@@ -227,6 +252,7 @@ function onEditorInput(e) {
   else if (f === 'cand') cand(t.dataset.k).k.form = t.value;
   else if (f === 'v') cand(t.dataset.k).k.viol[t.dataset.c] = t.value;
   else if (f === 'obs') cand(t.dataset.k).k.obs = t.value;
+  else if (f === 'extra') { const { k } = cand(t.dataset.k); k.extra = { ...k.extra, [t.dataset.x]: t.value }; }
   scheduleOutputs();
   save();
 }
@@ -313,7 +339,7 @@ function onEditorPaste(e) {
   if (!/[\t\n]/.test(text.trim())) return;
   e.preventDefault();
   const rows = text.replace(/\r/g, '').replace(/\n$/, '').split('\n').map(r => r.split('\t'));
-  const colOrder = ['cand', ...state.constraints.map(c => c.id), ...(state.mode === 'me' ? ['obs'] : [])];
+  const colOrder = ['cand', ...state.constraints.map(c => c.id), ...typedExtras().map(x => `x-${x}`), ...(state.mode === 'me' ? ['obs'] : [])];
   const startCol = colOrder.indexOf(col);
   const allCands = state.groups.flatMap(g => g.candidates);
   const startRow = allCands.findIndex(k => k.id === t.dataset.k);
@@ -332,6 +358,7 @@ function onEditorPaste(e) {
         const v = val.trim();
         if (key === 'cand') k.form = v;
         else if (key === 'obs') k.obs = v;
+        else if (key.startsWith('x-')) k.extra = { ...k.extra, [key.slice(2)]: v };
         else k.viol[key] = v === '0' ? '' : v;
       });
     });
@@ -381,23 +408,34 @@ function renderOutputs() {
     note.className = 'note';
     note.textContent = state.opts.latexIpa === 'tipa'
       ? 'Compiles with pdfLaTeX. The packages it needs are listed at the top.'
-      : 'Compile with XeLaTeX or LuaLaTeX, using a font that has IPA (e.g. Andika or Charis SIL).';
+      : 'Compile with XeLaTeX or LuaLaTeX, using a font that has IPA (e.g. Charis SIL or Andika).';
   }
   $('#typst-code').value = typstCode(grids, state.opts);
+  $('#md-code').value = markdownCode(grids);
   $('#otsoft-code').value = IO.toOTSoft(state);
   renderMessages(results);
-  if (state.mode === 'ot') renderHasse();
+  renderHasse();
 }
 
+const ipaSpan = s => `<span class="ipa">${esc(s)}</span>`;
+
+// General notes (always), and the automatic mode's analysis.
 function renderMessages(results) {
   const msgs = [];
-  const ipa = s => `<span class="ipa">${esc(s)}</span>`;
   const bad = [];
   state.groups.forEach(g => g.candidates.forEach(k => state.constraints.forEach(c => {
-    if (M.parseViol(k.viol[c.id]).bad) bad.push(`${ipa(k.viol[c.id])} (${ipa(k.form || '?')}, ${esc(c.name)})`);
+    if (M.parseViol(k.viol[c.id]).bad) bad.push(`${ipaSpan(k.viol[c.id])} (${ipaSpan(k.form || '?')}, ${esc(c.name)})`);
   })));
-  if (bad.length) msgs.push(['warn', `These cells aren't a number or stars and count as 0: ${bad.slice(0, 4).join('; ')}${bad.length > 4 ? '…' : ''}`]);
+  if (bad.length) msgs.push(['warn', `These cells aren't a number or stars, so they're shown as empty: ${bad.slice(0, 4).join('; ')}${bad.length > 4 ? '…' : ''}`]);
+  if (state.opts.comparative && state.mode === 'ot' && !state.auto && state.groups.some(g => !g.candidates.some(k => k.mark === 'hand' || k.mark === 'arrow'))) {
+    msgs.push(['warn', 'The comparative tableau pairs the winner with each loser: mark the winner of each input with ☞ in the Mark column.']);
+  }
+  $('#messages').innerHTML = msgs.map(([cls, html]) => `<p class="${cls}">${html}</p>`).join('');
+  $('#analysis').innerHTML = state.auto ? analysis(results).map(([cls, html]) => `<p class="${cls}">${html}</p>`).join('') : '';
+}
 
+function analysis(results) {
+  const msgs = [];
   if (state.mode !== 'me') {
     let designated = 0;
     state.groups.forEach((g, gi) => {
@@ -406,10 +444,10 @@ function renderMessages(results) {
       if (!w) return;
       designated++;
       if (!results[gi].winners.has(w.id)) {
-        const beaters = g.candidates.filter(k => results[gi].winners.has(k.id)).map(k => ipa(k.form));
-        msgs.push(['warn', `${ipa(g.input || 'Input ' + (gi + 1))}: the intended winner ${ipa(w.form)} loses to ${beaters.join(', ')}.${state.mode === 'ot' ? ' Try “Rank by RCD”.' : ''}`]);
+        const beaters = g.candidates.filter(k => results[gi].winners.has(k.id)).map(k => ipaSpan(k.form));
+        msgs.push(['warn', `${ipaSpan(g.input || 'Input ' + (gi + 1))}: the intended winner ${ipaSpan(w.form)} loses to ${beaters.join(', ')}.${state.mode === 'ot' ? ' Try “Rank by RCD”.' : ''}`]);
       } else if (results[gi].winners.size > 1) {
-        msgs.push(['warn', `${ipa(g.input || 'Input ' + (gi + 1))}: ${ipa(w.form)} ties with another candidate.`]);
+        msgs.push(['warn', `${ipaSpan(g.input || 'Input ' + (gi + 1))}: ${ipaSpan(w.form)} ties with another candidate.`]);
       }
     });
     if (designated && !msgs.some(m => m[0] === 'warn' && m[1].includes('intended winner')))
@@ -426,7 +464,7 @@ function renderMessages(results) {
     }
   }
   if (flash) msgs.unshift(flash);
-  $('#messages').innerHTML = msgs.map(([cls, html]) => `<p class="${cls}">${html}</p>`).join('');
+  return msgs;
 }
 
 let flash = null;
@@ -438,18 +476,22 @@ function setFlash(cls, html) {
   renderMessages(M.evaluate(state));
 }
 
+// The Hasse source actually in use (the entailed rankings are experimental).
+const hasseSource = () => (state.opts.hasseSource === 'entailed' && !state.auto ? 'ranking' : state.opts.hasseSource);
+
 function renderHasse() {
   const o = state.opts;
-  $('#hasse-custom-wrap').hidden = o.hasseSource !== 'custom';
+  const src = hasseSource();
+  $('#hasse-custom-wrap').hidden = src !== 'custom';
   if ($('#hasse-custom').value !== o.hasseCustom) $('#hasse-custom').value = o.hasseCustom;
-  const graph = hasseGraph(state);
+  const graph = hasseGraph({ ...state, opts: { ...o, hasseSource: src } });
   const note = $('#hasse-note');
   note.className = graph.error ? 'note warn' : 'note';
   note.textContent = graph.error || ({
-    entailed: 'Only rankings that every intended winner needs are drawn. Mark the intended winners, or the computed winners are used.',
-    ranking: 'The tableau\'s ranking as it stands: each stratum dominates the next, and unranked constraints sit side by side.',
+    entailed: 'Only the rankings that every winner needs are drawn.',
+    ranking: 'Each constraint dominates those to its right in the tableau. Constraints separated by a dashed line sit side by side.',
     custom: '',
-  })[o.hasseSource];
+  })[src];
   if (!graph.nodes.length) {
     current.hasse = null;
     $('#hasse-preview').innerHTML = '<p class="empty">Nothing to draw yet.</p>';
@@ -463,41 +505,53 @@ function renderHasse() {
   $('#hasse-code').value = tab === 'tikz' ? hasseTikz(graph, scene, o) : hasseTypst(graph, scene, o);
 }
 
+// The tableau's ranking as typed rankings, one line per domination pair.
+function rankingLines() {
+  const g = hasseGraph({ ...state, opts: { ...state.opts, hasseSource: 'ranking' } });
+  const lines = g.edges.map(([a, b]) => `${g.nodes[a].name} >> ${g.nodes[b].name}`);
+  const linked = new Set(g.edges.flat());
+  g.nodes.forEach((n, i) => { if (!linked.has(i)) lines.push(n.name); });
+  return lines.join('\n');
+}
+
 // ---------------------------------------------------------------------------
 // Options panel
 
+// `auto: true` options only matter when results are computed automatically.
 const OPTS = [
+  { key: 'comparative', label: 'Comparative tableau (W, L, e)', type: 'check', modes: ['ot'] },
   { key: 'violStyle', label: 'Show violations as', type: 'select', options: [['stars', 'Stars (*, **)'], ['numbers', 'Numbers (1, 2)']] },
-  { key: 'negative', label: 'Negative numbers (−1) for violations and H', type: 'check', modes: ['hg', 'me'] },
+  { key: 'negative', label: 'Negative numbers (−1) for violations', type: 'check', modes: ['hg', 'me'] },
   { key: 'zeroBlank', label: 'Leave zero cells empty', type: 'check' },
-  { key: 'fatal', label: 'Mark fatal violations with !', type: 'check', modes: ['ot'] },
-  { key: 'shading', label: 'Shade cells that no longer matter', type: 'check', modes: ['ot'] },
   { key: 'labels', label: 'Letter the candidates (a., b., …)', type: 'check' },
-  { key: 'winnerMark', label: 'Winner mark', type: 'select', options: [['hand', '☞ pointing hand'], ['arrow', '→ arrow']] },
-  { key: 'wrongMark', label: 'Loser that wrongly wins', type: 'select', options: [['frown', '☹ frowning face'], ['bomb', '💣 bomb'], ['cross', '✗ cross']], modes: ['ot', 'hg'] },
-  { key: 'meMarks', label: 'Mark the most probable candidate', type: 'check', modes: ['me'] },
   { key: 'showWeights', label: 'Row of weights', type: 'check', modes: ['hg', 'me'] },
   { key: 'showH', label: 'Harmony column (H)', type: 'check', modes: ['hg', 'me'] },
-  { key: 'showEH', label: 'e^H column', type: 'check', modes: ['me'] },
+  { key: 'showEH', label: 'e^−H column', type: 'check', modes: ['me'] },
   { key: 'showP', label: 'Probability column (P)', type: 'check', modes: ['me'] },
   { key: 'showObs', label: 'Observed column', type: 'check', modes: ['me'] },
-  { key: 'decimals', label: 'Decimal places', type: 'number', min: 0, max: 8, modes: ['hg', 'me'] },
   { key: 'layout', label: 'Several inputs', type: 'select', options: [['combined', 'One table with an input column'], ['separate', 'A separate tableau per input']] },
   { key: 'inputHeader', label: 'Input column heading (one table only)', type: 'text', ipa: true },
   { key: 'candHeader', label: 'Candidate column heading (one table only)', type: 'text', ipa: true },
   { key: 'smallcaps', label: 'Small caps constraint names', type: 'check' },
   { key: 'compE', label: 'Comparative cells with no preference', type: 'select', options: [['e', 'e'], ['', '(blank)']], modes: ['ot'] },
-  { key: 'font', label: 'Font (preview and images)', type: 'select', options: [['Andika', 'Andika (sans serif)'], ['Charis SIL', 'Charis SIL (serif)']] },
-  { key: 'fontSize', label: 'Font size (px)', type: 'number', min: 8, max: 40 },
+  { key: 'font', label: 'Font', type: 'select', options: [['Charis SIL', 'Charis SIL (serif)'], ['Andika', 'Andika (sans serif)']] },
+  { key: 'fontSize', label: 'Font size in the preview and images (px)', type: 'number', min: 8, max: 40 },
+  { key: 'decimals', label: 'Decimal places (weights and computed scores)', type: 'number', min: 0, max: 8, modes: ['hg', 'me'] },
+  { key: 'fatal', label: 'Mark fatal violations with !', type: 'check', modes: ['ot'], auto: true },
+  { key: 'shading', label: 'Shade cells that no longer matter', type: 'check', modes: ['ot'], auto: true },
+  { key: 'winnerMark', label: 'Winner mark', type: 'select', options: [['hand', '☞ pointing hand'], ['arrow', '→ arrow']], auto: true },
+  { key: 'wrongMark', label: 'Loser that wrongly wins', type: 'select', options: [['frown', '☹ frowning face'], ['bomb', '💣 bomb'], ['cross', '✗ cross']], modes: ['ot', 'hg'], auto: true },
+  { key: 'meMarks', label: 'Mark the most probable candidate', type: 'check', modes: ['me'], auto: true },
 ];
 
 function renderOptions() {
-  $('#opt-grid').innerHTML = OPTS.filter(o => !o.modes || o.modes.includes(state.mode)).map(o => {
+  $('#opt-grid').innerHTML = OPTS.filter(o => (!o.modes || o.modes.includes(state.mode)) && (!o.auto || state.auto)).map(o => {
     const v = state.opts[o.key];
-    if (o.type === 'check') return `<label class="check"><input type="checkbox" data-opt="${o.key}"${v ? ' checked' : ''}> ${esc(o.label)}</label>`;
-    if (o.type === 'select') return `<label>${esc(o.label)}<select data-opt="${o.key}">${o.options.map(([val, l]) => `<option value="${esc(val)}"${String(v) === val ? ' selected' : ''}>${esc(l)}</option>`).join('')}</select></label>`;
-    if (o.type === 'number') return `<label>${esc(o.label)}<input type="number" data-opt="${o.key}" data-num min="${o.min}" max="${o.max}" value="${esc(v)}"></label>`;
-    return `<label>${esc(o.label)}<input type="text" data-opt="${o.key}"${o.ipa ? ' data-ipa class="ipa-field"' : ''} value="${esc(v)}" spellcheck="false"></label>`;
+    const label = esc(o.label) + (o.auto ? ' <span class="exp-tag">automatic mode</span>' : '');
+    if (o.type === 'check') return `<label class="check"><input type="checkbox" data-opt="${o.key}"${v ? ' checked' : ''}> ${label}</label>`;
+    if (o.type === 'select') return `<label>${label}<select data-opt="${o.key}">${o.options.map(([val, l]) => `<option value="${esc(val)}"${String(v) === val ? ' selected' : ''}>${esc(l)}</option>`).join('')}</select></label>`;
+    if (o.type === 'number') return `<label>${label}<input type="number" data-opt="${o.key}" data-num min="${o.min}" max="${o.max}" value="${esc(v)}"></label>`;
+    return `<label>${label}<input type="text" data-opt="${o.key}"${o.ipa ? ' data-ipa class="ipa-field"' : ''} value="${esc(v)}" spellcheck="false"></label>`;
   }).join('');
 }
 
@@ -522,23 +576,28 @@ async function onOptInput(e) {
   if (el.type === 'text' || el.tagName === 'TEXTAREA') beginTyping(); else pushUndo();
   state.opts[key] = v;
   save();
-  if (key === 'font') await loadFont(v);
-  if (key === 'hasseSource') renderHasse();
+  if (key === 'font') { await loadFont(v); renderChrome(); }
+  // options that change which editor columns exist
+  if (['showH', 'showEH', 'showP', 'comparative'].includes(key)) renderEditor();
   scheduleOutputs();
 }
 
 // ---------------------------------------------------------------------------
-// Toolbar, modes
+// Toolbar, modes, pages
 
 function renderChrome() {
   $$('[data-mode]').forEach(b => b.setAttribute('aria-pressed', b.dataset.mode === state.mode));
-  $$('[data-view]').forEach(b => b.setAttribute('aria-pressed', b.dataset.view === state.view));
-  $('#view-seg').hidden = state.mode !== 'ot';
   $$('[data-modes]').forEach(el => {
     if (el.dataset.modes.split(' ').includes(state.mode)) el.removeAttribute('data-hidden-mode');
     else el.setAttribute('data-hidden-mode', '');
   });
-  $('#manual').checked = state.manual;
+  $$('[data-auto-only]').forEach(el => { el.hidden = !state.auto; });
+  $$('[data-manual-only]').forEach(el => { el.hidden = state.auto; });
+  $('#auto').checked = state.auto;
+  if (state.auto) $('#experimental').open = true;
+  $('#shade-mode').setAttribute('aria-pressed', shadeMode);
+  // the editor's IPA fields use the tableau's font
+  document.documentElement.style.setProperty('--ipa', `'${state.opts.font}', 'Noto Sans', serif`);
   const src = $('#source');
   const s = state.source;
   src.hidden = !s?.text;
@@ -547,6 +606,10 @@ function renderChrome() {
     src.innerHTML = `<strong>Source:</strong> ${esc(s.text)}${link}`;
   }
   $('#sigma2').value = state.opts.sigma2;
+  $$('[data-page]').forEach(el => {
+    if (el.getAttribute('role') === 'tab') el.setAttribute('aria-selected', el.dataset.page === page);
+    else el.hidden = el.dataset.page !== page;
+  });
 }
 
 function renderAll() {
@@ -557,27 +620,20 @@ function renderAll() {
   renderOutputs();
 }
 
-// Freeze the automatic marks into the data so they can be edited by hand.
-function setManual(on) {
+// Automatic mode on: marks follow the evaluation, and the ☞ marks become
+// the intended winners. Off: freeze what was computed so nothing changes.
+function setAuto(on) {
   change(() => {
-    if (on && state.mode === 'ot') {
-      const results = M.evalOT(state);
-      state.shade = {};
-      state.groups.forEach((g, gi) => g.candidates.forEach((k, ki) => {
-        const inf = results[gi].info[ki];
-        state.constraints.forEach((c, ci) => {
-          const p = M.parseViol(k.viol[c.id]);
-          if (state.opts.fatal && inf.fatal.has(ci)) {
-            const b = inf.fatal.get(ci);
-            k.viol[c.id] = Number.isInteger(p.n) && p.n <= 20
-              ? '*'.repeat(b + 1) + '!' + '*'.repeat(Math.max(0, p.n - b - 1))
-              : `${p.n}!`;
-          }
-          if (state.opts.shading && ci >= inf.shadeFrom) state.shade[`${k.id}:${c.id}`] = true;
-        });
-      }));
+    if (on) {
+      state.groups.forEach(g => {
+        const w = g.candidates.find(k => k.mark === 'hand' || k.mark === 'arrow');
+        if (w) g.winner = w.id;
+        g.candidates.forEach(k => { k.mark = 'auto'; });
+      });
+      state.auto = true;
+    } else {
+      freezeAuto(state);
     }
-    state.manual = on;
   });
 }
 
@@ -662,11 +718,41 @@ async function onDownload(kind) {
   if (kind === 'latex') return download('tableau.tex', $('#latex-code').value, 'text/x-tex');
   if (kind === 'typst') return download('tableau.typ', $('#typst-code').value, 'text/plain');
   if (kind === 'otsoft') return download('tableau.txt', $('#otsoft-code').value, 'text/plain');
+  if (kind === 'markdown') return download('tableau.md', $('#md-code').value, 'text/markdown');
   if (kind === 'png') return download('tableau.png', await pngBlob(current.scene));
   if (kind === 'svg') return download('tableau.svg', await svgFile(current.scene), 'image/svg+xml');
   if (!current.hasse) return toast('There is no Hasse diagram to download yet.');
   if (kind === 'hasse-png') return download('hasse.png', await pngBlob(current.hasse.scene));
   if (kind === 'hasse-svg') return download('hasse.svg', await svgFile(current.hasse.scene), 'image/svg+xml');
+}
+
+// Copy the tableau as a formatted table (HTML) for word processors, with
+// tab-separated text as the plain-text alternative.
+async function copyDocs() {
+  const { html, text } = docsCode(current.grids, state.opts);
+  const doc = `<html><body><!--StartFragment-->${html}<!--EndFragment--></body></html>`;
+  try {
+    await navigator.clipboard.write([new ClipboardItem({
+      'text/html': new Blob([doc], { type: 'text/html' }),
+      'text/plain': new Blob([text], { type: 'text/plain' }),
+    })]);
+  } catch {
+    // older browsers: copy a rendered, selected copy of the table
+    const box = document.createElement('div');
+    box.style.cssText = 'position:fixed;left:-9999px;top:0;background:#fff;color:#000';
+    box.innerHTML = html;
+    document.body.appendChild(box);
+    const range = document.createRange();
+    range.selectNodeContents(box);
+    const sel = getSelection();
+    sel.removeAllRanges();
+    sel.addRange(range);
+    const ok = document.execCommand('copy');
+    sel.removeAllRanges();
+    box.remove();
+    if (!ok) { toast('Copying failed in this browser. Try the image instead.'); return; }
+  }
+  toast('Table copied: paste it into your document');
 }
 
 async function copyPNG() {
@@ -899,6 +985,15 @@ async function init() {
   });
 
   const ed = $('#editor');
+  // with the 'Shade cells' tool on, clicking a violation cell toggles its shading
+  ed.addEventListener('mousedown', e => {
+    if (!shadeMode || state.auto) return;
+    const td = e.target.closest('td.cell-v');
+    if (!td) return;
+    e.preventDefault();
+    const key = `${td.dataset.k}:${td.dataset.c}`;
+    change(() => { state.shade[key] = !state.shade[key]; });
+  });
   ed.addEventListener('input', onEditorInput);
   ed.addEventListener('click', onEditorClick);
   ed.addEventListener('keydown', onEditorKey);
@@ -913,7 +1008,6 @@ async function init() {
       if (state.mode === 'me') state.groups.forEach(g => { g.winner = null; });
     });
   }));
-  $$('[data-view]').forEach(b => b.addEventListener('click', () => change(() => { state.view = b.dataset.view; })));
   $('#undo').addEventListener('click', undo);
   $('#redo').addEventListener('click', redo);
   $('#new').addEventListener('click', () => {
@@ -933,7 +1027,25 @@ async function init() {
   });
   $('#save-json').addEventListener('click', () => download('tableau.json', IO.toJSON(state), 'application/json'));
   $('#share').addEventListener('click', share);
-  $('#manual').addEventListener('change', e => setManual(e.target.checked));
+  $('#auto').addEventListener('change', e => setAuto(e.target.checked));
+  $('#shade-mode').addEventListener('click', () => {
+    shadeMode = !shadeMode;
+    renderChrome();
+    $('#editor').classList.toggle('shade-mode', shadeMode && !state.auto);
+    if (shadeMode) toast('Click violation cells to shade or unshade them. Click “Shade cells” again when you’re done.');
+  });
+  $$('.pagetabs [data-page]').forEach(b => b.addEventListener('click', () => {
+    page = b.dataset.page;
+    try { sessionStorage.setItem('tableau-page', page); } catch { /* ignore */ }
+    renderChrome();
+  }));
+  $('#copy-docs').addEventListener('click', copyDocs);
+  $('#hasse-fill').addEventListener('click', () => {
+    pushUndo();
+    state.opts.hasseCustom = rankingLines();
+    save();
+    renderHasse();
+  });
   $('#rcd').addEventListener('click', rankByRCD);
   $('#fit').addEventListener('click', fitWeights);
 
@@ -963,7 +1075,7 @@ async function init() {
     const r = e.target.closest('rect.hit');
     if (!r) return;
     const key = `${r.dataset.cand}:${r.dataset.con}`;
-    if (state.manual) {
+    if (!state.auto) {
       change(() => { state.shade[key] = !state.shade[key]; });
     } else {
       const el = $(`#editor input[data-f="v"][data-k="${r.dataset.cand}"][data-c="${r.dataset.con}"]`);
@@ -978,6 +1090,7 @@ async function init() {
     if (e.key === 'y' || (e.key === 'z' && e.shiftKey) || e.key === 'Z') { e.preventDefault(); redo(); }
   });
 
+  try { if (sessionStorage.getItem('tableau-page') === 'hasse') page = 'hasse'; } catch { /* ignore */ }
   initIPA();
   updateHistoryButtons();
   renderAll();

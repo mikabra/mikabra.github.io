@@ -8,7 +8,7 @@ import { effectiveLines } from './grid.js';
 export const IPA_FALLBACK = 'Noto Sans';
 
 export const fontStack = font =>
-  `"${font}", "${IPA_FALLBACK}", "Noto Sans Symbols 2", "Segoe UI Symbol", "Apple Symbols", sans-serif`;
+  `"${font}", "${IPA_FALLBACK}", "Noto Sans Math", "Noto Sans Symbols 2", "Segoe UI Symbol", "Apple Symbols", sans-serif`;
 
 const SHADE = '#d4d4d4';
 const measureCtx = document.createElement('canvas').getContext('2d');
@@ -47,14 +47,17 @@ export function measure(frags, font) {
 }
 
 // Lay out a grid. Returns a scene { width, height, items }.
-export function layoutGrid(grid, { font, fontSize: fs, margin = 1.5 }) {
+// Column and row boundaries fall on whole pixels, and each 1px rule is drawn
+// through the middle of the pixel after its boundary (see snap below), so
+// horizontal and vertical rules meet exactly at every corner.
+export function layoutGrid(grid, { font, fontSize: fs, margin = 1 }) {
   const em = fs;
   const { v, h } = effectiveLines(grid);
   const R = grid.rows.length;
   const Cn = grid.cols.length;
   const lineH = fs * 1.3;
   const padY = fs * 0.3;
-  const rowH = lineH + 2 * padY;
+  const rowH = Math.round(lineH + 2 * padY);
 
   const cols = grid.cols.map(c => ({ ...c }));
   // an empty mark column takes no space
@@ -88,7 +91,7 @@ export function layoutGrid(grid, { font, fontSize: fs, margin = 1.5 }) {
   }));
 
   const xs = [margin];
-  widths.forEach(w => xs.push(xs[xs.length - 1] + w));
+  widths.forEach(w => xs.push(xs[xs.length - 1] + Math.ceil(w)));
   const ys = Array.from({ length: R + 1 }, (_, r) => margin + r * rowH);
   const items = [];
 
@@ -138,7 +141,8 @@ export function layoutGrid(grid, { font, fontSize: fs, margin = 1.5 }) {
       }
     }
   }
-  return { width: xs[Cn] + margin, height: ys[R] + margin, items, font };
+  // the last rules occupy the pixel after the final boundary
+  return { width: xs[Cn] + 1 + margin, height: ys[R] + 1 + margin, items, font };
 }
 
 // Stack several scenes vertically.
@@ -154,11 +158,14 @@ export function stackScenes(scenes, gap) {
       if ('y1' in c) { c.y1 += y; c.y2 += y; }
       items.push(c);
     }
-    y += s.height + gap;
+    y += s.height + Math.round(gap);
     width = Math.max(width, s.width);
   }
-  return { width, height: y - gap, items, font: scenes[0].font };
+  return { width, height: y - Math.round(gap), items, font: scenes[0].font };
 }
+
+// A rule at boundary x is drawn through the centre of pixel [x, x+1].
+const snap = x => Math.round(x) + 0.5;
 
 const esc = s => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 const r2 = x => Math.round(x * 100) / 100;
@@ -175,9 +182,7 @@ export function toSVG(scene, { fontCSS = '', background = null, interactive = fa
   out.push(`<g stroke="${stroke}" stroke-width="1" fill="none" stroke-linecap="square">`);
   for (const it of scene.items) {
     if (it.type !== 'line') continue;
-    const snap = x => Math.round(x) + 0.5;
-    const horiz = it.y1 === it.y2;
-    const [x1, y1, x2, y2] = it.free ? [it.x1, it.y1, it.x2, it.y2] : horiz ? [it.x1, snap(it.y1), it.x2, snap(it.y2)] : [snap(it.x1), it.y1, snap(it.x2), it.y2];
+    const [x1, y1, x2, y2] = it.free ? [it.x1, it.y1, it.x2, it.y2] : [snap(it.x1), snap(it.y1), snap(it.x2), snap(it.y2)];
     out.push(`<line x1="${r2(x1)}" y1="${r2(y1)}" x2="${r2(x2)}" y2="${r2(y2)}"${it.dash ? ' stroke-dasharray="3 3" stroke-linecap="butt"' : ''}/>`);
   }
   out.push('</g>');
@@ -214,11 +219,8 @@ export function toCanvas(scene, { scale = 2, background = '#fff', stroke = '#000
     ctx.setLineDash(it.dash ? [3, 3] : []);
     ctx.lineCap = it.dash ? 'butt' : 'square';
     ctx.beginPath();
-    const snap = x => Math.round(x) + 0.5;
-    const horiz = it.y1 === it.y2;
     if (it.free) { ctx.moveTo(it.x1, it.y1); ctx.lineTo(it.x2, it.y2); }
-    else if (horiz) { ctx.moveTo(it.x1, snap(it.y1)); ctx.lineTo(it.x2, snap(it.y2)); }
-    else { ctx.moveTo(snap(it.x1), it.y1); ctx.lineTo(snap(it.x2), it.y2); }
+    else { ctx.moveTo(snap(it.x1), snap(it.y1)); ctx.lineTo(snap(it.x2), snap(it.y2)); }
     ctx.stroke();
   }
   ctx.fillStyle = stroke;
@@ -237,14 +239,16 @@ export function toCanvas(scene, { scale = 2, background = '#fff', stroke = '#000
 const loadedCSS = new Set();
 
 export async function loadFont(font) {
-  const fams = [font, IPA_FALLBACK, 'Noto Sans Symbols 2'];
+  // Noto Sans Math is only registered here: the browser downloads it the
+  // first time a logic symbol needs it
+  const fams = [font, IPA_FALLBACK, 'Noto Sans Symbols 2', 'Noto Sans Math'];
   for (const f of fams) {
     if (loadedCSS.has(f)) continue;
     loadedCSS.add(f);
     const link = document.createElement('link');
     link.rel = 'stylesheet';
     link.href = `https://fonts.googleapis.com/css2?family=${encodeURIComponent(f).replace(/%20/g, '+')}:ital,wght@0,400;1,400&display=swap`;
-    if (f === 'Noto Sans Symbols 2') link.href = 'https://fonts.googleapis.com/css2?family=Noto+Sans+Symbols+2&display=swap';
+    if (f === 'Noto Sans Symbols 2' || f === 'Noto Sans Math') link.href = `https://fonts.googleapis.com/css2?family=${f.replace(/ /g, '+')}&display=swap`;
     document.head.appendChild(link);
     await new Promise(res => { link.onload = res; link.onerror = res; });
   }
@@ -286,7 +290,8 @@ export async function embeddedFontCSS(scene) {
     const main = await fetchFaces(scene.font, hasItalic ? ':ital@0;1' : '');
     const ipa = scene.font !== IPA_FALLBACK && /[^\x00-\x7F]/.test(text) ? await fetchFaces(IPA_FALLBACK, '') : '';
     const symbols = /[☞☹✗]/.test(text) ? await fetchFaces('Noto Sans Symbols 2', '') : '';
-    return [main, ipa, symbols].join('\n');
+    const math = /[←-⋿□◇⟦⟧⨀-⫿]/.test(text) ? await fetchFaces('Noto Sans Math', '') : '';
+    return [main, ipa, symbols, math].join('\n');
   } catch {
     return '';
   }

@@ -66,7 +66,7 @@ label.small input { width: 4.5em; }
   flex-wrap: wrap;
   gap: 0.6rem;
   align-items: center;
-  margin: 1.5rem 0 1.25rem;
+  margin: 0.75rem 0 1.25rem;
   position: sticky;
   top: 0;
   z-index: 20;
@@ -89,7 +89,33 @@ label.small input { width: 4.5em; }
 .panel h2 { margin-top: 0; }
 .panel-head { display: flex; align-items: baseline; gap: 1rem; }
 
-[data-hidden-mode] { display: none !important; }
+[data-hidden-mode], [hidden] { display: none !important; }
+
+/* Tableau / Hasse diagram pages */
+.pagetabs { display: flex; gap: 0.25rem; margin: 1.5rem 0 0; border-bottom: 2px solid var(--divider); }
+.pagetabs button {
+  font-family: var(--font-body); font-weight: 700; font-size: 0.95rem;
+  padding: 0.5rem 1rem; background: none; border: none; border-bottom: 3px solid transparent;
+  margin-bottom: -2px; color: var(--muted); cursor: pointer;
+}
+.pagetabs button:hover { color: var(--link); }
+.pagetabs button[aria-selected="true"] { color: var(--link); border-bottom-color: var(--link); }
+
+/* Experimental (automatic) section */
+details.experimental { margin-top: 0.75rem; border: 1px dashed var(--line-strong); padding: 0.5rem 0.75rem; font-size: 0.92rem; }
+details.experimental summary { cursor: pointer; font-family: var(--font-body); font-weight: 700; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); }
+details.experimental[open] summary { margin-bottom: 0.5rem; }
+.exp-body > * + * { margin-top: 0.6rem; }
+.exp-tools { display: flex; flex-wrap: wrap; gap: 0.6rem; align-items: center; }
+.exp-tag { font-size: 0.72rem; color: var(--muted); border: 1px solid var(--line); padding: 0 0.3em; margin-left: 0.2em; white-space: nowrap; }
+
+/* Mark column and the shading tool */
+.editor td.cell-mark { text-align: center; padding: 0.15rem; }
+.editor .mark-select { font-family: var(--ipa); font-size: 1rem; padding: 0.1rem 0.2rem; font-weight: 400; }
+.editor.shade-mode td.cell-v { cursor: cell; }
+.editor.shade-mode td.cell-v input { pointer-events: none; }
+#shade-mode[aria-pressed="true"] { background: var(--link); border-color: var(--link); color: var(--bg); }
+.custom-rank .btn { margin-top: 0.4rem; }
 
 /* Editor grid ------------------------------------------------------------- */
 .editor-scroll { overflow-x: auto; padding-bottom: 0.25rem; }

@@ -30,6 +30,7 @@ export function runsLatex(runs, ctx) {
       const res = toLatex(r.t, ctx.ipa);
       if (res.tipa) ctx.pkgs.add('tipa');
       if (res.tone) ctx.tone = true;
+      if (/\\(Box|Diamond|leadsto|nexists)\b/.test(res.latex)) ctx.pkgs.add('amssymb');
       res.unknown.forEach(u => ctx.unknown.add(u));
       s = res.latex;
     } else {
@@ -117,7 +118,7 @@ function gridLatex(grid, ctx) {
   return lines.join('\n');
 }
 
-const PKG_ORDER = ['tikz', 'tipa', 'pifont', 'wasysym', 'fontawesome5', 'colortbl', 'arydshln', 'multirow'];
+const PKG_ORDER = ['tikz', 'amssymb', 'tipa', 'pifont', 'wasysym', 'fontawesome5', 'colortbl', 'arydshln', 'multirow'];
 
 // \usepackage lines for the packages a piece of code needs.
 export function usepackages(ctx) {

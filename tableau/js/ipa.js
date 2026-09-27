@@ -251,6 +251,66 @@ export const GROUPS = [
       T('–', 'en dash', '--'),
     ],
   },
+  {
+    // formal semantics and pragmatics
+    id: 'logic', label: 'Logic', items: [
+      T('¬', 'negation (not)', '$\\neg$'),
+      T('∧', 'conjunction (and, wedge)', '$\\wedge$'),
+      T('∨', 'disjunction (or, vee)', '$\\vee$'),
+      T('→', 'material conditional (implies, arrow)', '$\\rightarrow$'),
+      T('↔', 'biconditional (if and only if)', '$\\leftrightarrow$'),
+      T('⊃', 'conditional (horseshoe)', '$\\supset$'),
+      T('≡', 'equivalence (triple bar)', '$\\equiv$'),
+      T('⊕', 'exclusive or (xor)', '$\\oplus$'),
+      T('∀', 'universal quantifier (for all)', '$\\forall$'),
+      T('∃', 'existential quantifier (there exists)', '$\\exists$'),
+      T('∄', 'there does not exist', '$\\nexists$'),
+      T('λ', 'lambda (abstraction)', '$\\lambda$'),
+      T('ι', 'iota (definite description)', '$\\iota$'),
+      T('ε', 'epsilon (choice function)', '$\\varepsilon$'),
+      T('⊤', 'verum (top, true)', '$\\top$'),
+      T('⊥', 'falsum (bottom, false)', '$\\bot$'),
+      T('⊢', 'proves (turnstile)', '$\\vdash$'),
+      T('⊨', 'entails (models, double turnstile)', '$\\models$'),
+      T('⊭', 'does not entail', '$\\not\\models$'),
+      T('□', 'necessity (box)', '$\\Box$'),
+      T('◇', 'possibility (diamond)', '$\\Diamond$'),
+      T('⟦', 'left denotation bracket (double bracket)', '$[\\![$'),
+      T('⟧', 'right denotation bracket (double bracket)', '$]\\!]$'),
+      T('∈', 'element of (in)', '$\\in$'),
+      T('∉', 'not an element of', '$\\notin$'),
+      T('⊆', 'subset or equal', '$\\subseteq$'),
+      T('⊂', 'proper subset', '$\\subset$'),
+      T('⊇', 'superset or equal', '$\\supseteq$'),
+      T('∩', 'intersection', '$\\cap$'),
+      T('∪', 'union', '$\\cup$'),
+      T('≠', 'not equal', '$\\neq$'),
+      T('≤', 'less than or equal', '$\\leq$'),
+      T('≥', 'greater than or equal', '$\\geq$'),
+      T('≺', 'precedes (strictly weaker on a scale)', '$\\prec$'),
+      T('≻', 'succeeds (strictly stronger on a scale)', '$\\succ$'),
+      T('⪯', 'precedes or equals', '$\\preceq$'),
+      T('∘', 'function composition (circle)', '$\\circ$'),
+      T('×', 'cartesian product (times)', '$\\times$'),
+      T('↦', 'maps to', '$\\mapsto$'),
+      T('⇒', 'implies (double arrow)', '$\\Rightarrow$'),
+      T('⇔', 'if and only if (double arrow)', '$\\Leftrightarrow$'),
+      T('⇝', 'implicates (squiggly arrow)', '$\\leadsto$'),
+      T('≫', 'dominates, ranked above', '$\\gg$'),
+      T('α', 'alpha', '$\\alpha$'),
+      T('γ', 'gamma', '$\\gamma$'),
+      T('δ', 'delta', '$\\delta$'),
+      T('π', 'pi', '$\\pi$'),
+      T('τ', 'tau (type t)', '$\\tau$'),
+      T('ψ', 'psi', '$\\psi$'),
+      T('Γ', 'capital gamma', '$\\Gamma$'),
+      T('Δ', 'capital delta', '$\\Delta$'),
+      T('Σ', 'capital sigma', '$\\Sigma$'),
+      T('Φ', 'capital phi', '$\\Phi$'),
+      T('Ψ', 'capital psi', '$\\Psi$'),
+      T('Ω', 'capital omega', '$\\Omega$'),
+    ],
+  },
 ];
 
 // Everything searchable, with the chart symbols included.
@@ -306,6 +366,12 @@ const LATEX_SPECIAL = {
   '☞': '\\ding{43}', '✗': '\\ding{55}', '☹': '\\frownie{}', '💣': '\\faBomb{}',
   '→': '$\\rightarrow$', '·': '\\textperiodcentered{}',
 };
+
+// Symbols from the non-IPA groups (phonology, logic) map to the same LaTeX
+// in Unicode mode as in tipa mode.
+for (const g of GROUPS) {
+  for (const s of g.items) if (s.k === 'text' && !(s.c in LATEX_SPECIAL)) LATEX_SPECIAL[s.c] = s.tx;
+}
 
 export function escapeLatexChar(ch) {
   return LATEX_SPECIAL[ch] ?? ch;

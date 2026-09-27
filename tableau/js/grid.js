@@ -42,9 +42,14 @@ function violText(state, n, bang) {
   return num + (bang >= 0 ? '!' : '');
 }
 
-// The mark (☞ / ☹ / nothing) shown before a candidate.
+// The mark (☞ / ☹ / nothing) shown before a candidate: the one chosen in
+// the editor, or in automatic mode the one the evaluation implies.
 export function markFor(state, g, k, res) {
   if (k.mark && k.mark !== 'auto') return k.mark === 'none' ? null : k.mark;
+  return state.auto ? autoMark(state, g, k, res) : null;
+}
+
+export function autoMark(state, g, k, res) {
   const o = state.opts;
   const win = o.winnerMark;
   if (state.mode === 'me') return o.meMarks && res.winners.has(k.id) ? win : null;
@@ -145,7 +150,7 @@ function tableauGrid(state, results, gis, withInputCol) {
         const p = parseViol(k.viol[c.id]);
         let bang = -1;
         let shade = false;
-        if (state.manual) {
+        if (!state.auto) {
           bang = p.bang;
           shade = !!state.shade[`${k.id}:${c.id}`];
         } else if (state.mode === 'ot') {
@@ -161,7 +166,8 @@ function tableauGrid(state, results, gis, withInputCol) {
       extras.forEach((x, xi) => {
         let t = '';
         const pen = res.pen?.[ki] ?? 0;
-        if (x === 'H') t = fmtNum(o.negative ? -pen : pen, o.decimals);
+        if (!state.auto && x !== 'Obs') t = String(k.extra?.[x] ?? '');
+        else if (x === 'H') t = fmtNum(o.negative ? -pen : pen, o.decimals);
         if (x === 'eH') t = fmtNum(res.eh[ki], o.decimals, true);
         if (x === 'P') t = fmtNum(res.P[ki], o.decimals, true);
         if (x === 'Obs') t = String(k.obs ?? '').trim() === '' ? '' : fmtNum(parseObs(k.obs), o.decimals);
@@ -221,11 +227,52 @@ export function buildGrids(state) {
   const n = state.groups.length;
   const separate = state.opts.layout === 'separate' || n === 1;
   const sets = separate ? state.groups.map((_, i) => [i]) : [[...Array(n).keys()]];
-  if (state.view === 'comparative' && state.mode === 'ot') {
+  if (state.opts.comparative && state.mode === 'ot') {
     const rows = ercs(state, results);
     return sets.map(gis => comparativeGrid(state, rows, gis, !separate));
   }
   return sets.map(gis => tableauGrid(state, results, gis, !separate));
+}
+
+// Turn automatic mode off, writing what it computed (marks, fatal '!',
+// shading, H/eH/P) into the tableau, so the display doesn't change and
+// everything can then be edited by hand.
+export function freezeAuto(state) {
+  const o = state.opts;
+  const results = evaluate(state);
+  const wasAuto = state.auto;
+  state.auto = true;
+  state.shade = {};
+  state.groups.forEach((g, gi) => {
+    const res = results[gi];
+    g.candidates.forEach((k, ki) => {
+      if (!k.mark || k.mark === 'auto') k.mark = autoMark(state, g, k, res) || 'auto';
+      if (state.mode === 'ot') {
+        const inf = res.info[ki];
+        state.constraints.forEach((c, ci) => {
+          const p = parseViol(k.viol[c.id]);
+          if (o.fatal && inf.fatal.has(ci)) {
+            const b = inf.fatal.get(ci);
+            k.viol[c.id] = Number.isInteger(p.n) && p.n <= 20
+              ? '*'.repeat(b + 1) + '!' + '*'.repeat(Math.max(0, p.n - b - 1))
+              : `${p.n}!`;
+          } else if (p.bang >= 0) {
+            k.viol[c.id] = String(k.viol[c.id]).replace(/!/g, '');
+          }
+          if (o.shading && ci >= inf.shadeFrom) state.shade[`${k.id}:${c.id}`] = true;
+        });
+      } else {
+        const pen = res.pen[ki];
+        k.extra = { H: fmtNum(o.negative ? -pen : pen, o.decimals) };
+        if (state.mode === 'me') {
+          k.extra.eH = fmtNum(res.eh[ki], o.decimals, true);
+          k.extra.P = fmtNum(res.P[ki], o.decimals, true);
+        }
+      }
+    });
+  });
+  state.auto = false;
+  return wasAuto;
 }
 
 // For every (row, column) the cell object covering it, and its origin.

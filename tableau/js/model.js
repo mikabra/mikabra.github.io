@@ -8,8 +8,9 @@ export const DEFAULT_OPTS = {
   violStyle: 'stars',      // 'stars' | 'numbers'
   negative: false,         // show violations and harmonies as negative numbers
   zeroBlank: true,         // leave zero-violation cells empty
-  fatal: true,             // OT: mark fatal violations with '!'
-  shading: true,           // OT: shade cells that no longer matter
+  fatal: true,             // automatic mode, OT: mark fatal violations with '!'
+  shading: true,           // automatic mode, OT: shade cells that no longer matter
+  comparative: false,      // OT: comparative (W/L/e) tableau instead of violations
   labels: true,            // a. b. c. before candidates
   winnerMark: 'hand',      // 'hand' | 'arrow'
   wrongMark: 'frown',      // 'frown' | 'bomb' | 'cross'
@@ -25,14 +26,14 @@ export const DEFAULT_OPTS = {
   inputHeader: '',
   candHeader: '',
   compE: 'e',              // what to write in comparative cells with no preference
-  font: 'Andika',          // sans serif with complete IPA coverage
+  font: 'Charis SIL',      // serif with complete IPA coverage; Andika is the sans option
   fontSize: 16,
   latexIpa: 'tipa',        // 'tipa' | 'unicode'
   latexStandalone: false,
   typstStandalone: false,
   pngScale: 3,
   pngBg: 'white',
-  hasseSource: 'entailed', // 'ranking' | 'entailed' | 'custom'
+  hasseSource: 'ranking',  // 'ranking' | 'custom' | 'entailed' (experimental)
   hasseCustom: '',
   sigma2: 100000,          // MaxEnt fitting: Gaussian prior variance (as in the MaxEnt Grammar Tool)
 };
@@ -41,7 +42,7 @@ export function blankState(mode = 'ot') {
   const c1 = { id: uid('c'), name: '*Coda', weight: 3, tie: false };
   const c2 = { id: uid('c'), name: 'Max', weight: 2, tie: false };
   const c3 = { id: uid('c'), name: 'Dep', weight: 1, tie: false };
-  const cand = (form, v) => ({ id: uid('k'), form, viol: v, obs: '', mark: 'auto' });
+  const cand = (form, v) => ({ id: uid('k'), form, viol: v, obs: '', mark: 'auto', extra: {} });
   const g = {
     id: uid('g'), input: '/pat/', winner: null, candidates: [
       cand('[pat]', { [c1.id]: '1' }),
@@ -50,7 +51,7 @@ export function blankState(mode = 'ot') {
     ],
   };
   return withModeDefaults({
-    version: 3, mode, view: 'tableau', manual: false, shade: {},
+    version: 4, mode, auto: false, shade: {},
     constraints: [c1, c2, c3], groups: [g], opts: { ...DEFAULT_OPTS },
   }, mode);
 }
@@ -59,20 +60,24 @@ export function withModeDefaults(state, mode) {
   state.mode = mode;
   state.opts.violStyle = mode === 'ot' ? 'stars' : 'numbers';
   state.opts.negative = mode === 'hg';
-  if (mode !== 'ot') state.view = 'tableau';
   return state;
 }
 
 // Bring loaded/old states up to the current shape.
 export function normalize(state) {
   state.opts = { ...DEFAULT_OPTS, ...(state.opts || {}) };
-  // earlier versions defaulted to Charis SIL (v1) and Atkinson Hyperlegible (v2)
   const v = state.version || 1;
-  if ((v < 2 && state.opts.font === 'Charis SIL') || (v < 3 && state.opts.font === 'Atkinson Hyperlegible')) state.opts.font = DEFAULT_OPTS.font;
-  state.version = 3;
+  // v2 and v3 defaulted to Atkinson Hyperlegible and Andika
+  if (v < 4 && ['Atkinson Hyperlegible', 'Andika'].includes(state.opts.font)) state.opts.font = DEFAULT_OPTS.font;
+  // before v4, automatic evaluation was on unless 'manual' was set, and the
+  // comparative tableau was a view rather than a display option
+  if (state.auto === undefined) state.auto = v < 4 ? !state.manual : false;
+  if (state.view === 'comparative') state.opts.comparative = true;
+  delete state.manual;
+  delete state.view;
+  state.version = 4;
   state.shade ||= {};
   state.source ??= null; // citation for a built-in example: { text, url }
-  state.view ||= 'tableau';
   state.mode ||= 'ot';
   for (const c of state.constraints) {
     c.id ||= uid('c');
@@ -87,6 +92,7 @@ export function normalize(state) {
       k.viol ||= {};
       k.obs ??= '';
       k.mark ||= 'auto';
+      k.extra ||= {}; // typed H, eH and P values (when not computed)
     }
   }
   return state;
@@ -262,10 +268,16 @@ export function fitMaxEnt(state, { sigma2 = 100000, iters = 50000 } = {}) {
 // ---------------------------------------------------------------------------
 // ERCs and ranking
 
-// The intended winner of each group: the user's choice, else the first
+// The intended winner of each group: the candidate marked ☞ (typesetting
+// mode) or ticked as intended winner (automatic mode), else the first
 // computed winner.
 export function intendedWinners(state, results = evaluate(state)) {
   return state.groups.map((g, gi) => {
+    if (!state.auto) {
+      // typesetting mode: the candidate marked with the winner symbol
+      const marked = g.candidates.find(k => k.mark === 'hand' || k.mark === 'arrow');
+      if (marked) return marked.id;
+    }
     if (g.winner && g.candidates.some(k => k.id === g.winner)) return g.winner;
     const w = g.candidates.find(k => results[gi].winners.has(k.id));
     return w ? w.id : null;
