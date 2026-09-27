@@ -6,7 +6,10 @@
   <title>Mika Bradley</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;700&family=Ubuntu+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <script>
+    try { if (localStorage.getItem('theme') === 'dark') document.documentElement.setAttribute('data-theme', 'dark'); } catch {}
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&family=Hanken+Grotesk:wght@700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 </head>
@@ -16,10 +19,10 @@
       <nav>
         <a href="#about" class="nav-link active" data-page="about">About</a>
         <a href="#cv" class="nav-link" data-page="cv">CV</a>
-        <label class="theme-switch" aria-label="Toggle dark theme">
-          <input type="checkbox" id="theme-toggle">
-          <span class="theme-switch-track"></span>
-        </label>
+        <a href="tableau/" class="nav-link">Tableau&nbsp;tool</a>
+        <button type="button" class="theme-toggle" id="theme-toggle" aria-pressed="false" aria-label="Dark mode">
+          <span class="disc" aria-hidden="true"></span><span class="label">Dark</span>
+        </button>
       </nav>
     </header>
     <main id="content">
@@ -31,23 +34,21 @@
   </div>
   <script>
     const contentDiv = document.getElementById('content');
-    const navLinks = document.querySelectorAll('.nav-link');
+    const navLinks = document.querySelectorAll('.nav-link[data-page]');
     const themeToggle = document.getElementById('theme-toggle');
 
-    function currentIsDark() {
-      const stored = localStorage.getItem('theme');
-      const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      return stored ? stored === 'dark' : systemDark;
+    // Light unless the visitor has chosen dark with the toggle.
+    function setTheme(dark) {
+      document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
+      themeToggle.setAttribute('aria-pressed', dark);
+      themeToggle.querySelector('.label').textContent = dark ? 'Light' : 'Dark';
     }
+    setTheme(document.documentElement.getAttribute('data-theme') === 'dark');
 
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme) document.documentElement.setAttribute('data-theme', savedTheme);
-    themeToggle.checked = currentIsDark();
-
-    themeToggle.addEventListener('change', () => {
-      const next = themeToggle.checked ? 'dark' : 'light';
-      localStorage.setItem('theme', next);
-      document.documentElement.setAttribute('data-theme', next);
+    themeToggle.addEventListener('click', () => {
+      const dark = themeToggle.getAttribute('aria-pressed') !== 'true';
+      try { localStorage.setItem('theme', dark ? 'dark' : 'light'); } catch {}
+      setTheme(dark);
     });
 
     async function loadPage(page) {

@@ -1,11 +1,11 @@
 # Mika Bradley
 
+Hi! I'm an MPhil student in linguistics at University College London. I'm interested in the logic of natural language, and how it interfaces with the logic of thought and the logic of conversation.
+
 <figure class="profile-photo">
   <img src="assets/mika.jpg" alt="Mika hiking somewhere near the Feldberg in Baden-Württemberg, Germany.">
-  <figcaption>Mika hiking somewhere near the Feldberg in Baden-Württemberg, Germany.</figcaption>
+  <figcaption>Me hiking somewhere near the Feldberg in Baden-Württemberg, Germany.</figcaption>
 </figure>
-
-Hi! I'm an MPhil student in linguistics at University College London. I'm interested in the logic of natural language, and how it interfaces with the logic of thought and the logic of conversation.
 
 Lately, I've been thinking a bit about the role of [weighted constraints](https://onlinelibrary.wiley.com/doi/pdf/10.1111/j.1551-6709.2009.01047.x) in linguistic theorising, which I've suspected might shed light on some issues in the grammar of alternatives and anti-presupposition. Interestingly, architectures that make use of these tend to be highly compatible with [connectionist](https://plato.stanford.edu/entries/connectionism/) models of learning and representation — the kind underpinning most modern AI systems. I've also worked on the semantics and cognition of quantificational expressions, as well as on game-theoretic models of pragmatic language understanding.
 

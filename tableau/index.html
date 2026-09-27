@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tableau Maker · Mika Bradley</title>
+  <meta name="description" content="Tool for typesetting OT, Harmonic Grammar and MaxEnt tableaux with an IPA picker.">
+  <script>
+    try { if (localStorage.getItem('theme') === 'dark') document.documentElement.setAttribute('data-theme', 'dark'); } catch {}
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&family=Atkinson+Hyperlegible+Mono:wght@400;700&family=Hanken+Grotesk:wght@700&family=Andika:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="tableau.css">
+</head>
+<body>
+  <div class="container wide">
+    <header>
+      <nav>
+        <a href="../#about" class="nav-link">About</a>
+        <a href="../#cv" class="nav-link">CV</a>
+        <a href="./" class="nav-link active">Tableau&nbsp;tool</a>
+        <button type="button" class="theme-toggle" id="theme-toggle" aria-pressed="false" aria-label="Dark mode">
+          <span class="disc" aria-hidden="true"></span><span class="label">Dark</span>
+        </button>
+      </nav>
+    </header>
+
+    <main>
+      <h1>Tableau maker</h1>
+      <p class="lede">Here's a tool I vibecoded for easily creating and typesetting OT, HG and MaxEnt tableaux. Feel free to use it for your own purposes as well.
+ 		      It's not quite as powerful as <a href="https://brucehayes.org/otsoft/">Hayes' OTSoft</a>, but this one works in your browser.</p>
+
+      <p class="lede">Winners, fatal violations, harmonies and probabilities are calculated automatically, but you can still change any of them by hand.</p>
+
+      <div class="toolbar" role="toolbar" aria-label="Tableau type and file">
+        <div class="seg" role="group" aria-label="Framework">
+          <button type="button" data-mode="ot" title="Optimality Theory: strict ranking">OT</button>
+          <button type="button" data-mode="hg" title="Harmonic Grammar: weighted constraints">HG</button>
+          <button type="button" data-mode="me" title="Maximum Entropy: probabilities from weights">MaxEnt</button>
+        </div>
+        <div class="seg" role="group" aria-label="View" id="view-seg">
+          <button type="button" data-view="tableau">Tableau</button>
+          <button type="button" data-view="comparative" title="Winner~loser pairs with W, L and e">Comparative</button>
+        </div>
+        <div class="seg" role="group" aria-label="History">
+          <button type="button" id="undo" title="Undo (Ctrl+Z)">Undo</button>
+          <button type="button" id="redo" title="Redo (Ctrl+Y)">Redo</button>
+        </div>
+        <div class="spacer"></div>
+        <select id="examples" aria-label="Load an example">
+          <option value="">Examples…</option>
+        </select>
+        <div class="seg" role="group" aria-label="File">
+          <button type="button" id="new">New</button>
+          <button type="button" id="import">Import</button>
+          <button type="button" id="save-json" title="Download as a JSON file you can import later">Save</button>
+          <button type="button" id="share" title="Copy a link that contains this tableau">Share link</button>
+        </div>
+      </div>
+
+      <div class="workspace">
+        <section class="panel editor-panel" aria-labelledby="ed-h">
+          <h2 id="ed-h">Tableau</h2>
+          <div class="editor-scroll">
+            <table id="editor" class="editor"></table>
+          </div>
+          <div class="editor-actions">
+            <button type="button" class="btn" data-act="group-add">+ Input</button>
+            <button type="button" class="btn" data-act="con-add">+ Constraint</button>
+            <button type="button" class="btn" id="rcd" data-modes="ot" title="Rank the constraints with Recursive Constraint Demotion so that every intended winner wins">Rank by RCD</button>
+            <span class="fit" data-modes="me">
+              <button type="button" class="btn" id="fit" title="Fit weights to the observed frequencies (maximum likelihood with a Gaussian prior)">Fit weights</button>
+              <label class="small">σ² <input type="number" id="sigma2" min="0" step="any" aria-label="Prior variance σ²"></label>
+            </span>
+            <label class="check"><input type="checkbox" id="manual"> Edit marks by hand</label>
+          </div>
+          <div id="messages" class="messages" aria-live="polite"></div>
+          <details class="hint">
+            <summary>Tips for filling in the tableau</summary>
+            <ul>
+              <li><strong>Violations:</strong> type a number (<code>2</code>) or stars (<code>**</code>). Leave a cell empty for no violations. Enter and the arrow keys move between rows.</li>
+              <li><strong>Constraint names:</strong> <code>Max_{IO}</code> gives a subscript and <code>X^{2}</code> a superscript. Small caps are added automatically.</li>
+              <li><strong>Ranking (OT):</strong> the columns are ranked from left to right. The <span class="tie-demo">┆</span> button marks two neighbouring constraints as unranked (dashed line).</li>
+              <li><strong>Winners:</strong> ☞ goes on the optimal candidate. Tick <em>Winner</em> to say which candidate <em>should</em> win. If another candidate beats it, that candidate gets ☹. The intended winners also drive the comparative tableau, RCD and the Hasse diagram.</li>
+              <li><strong>By hand:</strong> “Edit marks by hand” keeps the current <code>!</code> marks and shading and lets you change them. Type <code>*!</code> into cells, and click cells in the preview to shade them.</li>
+              <li><strong>Spreadsheets:</strong> you can paste a block of cells copied from Excel or Google Sheets into the grid.</li>
+            </ul>
+          </details>
+        </section>
+
+        <aside class="panel ipa-panel" id="ipa" aria-label="IPA symbols">
+          <div class="ipa-top">
+            <h2>IPA</h2>
+            <button type="button" class="ipa-close btn" aria-label="Close IPA picker">Close</button>
+          </div>
+          <p class="ipa-target" id="ipa-target">Click a field in the tableau, then click a symbol.</p>
+          <input type="search" id="ipa-search" placeholder="Search: schwa, esh, voiced velar…" aria-label="Search IPA symbols by name or X-SAMPA">
+          <div class="ipa-results" id="ipa-results"></div>
+          <div class="ipa-tabs" role="tablist" id="ipa-tabs"></div>
+          <div class="ipa-body" id="ipa-body"></div>
+          <p class="ipa-name" id="ipa-name" aria-live="polite">&nbsp;</p>
+        </aside>
+      </div>
+
+      <section class="panel" aria-labelledby="pv-h">
+        <div class="panel-head">
+          <h2 id="pv-h">Preview</h2>
+        </div>
+        <div class="paper-wrap"><div class="paper" id="preview"></div></div>
+        <details class="options" id="options">
+          <summary>Display options</summary>
+          <div class="opt-grid" id="opt-grid"></div>
+        </details>
+      </section>
+
+      <section class="panel" aria-labelledby="out-h">
+        <h2 id="out-h">Export</h2>
+        <div class="tabs" role="tablist" aria-label="Export format">
+          <button type="button" role="tab" data-tab="latex" aria-selected="true">LaTeX</button>
+          <button type="button" role="tab" data-tab="typst" aria-selected="false">Typst</button>
+          <button type="button" role="tab" data-tab="image" aria-selected="false">Image</button>
+          <button type="button" role="tab" data-tab="otsoft" aria-selected="false">OTSoft</button>
+        </div>
+        <div class="tabpanel" data-panel="latex">
+          <div class="out-opts">
+            <label>IPA as
+              <select data-opt="latexIpa">
+                <option value="tipa">tipa commands (pdfLaTeX)</option>
+                <option value="unicode">Unicode (XeLaTeX / LuaLaTeX)</option>
+              </select>
+            </label>
+            <label class="check"><input type="checkbox" data-opt="latexStandalone"> Complete document</label>
+          </div>
+          <textarea id="latex-code" class="code" readonly spellcheck="false" aria-label="LaTeX code"></textarea>
+          <p class="note" id="latex-note"></p>
+          <div class="out-actions">
+            <button type="button" class="btn primary" data-copy="latex-code">Copy LaTeX</button>
+            <button type="button" class="btn" data-dl="latex">Download .tex</button>
+          </div>
+        </div>
+        <div class="tabpanel" data-panel="typst" hidden>
+          <div class="out-opts">
+            <label class="check"><input type="checkbox" data-opt="typstStandalone"> Complete document</label>
+          </div>
+          <textarea id="typst-code" class="code" readonly spellcheck="false" aria-label="Typst code"></textarea>
+          <p class="note">Uses Typst's built-in <code>table</code>, so no packages are needed.</p>
+          <div class="out-actions">
+            <button type="button" class="btn primary" data-copy="typst-code">Copy Typst</button>
+            <button type="button" class="btn" data-dl="typst">Download .typ</button>
+          </div>
+        </div>
+        <div class="tabpanel" data-panel="image" hidden>
+          <div class="out-opts">
+            <label>Resolution
+              <select data-opt="pngScale" data-num>
+                <option value="1">1× (screen)</option>
+                <option value="2">2×</option>
+                <option value="3">3× (print)</option>
+                <option value="4">4×</option>
+                <option value="6">6×</option>
+              </select>
+            </label>
+            <label>Background
+              <select data-opt="pngBg">
+                <option value="white">White</option>
+                <option value="transparent">Transparent</option>
+              </select>
+            </label>
+          </div>
+          <p class="note">PNG works in Word, Google Docs and slides. SVG stays sharp at any size and has the font built in.</p>
+          <div class="out-actions">
+            <button type="button" class="btn primary" data-dl="png">Download PNG</button>
+            <button type="button" class="btn" id="copy-png">Copy image</button>
+            <button type="button" class="btn" data-dl="svg">Download SVG</button>
+          </div>
+        </div>
+        <div class="tabpanel" data-panel="otsoft" hidden>
+          <textarea id="otsoft-code" class="code" readonly spellcheck="false" aria-label="OTSoft tab-delimited data"></textarea>
+          <p class="note">Tab-delimited input for OTSoft, and for the Maxent Grammar Tool after light editing. The frequency column holds the observed values, or 1 for an intended winner.</p>
+          <div class="out-actions">
+            <button type="button" class="btn primary" data-copy="otsoft-code">Copy</button>
+            <button type="button" class="btn" data-dl="otsoft">Download .txt</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel" id="hasse-panel" aria-labelledby="hs-h" data-modes="ot">
+        <h2 id="hs-h">Hasse diagram</h2>
+        <div class="out-opts">
+          <label>Rankings
+            <select data-opt="hasseSource">
+              <option value="entailed">Entailed by the intended winners</option>
+              <option value="ranking">The ranking in the tableau</option>
+              <option value="custom">Typed in by hand</option>
+            </select>
+          </label>
+        </div>
+        <label class="custom-rank" id="hasse-custom-wrap">One ranking per line, for example <code>*Coda ≫ Max ≫ Dep</code> (<code>&gt;&gt;</code> works too):
+          <textarea id="hasse-custom" rows="3" spellcheck="false" data-ipa></textarea>
+        </label>
+        <p class="note" id="hasse-note"></p>
+        <div class="paper-wrap"><div class="paper" id="hasse-preview"></div></div>
+        <div class="tabs small" role="tablist" aria-label="Hasse diagram format">
+          <button type="button" role="tab" data-htab="tikz" aria-selected="true">TikZ</button>
+          <button type="button" role="tab" data-htab="typst" aria-selected="false">Typst</button>
+        </div>
+        <textarea id="hasse-code" class="code short" readonly spellcheck="false" aria-label="Hasse diagram code"></textarea>
+        <div class="out-actions">
+          <button type="button" class="btn primary" data-copy="hasse-code">Copy code</button>
+          <button type="button" class="btn" data-dl="hasse-png">Download PNG</button>
+          <button type="button" class="btn" data-dl="hasse-svg">Download SVG</button>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <p>© Mika Bradley · Your tableau is saved in this browser. To share it, use a share link or a saved file.</p>
+    </footer>
+  </div>
+
+  <button type="button" class="ipa-fab" id="ipa-fab" aria-controls="ipa" aria-expanded="false">IPA</button>
+
+  <dialog id="import-dialog">
+    <form method="dialog" class="dialog-body">
+      <h2>Import</h2>
+      <p>Choose a file you saved here (<code>.json</code>) or an OTSoft file (tab-delimited <code>.txt</code>). You can also paste either format, or cells copied from a spreadsheet in OTSoft layout: two header rows with the constraint names in column D onwards, then input, candidate, frequency and violations.</p>
+      <input type="file" id="import-file" accept=".json,.txt,.tsv,.csv,text/plain,application/json">
+      <textarea id="import-text" rows="8" spellcheck="false" placeholder="…or paste here"></textarea>
+      <p class="note" id="import-error"></p>
+      <div class="out-actions">
+        <button type="submit" value="cancel" class="btn">Cancel</button>
+        <button type="button" id="import-go" class="btn primary">Import</button>
+      </div>
+    </form>
+  </dialog>
+
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
