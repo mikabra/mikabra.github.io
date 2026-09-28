@@ -6,8 +6,11 @@
 // F: Both  /  J: All). The context screen reserves the space for the frame and options, invisibly,
 // so nothing on screen moves when the choice appears.
 //
-// A session interleaves 60 critical trials (one of four lists) with 60 fillers, never more than
-// MAX_RUN of either in a row, plus 6 attention checks.
+// A session interleaves 56 critical trials (one of four lists) with 56 fillers, never more than
+// MAX_RUN of either in a row, plus 6 attention checks: 118 trials.
+//
+// Framing: each context is the sentence the participant has just said to a friend, and the
+// choice is how they carry on (a continuation), rather than a fact both speakers know.
 
 const CONFIG = {
   KEY_LEFT: 'f',
@@ -21,7 +24,7 @@ const CONFIG = {
   TIMEOUT_FEEDBACK_MS: 1000,
   ITI_MS: 300,
   N_BREAKS: 2,
-  ATTENTION_EVERY: 21,          // one attention check after every 21 critical + filler trials
+  ATTENTION_EVERY: 18,          // one attention check after every 18 critical + filler trials
   MAX_RUN: 2                    // at most this many critical (or filler) trials in a row
 };
 
@@ -204,12 +207,12 @@ function buildTimeline(jsPsych, P, opts) {
 
   tl.push(page(`<h2>Instructions</h2>
     <p class="body">Imagine you are chatting with a friend. Each round has two steps.</p>
-    <p class="body"><strong>1.</strong> A sentence appears on its own. It tells you something that
-    <strong>you and your friend both already know</strong>. Read it.</p>
-    <p class="body"><strong>2.</strong> After a few seconds, the next thing you are about to say
+    <p class="body"><strong>1.</strong> A sentence appears on its own. It is <strong>something you
+    have just said</strong> to your friend. Read it.</p>
+    <p class="body"><strong>2.</strong> After a few seconds, <strong>the next thing you say</strong>
     appears below it, with a gap and two ways to fill the gap. Choose the one
-    <strong>you would say</strong>. Press <kbd>F</kbd> for the left option and <kbd>J</kbd> for the
-    right. The first sentence stays on screen, in grey, while you choose.</p>
+    <strong>you would say</strong> to carry on. Press <kbd>F</kbd> for the left option and
+    <kbd>J</kbd> for the right. Your first sentence stays on screen, in grey, while you choose.</p>
     <p class="body">Go with your first impression. Often either option would do, and then there is
     no right answer; just pick the one you would actually say. You have
     ${Math.round(CONFIG.RESPONSE_DEADLINE_MS / 1000)} seconds to answer, which is plenty.
@@ -257,8 +260,8 @@ function buildTimeline(jsPsych, P, opts) {
 
   if (o.practice) {
     tl.push(page(`<h2>Three practice rounds</h2><p class="body">These do not count. Remember: the
-      first sentence is something you and your friend both know, and you choose what you would say
-      next.</p>`, 'Start practice'));
+      first sentence is what you have just said to your friend, and you choose how you would carry
+      on.</p>`, 'Start practice'));
     S.practice.forEach(t => tl.push(...trialNodes(
       Object.assign({}, t, splitCandidates(t.cand_A, t.cand_B), { left_is_A: rand() < 0.5 }), true)));
     tl.push(page(`<p class="body">That’s the practice done. The main task has ${trials.length}

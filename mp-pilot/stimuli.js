@@ -6,124 +6,196 @@ const STIMULI = {
     "item": "def-01",
     "cls": "definiteness",
     "ctx": "Support",
-    "context": "The kitchen has exactly one window.",
-    "cand_A": "The window in the kitchen is open.",
-    "cand_B": "A window in the kitchen is open."
+    "context": "Our kitchen only has one window.",
+    "cand_A": "I opened the window this morning.",
+    "cand_B": "I opened a window this morning."
    },
    {
     "item": "def-03",
     "cls": "definiteness",
     "ctx": "Control",
-    "context": "The office has six lamps.",
-    "cand_A": "The lamp in the office is broken.",
-    "cand_B": "A lamp in the office is broken."
+    "context": "My office has a lot of lamps.",
+    "cand_A": "I switched on the lamp.",
+    "cand_B": "I switched on a lamp."
    },
    {
     "item": "def-05",
     "cls": "definiteness",
     "ctx": "Support",
-    "context": "The garden has exactly one tree.",
-    "cand_A": "The tree in the garden is dying.",
-    "cand_B": "A tree in the garden is dying."
+    "context": "The classroom only had one clock.",
+    "cand_A": "Someone broke the clock.",
+    "cand_B": "Someone broke a clock."
    },
    {
     "item": "def-07",
     "cls": "definiteness",
     "ctx": "Control",
-    "context": "The hallway has six paintings.",
-    "cand_A": "The painting in the hallway is crooked.",
-    "cand_B": "A painting in the hallway is crooked."
+    "context": "The bathroom had plenty of towels.",
+    "cand_A": "I dried my hands on the towel.",
+    "cand_B": "I dried my hands on a towel."
    },
    {
     "item": "def-09",
     "cls": "definiteness",
     "ctx": "Support",
-    "context": "The fridge has exactly one pear.",
-    "cand_A": "The pear in the fridge is bruised.",
-    "cand_B": "A pear in the fridge is bruised."
+    "context": "The drawer only had one key in it.",
+    "cand_A": "I tried the key in the lock.",
+    "cand_B": "I tried a key in the lock."
    },
    {
     "item": "def-11",
     "cls": "definiteness",
     "ctx": "Control",
-    "context": "The car park has six vans.",
-    "cand_A": "The van in the car park is dented.",
-    "cand_B": "A van in the car park is dented."
+    "context": "The library has twenty computers.",
+    "cand_A": "Someone was using the computer.",
+    "cand_B": "Someone was using a computer."
    },
    {
     "item": "def-13",
     "cls": "definiteness",
     "ctx": "Support",
-    "context": "The field has exactly one horse.",
-    "cand_A": "The horse in the field is limping.",
-    "cand_B": "A horse in the field is limping."
+    "context": "The bedroom only has one mirror.",
+    "cand_A": "There's a crack in the mirror.",
+    "cand_B": "There's a crack in a mirror."
    },
    {
     "item": "def-15",
     "cls": "definiteness",
     "ctx": "Control",
-    "context": "The shop has six tills.",
-    "cand_A": "The till in the shop is jammed.",
-    "cand_B": "A till in the shop is jammed."
+    "context": "The hotel had several lifts.",
+    "cand_A": "The lift was out of order.",
+    "cand_B": "A lift was out of order."
    },
    {
-    "item": "dual-02",
+    "item": "part-02",
+    "cls": "partitive",
+    "ctx": "Support",
+    "context": "My sister only has one cat.",
+    "cand_A": "The cat scratched me.",
+    "cand_B": "One of the cats scratched me."
+   },
+   {
+    "item": "part-04",
+    "cls": "partitive",
+    "ctx": "Control",
+    "context": "The team has several coaches.",
+    "cand_A": "I spoke to the coach after the match.",
+    "cand_B": "I spoke to one of the coaches after the match."
+   },
+   {
+    "item": "part-06",
+    "cls": "partitive",
+    "ctx": "Support",
+    "context": "My desk only has one drawer.",
+    "cand_A": "The drawer keeps getting stuck.",
+    "cand_B": "One of the drawers keeps getting stuck."
+   },
+   {
+    "item": "part-08",
+    "cls": "partitive",
+    "ctx": "Control",
+    "context": "The printer has three trays.",
+    "cand_A": "I filled the tray with paper.",
+    "cand_B": "I filled one of the trays with paper."
+   },
+   {
+    "item": "part-10",
+    "cls": "partitive",
+    "ctx": "Support",
+    "context": "The school only has one nurse.",
+    "cand_A": "I phoned the nurse this morning.",
+    "cand_B": "I phoned one of the nurses this morning."
+   },
+   {
+    "item": "part-12",
+    "cls": "partitive",
+    "ctx": "Control",
+    "context": "The course had a lot of exams.",
+    "cand_A": "I failed the exam.",
+    "cand_B": "I failed one of the exams."
+   },
+   {
+    "item": "part-14",
+    "cls": "partitive",
+    "ctx": "Support",
+    "context": "The hotel only had one pool.",
+    "cand_A": "We swam in the pool every day.",
+    "cand_B": "We swam in one of the pools every day."
+   },
+   {
+    "item": "part-16",
+    "cls": "partitive",
+    "ctx": "Control",
+    "context": "The farm had several tractors.",
+    "cand_A": "My uncle let me drive the tractor.",
+    "cand_B": "My uncle let me drive one of the tractors."
+   },
+   {
+    "item": "dual-01",
     "cls": "duality",
     "ctx": "Support",
-    "context": "Tom has exactly two sisters.",
-    "cand_A": "Both of his sisters are teachers.",
-    "cand_B": "All of his sisters are teachers."
+    "context": "My aunt only has two dogs.",
+    "cand_A": "Both of her dogs are very old.",
+    "cand_B": "All of her dogs are very old."
    },
    {
-    "item": "dual-04",
+    "item": "dual-03",
     "cls": "duality",
     "ctx": "Control",
-    "context": "Mark has three cars.",
-    "cand_A": "Both of his cars are electric.",
-    "cand_B": "All of his cars are electric."
+    "context": "Priya has lots of cats.",
+    "cand_A": "She feeds both of her cats twice a day.",
+    "cand_B": "She feeds all of her cats twice a day."
    },
    {
-    "item": "dual-06",
+    "item": "dual-05",
     "cls": "duality",
     "ctx": "Support",
-    "context": "Omar has exactly two bikes.",
-    "cand_A": "Both of his bikes were stolen.",
-    "cand_B": "All of his bikes were stolen."
+    "context": "Our neighbours only have two children.",
+    "cand_A": "Both of their children go to my school.",
+    "cand_B": "All of their children go to my school."
    },
    {
-    "item": "dual-08",
+    "item": "dual-07",
     "cls": "duality",
     "ctx": "Control",
-    "context": "Sam has three dogs.",
-    "cand_A": "Both of his dogs are well trained.",
-    "cand_B": "All of his dogs are well trained."
+    "context": "We ordered twenty pizzas.",
+    "cand_A": "They were both delicious.",
+    "cand_B": "They were all delicious."
    },
    {
-    "item": "dual-10",
+    "item": "dual-09",
     "cls": "duality",
     "ctx": "Support",
-    "context": "Leo has exactly two flatmates.",
-    "cand_A": "Both of his flatmates are students.",
-    "cand_B": "All of his flatmates are students."
+    "context": "Hana only had two exams this term.",
+    "cand_A": "She passed them both.",
+    "cand_B": "She passed them all."
    },
    {
-    "item": "dual-12",
+    "item": "dual-11",
     "cls": "duality",
     "ctx": "Control",
-    "context": "Ben has three guitars.",
-    "cand_A": "Both of his guitars are out of tune.",
-    "cand_B": "All of his guitars are out of tune."
+    "context": "Ada has thirty grandchildren.",
+    "cand_A": "She sends both of her grandchildren a card every year.",
+    "cand_B": "She sends all of her grandchildren a card every year."
    },
    {
-    "item": "dual-14",
+    "item": "dual-13",
     "cls": "duality",
     "ctx": "Support",
-    "context": "Jon has exactly two laptops.",
-    "cand_A": "Both of his laptops are broken.",
-    "cand_B": "All of his laptops are broken."
+    "context": "The shop only had two bikes left.",
+    "cand_A": "I tried both of them.",
+    "cand_B": "I tried all of them."
    },
    {
-    "item": "add-01",
+    "item": "dual-15",
+    "cls": "duality",
+    "ctx": "Control",
+    "context": "Mei packed seven suitcases.",
+    "cand_A": "The airline lost both of her suitcases.",
+    "cand_B": "The airline lost all of her suitcases."
+   },
+   {
+    "item": "add-02",
     "cls": "additive",
     "ctx": "Support",
     "context": "John came to the party.",
@@ -131,505 +203,15 @@ const STIMULI = {
     "cand_B": "Bill came to the party."
    },
    {
-    "item": "add-03",
+    "item": "add-04",
     "cls": "additive",
     "ctx": "Control",
-    "context": "Priya didn't pass the exam.",
-    "cand_A": "Marcus passed the exam too.",
-    "cand_B": "Marcus passed the exam."
+    "context": "Anna ran a stall at the fair.",
+    "cand_A": "Kate won a prize too.",
+    "cand_B": "Kate won a prize."
    },
    {
-    "item": "add-05",
-    "cls": "additive",
-    "ctx": "Support",
-    "context": "Paul quit the choir.",
-    "cand_A": "Sara quit the choir too.",
-    "cand_B": "Sara quit the choir."
-   },
-   {
-    "item": "add-07",
-    "cls": "additive",
-    "ctx": "Control",
-    "context": "Raj didn't read the report.",
-    "cand_A": "Emma read the report too.",
-    "cand_B": "Emma read the report."
-   },
-   {
-    "item": "add-09",
-    "cls": "additive",
-    "ctx": "Support",
-    "context": "Omar caught the early train.",
-    "cand_A": "Lucy caught the early train too.",
-    "cand_B": "Lucy caught the early train."
-   },
-   {
-    "item": "add-11",
-    "cls": "additive",
-    "ctx": "Control",
-    "context": "Tariq didn't fail the driving test.",
-    "cand_A": "Holly failed the driving test too.",
-    "cand_B": "Holly failed the driving test."
-   },
-   {
-    "item": "add-13",
-    "cls": "additive",
-    "ctx": "Support",
-    "context": "Elif visited the museum.",
-    "cand_A": "Sam visited the museum too.",
-    "cand_B": "Sam visited the museum."
-   },
-   {
-    "item": "add-15",
-    "cls": "additive",
-    "ctx": "Control",
-    "context": "Zoe didn't finish the marathon.",
-    "cand_A": "Ian finished the marathon too.",
-    "cand_B": "Ian finished the marathon."
-   },
-   {
-    "item": "it-02",
-    "cls": "iterative",
-    "ctx": "Control",
-    "context": "Before today, Marco had never climbed the tower.",
-    "cand_A": "He climbed the tower again today.",
-    "cand_B": "He climbed the tower today."
-   },
-   {
-    "item": "it-04",
-    "cls": "iterative",
-    "ctx": "Support",
-    "context": "Pete ran ten miles yesterday.",
-    "cand_A": "He ran ten miles again today.",
-    "cand_B": "He ran ten miles today."
-   },
-   {
-    "item": "it-06",
-    "cls": "iterative",
-    "ctx": "Control",
-    "context": "Before today, Tom had never missed the bus.",
-    "cand_A": "He missed the bus again today.",
-    "cand_B": "He missed the bus today."
-   },
-   {
-    "item": "it-08",
-    "cls": "iterative",
-    "ctx": "Support",
-    "context": "Rhys lost his keys yesterday.",
-    "cand_A": "He lost his keys again today.",
-    "cand_B": "He lost his keys today."
-   },
-   {
-    "item": "it-10",
-    "cls": "iterative",
-    "ctx": "Control",
-    "context": "Before today, Adam had never burned the toast.",
-    "cand_A": "He burned the toast again today.",
-    "cand_B": "He burned the toast today."
-   },
-   {
-    "item": "it-12",
-    "cls": "iterative",
-    "ctx": "Support",
-    "context": "Joel forgot his password yesterday.",
-    "cand_A": "He forgot his password again today.",
-    "cand_B": "He forgot his password today."
-   },
-   {
-    "item": "it-14",
-    "cls": "iterative",
-    "ctx": "Control",
-    "context": "Before today, Kofi had never broken a plate.",
-    "cand_A": "He broke a plate again today.",
-    "cand_B": "He broke a plate today."
-   },
-   {
-    "item": "fact-01",
-    "cls": "factivity",
-    "ctx": "Support",
-    "context": "The meeting was cancelled.",
-    "cand_A": "Sam knows that the meeting was cancelled.",
-    "cand_B": "Sam believes that the meeting was cancelled."
-   },
-   {
-    "item": "fact-03",
-    "cls": "factivity",
-    "ctx": "Control",
-    "context": "The storm has not passed, though a rumour says otherwise.",
-    "cand_A": "Ali knows that the storm has passed.",
-    "cand_B": "Ali believes that the storm has passed."
-   },
-   {
-    "item": "fact-05",
-    "cls": "factivity",
-    "ctx": "Support",
-    "context": "The train was delayed.",
-    "cand_A": "Carl knows that the train was delayed.",
-    "cand_B": "Carl believes that the train was delayed."
-   },
-   {
-    "item": "fact-07",
-    "cls": "factivity",
-    "ctx": "Control",
-    "context": "The bridge is not closed, though a rumour says otherwise.",
-    "cand_A": "Eli knows that the bridge is closed.",
-    "cand_B": "Eli believes that the bridge is closed."
-   },
-   {
-    "item": "fact-09",
-    "cls": "factivity",
-    "ctx": "Support",
-    "context": "The boss is on holiday.",
-    "cand_A": "Gus knows that the boss is on holiday.",
-    "cand_B": "Gus believes that the boss is on holiday."
-   },
-   {
-    "item": "fact-11",
-    "cls": "factivity",
-    "ctx": "Control",
-    "context": "The flight was not cancelled, though a rumour says otherwise.",
-    "cand_A": "Ivy knows that the flight was cancelled.",
-    "cand_B": "Ivy believes that the flight was cancelled."
-   },
-   {
-    "item": "fact-13",
-    "cls": "factivity",
-    "ctx": "Support",
-    "context": "The dog has been fed.",
-    "cand_A": "Kim knows that the dog has been fed.",
-    "cand_B": "Kim believes that the dog has been fed."
-   },
-   {
-    "item": "fact-15",
-    "cls": "factivity",
-    "ctx": "Control",
-    "context": "The lift is not out of order, though a rumour says otherwise.",
-    "cand_A": "Max knows that the lift is out of order.",
-    "cand_B": "Max believes that the lift is out of order."
-   },
-   {
-    "item": "cos-02",
-    "cls": "change-of-state",
-    "ctx": "Support",
-    "context": "Marta used to cycle to work.",
-    "cand_A": "Marta stopped cycling to work.",
-    "cand_B": "Marta doesn't cycle to work."
-   },
-   {
-    "item": "cos-04",
-    "cls": "change-of-state",
-    "ctx": "Control",
-    "context": "Maybe Raj has never drunk coffee.",
-    "cand_A": "Raj stopped drinking coffee.",
-    "cand_B": "Raj doesn't drink coffee."
-   },
-   {
-    "item": "cos-06",
-    "cls": "change-of-state",
-    "ctx": "Support",
-    "context": "Owen used to bite his nails.",
-    "cand_A": "Owen stopped biting his nails.",
-    "cand_B": "Owen doesn't bite his nails."
-   },
-   {
-    "item": "cos-08",
-    "cls": "change-of-state",
-    "ctx": "Control",
-    "context": "Maybe Quinn has never run marathons.",
-    "cand_A": "Quinn stopped running marathons.",
-    "cand_B": "Quinn doesn't run marathons."
-   },
-   {
-    "item": "cos-10",
-    "cls": "change-of-state",
-    "ctx": "Support",
-    "context": "Seb used to gamble.",
-    "cand_A": "Seb stopped gambling.",
-    "cand_B": "Seb doesn't gamble."
-   },
-   {
-    "item": "cos-12",
-    "cls": "change-of-state",
-    "ctx": "Control",
-    "context": "Maybe Umar has never watched the news.",
-    "cand_A": "Umar stopped watching the news.",
-    "cand_B": "Umar doesn't watch the news."
-   },
-   {
-    "item": "cos-14",
-    "cls": "change-of-state",
-    "ctx": "Support",
-    "context": "Will used to drive to work.",
-    "cand_A": "Will stopped driving to work.",
-    "cand_B": "Will doesn't drive to work."
-   },
-   {
-    "item": "poss-01",
-    "cls": "possessive",
-    "ctx": "Support",
-    "context": "Judy has exactly one pie.",
-    "cand_A": "Judy's pie won the contest.",
-    "cand_B": "A pie of Judy's won the contest."
-   },
-   {
-    "item": "poss-03",
-    "cls": "possessive",
-    "ctx": "Control",
-    "context": "Gerald has six photographs.",
-    "cand_A": "Gerald's photograph hangs in the hall.",
-    "cand_B": "A photograph of Gerald's hangs in the hall."
-   },
-   {
-    "item": "poss-05",
-    "cls": "possessive",
-    "ctx": "Support",
-    "context": "Brian has exactly one bike.",
-    "cand_A": "Brian's bike needs repairing.",
-    "cand_B": "A bike of Brian's needs repairing."
-   },
-   {
-    "item": "poss-07",
-    "cls": "possessive",
-    "ctx": "Control",
-    "context": "David has six cars.",
-    "cand_A": "David's car broke down yesterday.",
-    "cand_B": "A car of David's broke down yesterday."
-   },
-   {
-    "item": "poss-09",
-    "cls": "possessive",
-    "ctx": "Support",
-    "context": "Curtis has exactly one hat.",
-    "cand_A": "Curtis's hat blew away.",
-    "cand_B": "A hat of Curtis's blew away."
-   },
-   {
-    "item": "poss-11",
-    "cls": "possessive",
-    "ctx": "Control",
-    "context": "Christopher has six skateboards.",
-    "cand_A": "Christopher's skateboard was left outside.",
-    "cand_B": "A skateboard of Christopher's was left outside."
-   },
-   {
-    "item": "poss-13",
-    "cls": "possessive",
-    "ctx": "Support",
-    "context": "Leslie has exactly one print.",
-    "cand_A": "Leslie's print faded badly.",
-    "cand_B": "A print of Leslie's faded badly."
-   },
-   {
-    "item": "poss-15",
-    "cls": "possessive",
-    "ctx": "Control",
-    "context": "Pamela has six snakes.",
-    "cand_A": "Pamela's snake escaped last night.",
-    "cand_B": "A snake of Pamela's escaped last night."
-   },
-   {
-    "item": "cleft-02",
-    "cls": "cleft",
-    "ctx": "Control",
-    "context": "Maybe nobody made the phone call.",
-    "cand_A": "It was Dan who made the phone call.",
-    "cand_B": "Dan made the phone call."
-   },
-   {
-    "item": "cleft-04",
-    "cls": "cleft",
-    "ctx": "Support",
-    "context": "Someone paid the bill.",
-    "cand_A": "It was Douglas who paid the bill.",
-    "cand_B": "Douglas paid the bill."
-   },
-   {
-    "item": "cleft-06",
-    "cls": "cleft",
-    "ctx": "Control",
-    "context": "Maybe nobody opened the gate.",
-    "cand_A": "It was George who opened the gate.",
-    "cand_B": "George opened the gate."
-   },
-   {
-    "item": "cleft-08",
-    "cls": "cleft",
-    "ctx": "Support",
-    "context": "Someone booked the room.",
-    "cand_A": "It was Suzanne who booked the room.",
-    "cand_B": "Suzanne booked the room."
-   },
-   {
-    "item": "cleft-10",
-    "cls": "cleft",
-    "ctx": "Control",
-    "context": "Maybe nobody signed the form.",
-    "cand_A": "It was Andrea who signed the form.",
-    "cand_B": "Andrea signed the form."
-   },
-   {
-    "item": "cleft-12",
-    "cls": "cleft",
-    "ctx": "Support",
-    "context": "Someone took the photograph.",
-    "cand_A": "It was Nancy who took the photograph.",
-    "cand_B": "Nancy took the photograph."
-   },
-   {
-    "item": "cleft-14",
-    "cls": "cleft",
-    "ctx": "Control",
-    "context": "Maybe nobody answered the phone.",
-    "cand_A": "It was Melinda who answered the phone.",
-    "cand_B": "Melinda answered the phone."
-   }
-  ],
-  "2": [
-   {
-    "item": "def-01",
-    "cls": "definiteness",
-    "ctx": "Control",
-    "context": "The kitchen has four windows.",
-    "cand_A": "The window in the kitchen is open.",
-    "cand_B": "A window in the kitchen is open."
-   },
-   {
-    "item": "def-03",
-    "cls": "definiteness",
-    "ctx": "Support",
-    "context": "The office has exactly one lamp.",
-    "cand_A": "The lamp in the office is broken.",
-    "cand_B": "A lamp in the office is broken."
-   },
-   {
-    "item": "def-05",
-    "cls": "definiteness",
-    "ctx": "Control",
-    "context": "The garden has four trees.",
-    "cand_A": "The tree in the garden is dying.",
-    "cand_B": "A tree in the garden is dying."
-   },
-   {
-    "item": "def-07",
-    "cls": "definiteness",
-    "ctx": "Support",
-    "context": "The hallway has exactly one painting.",
-    "cand_A": "The painting in the hallway is crooked.",
-    "cand_B": "A painting in the hallway is crooked."
-   },
-   {
-    "item": "def-09",
-    "cls": "definiteness",
-    "ctx": "Control",
-    "context": "The fridge has four pears.",
-    "cand_A": "The pear in the fridge is bruised.",
-    "cand_B": "A pear in the fridge is bruised."
-   },
-   {
-    "item": "def-11",
-    "cls": "definiteness",
-    "ctx": "Support",
-    "context": "The car park has exactly one van.",
-    "cand_A": "The van in the car park is dented.",
-    "cand_B": "A van in the car park is dented."
-   },
-   {
-    "item": "def-13",
-    "cls": "definiteness",
-    "ctx": "Control",
-    "context": "The field has four horses.",
-    "cand_A": "The horse in the field is limping.",
-    "cand_B": "A horse in the field is limping."
-   },
-   {
-    "item": "def-15",
-    "cls": "definiteness",
-    "ctx": "Support",
-    "context": "The shop has exactly one till.",
-    "cand_A": "The till in the shop is jammed.",
-    "cand_B": "A till in the shop is jammed."
-   },
-   {
-    "item": "dual-02",
-    "cls": "duality",
-    "ctx": "Control",
-    "context": "Tom has five sisters.",
-    "cand_A": "Both of his sisters are teachers.",
-    "cand_B": "All of his sisters are teachers."
-   },
-   {
-    "item": "dual-04",
-    "cls": "duality",
-    "ctx": "Support",
-    "context": "Mark has exactly two cars.",
-    "cand_A": "Both of his cars are electric.",
-    "cand_B": "All of his cars are electric."
-   },
-   {
-    "item": "dual-06",
-    "cls": "duality",
-    "ctx": "Control",
-    "context": "Omar has five bikes.",
-    "cand_A": "Both of his bikes were stolen.",
-    "cand_B": "All of his bikes were stolen."
-   },
-   {
-    "item": "dual-08",
-    "cls": "duality",
-    "ctx": "Support",
-    "context": "Sam has exactly two dogs.",
-    "cand_A": "Both of his dogs are well trained.",
-    "cand_B": "All of his dogs are well trained."
-   },
-   {
-    "item": "dual-10",
-    "cls": "duality",
-    "ctx": "Control",
-    "context": "Leo has five flatmates.",
-    "cand_A": "Both of his flatmates are students.",
-    "cand_B": "All of his flatmates are students."
-   },
-   {
-    "item": "dual-12",
-    "cls": "duality",
-    "ctx": "Support",
-    "context": "Ben has exactly two guitars.",
-    "cand_A": "Both of his guitars are out of tune.",
-    "cand_B": "All of his guitars are out of tune."
-   },
-   {
-    "item": "dual-14",
-    "cls": "duality",
-    "ctx": "Control",
-    "context": "Jon has five laptops.",
-    "cand_A": "Both of his laptops are broken.",
-    "cand_B": "All of his laptops are broken."
-   },
-   {
-    "item": "add-01",
-    "cls": "additive",
-    "ctx": "Control",
-    "context": "John didn't come to the party.",
-    "cand_A": "Bill came to the party too.",
-    "cand_B": "Bill came to the party."
-   },
-   {
-    "item": "add-03",
-    "cls": "additive",
-    "ctx": "Support",
-    "context": "Priya passed the exam.",
-    "cand_A": "Marcus passed the exam too.",
-    "cand_B": "Marcus passed the exam."
-   },
-   {
-    "item": "add-05",
-    "cls": "additive",
-    "ctx": "Control",
-    "context": "Paul didn't quit the choir.",
-    "cand_A": "Sara quit the choir too.",
-    "cand_B": "Sara quit the choir."
-   },
-   {
-    "item": "add-07",
+    "item": "add-06",
     "cls": "additive",
     "ctx": "Support",
     "context": "Raj read the report.",
@@ -637,509 +219,43 @@ const STIMULI = {
     "cand_B": "Emma read the report."
    },
    {
-    "item": "add-09",
+    "item": "add-08",
     "cls": "additive",
     "ctx": "Control",
-    "context": "Omar didn't catch the early train.",
+    "context": "Omar drove to work.",
     "cand_A": "Lucy caught the early train too.",
     "cand_B": "Lucy caught the early train."
    },
    {
-    "item": "add-11",
-    "cls": "additive",
-    "ctx": "Support",
-    "context": "Tariq failed the driving test.",
-    "cand_A": "Holly failed the driving test too.",
-    "cand_B": "Holly failed the driving test."
-   },
-   {
-    "item": "add-13",
-    "cls": "additive",
-    "ctx": "Control",
-    "context": "Elif didn't visit the museum.",
-    "cand_A": "Sam visited the museum too.",
-    "cand_B": "Sam visited the museum."
-   },
-   {
-    "item": "add-15",
-    "cls": "additive",
-    "ctx": "Support",
-    "context": "Zoe finished the marathon.",
-    "cand_A": "Ian finished the marathon too.",
-    "cand_B": "Ian finished the marathon."
-   },
-   {
-    "item": "it-02",
-    "cls": "iterative",
-    "ctx": "Support",
-    "context": "Marco climbed the tower yesterday.",
-    "cand_A": "He climbed the tower again today.",
-    "cand_B": "He climbed the tower today."
-   },
-   {
-    "item": "it-04",
-    "cls": "iterative",
-    "ctx": "Control",
-    "context": "Before today, Pete had never run ten miles.",
-    "cand_A": "He ran ten miles again today.",
-    "cand_B": "He ran ten miles today."
-   },
-   {
-    "item": "it-06",
-    "cls": "iterative",
-    "ctx": "Support",
-    "context": "Tom missed the bus yesterday.",
-    "cand_A": "He missed the bus again today.",
-    "cand_B": "He missed the bus today."
-   },
-   {
-    "item": "it-08",
-    "cls": "iterative",
-    "ctx": "Control",
-    "context": "Before today, Rhys had never lost his keys.",
-    "cand_A": "He lost his keys again today.",
-    "cand_B": "He lost his keys today."
-   },
-   {
-    "item": "it-10",
-    "cls": "iterative",
-    "ctx": "Support",
-    "context": "Adam burned the toast yesterday.",
-    "cand_A": "He burned the toast again today.",
-    "cand_B": "He burned the toast today."
-   },
-   {
-    "item": "it-12",
-    "cls": "iterative",
-    "ctx": "Control",
-    "context": "Before today, Joel had never forgotten his password.",
-    "cand_A": "He forgot his password again today.",
-    "cand_B": "He forgot his password today."
-   },
-   {
-    "item": "it-14",
-    "cls": "iterative",
-    "ctx": "Support",
-    "context": "Kofi broke a plate yesterday.",
-    "cand_A": "He broke a plate again today.",
-    "cand_B": "He broke a plate today."
-   },
-   {
-    "item": "fact-01",
-    "cls": "factivity",
-    "ctx": "Control",
-    "context": "The meeting was not cancelled, though a rumour says otherwise.",
-    "cand_A": "Sam knows that the meeting was cancelled.",
-    "cand_B": "Sam believes that the meeting was cancelled."
-   },
-   {
-    "item": "fact-03",
-    "cls": "factivity",
-    "ctx": "Support",
-    "context": "The storm has passed.",
-    "cand_A": "Ali knows that the storm has passed.",
-    "cand_B": "Ali believes that the storm has passed."
-   },
-   {
-    "item": "fact-05",
-    "cls": "factivity",
-    "ctx": "Control",
-    "context": "The train was not delayed, though a rumour says otherwise.",
-    "cand_A": "Carl knows that the train was delayed.",
-    "cand_B": "Carl believes that the train was delayed."
-   },
-   {
-    "item": "fact-07",
-    "cls": "factivity",
-    "ctx": "Support",
-    "context": "The bridge is closed.",
-    "cand_A": "Eli knows that the bridge is closed.",
-    "cand_B": "Eli believes that the bridge is closed."
-   },
-   {
-    "item": "fact-09",
-    "cls": "factivity",
-    "ctx": "Control",
-    "context": "The boss is not on holiday, though a rumour says otherwise.",
-    "cand_A": "Gus knows that the boss is on holiday.",
-    "cand_B": "Gus believes that the boss is on holiday."
-   },
-   {
-    "item": "fact-11",
-    "cls": "factivity",
-    "ctx": "Support",
-    "context": "The flight was cancelled.",
-    "cand_A": "Ivy knows that the flight was cancelled.",
-    "cand_B": "Ivy believes that the flight was cancelled."
-   },
-   {
-    "item": "fact-13",
-    "cls": "factivity",
-    "ctx": "Control",
-    "context": "The dog has not been fed, though a rumour says otherwise.",
-    "cand_A": "Kim knows that the dog has been fed.",
-    "cand_B": "Kim believes that the dog has been fed."
-   },
-   {
-    "item": "fact-15",
-    "cls": "factivity",
-    "ctx": "Support",
-    "context": "The lift is out of order.",
-    "cand_A": "Max knows that the lift is out of order.",
-    "cand_B": "Max believes that the lift is out of order."
-   },
-   {
-    "item": "cos-02",
-    "cls": "change-of-state",
-    "ctx": "Control",
-    "context": "Maybe Marta has never cycled to work.",
-    "cand_A": "Marta stopped cycling to work.",
-    "cand_B": "Marta doesn't cycle to work."
-   },
-   {
-    "item": "cos-04",
-    "cls": "change-of-state",
-    "ctx": "Support",
-    "context": "Raj used to drink coffee.",
-    "cand_A": "Raj stopped drinking coffee.",
-    "cand_B": "Raj doesn't drink coffee."
-   },
-   {
-    "item": "cos-06",
-    "cls": "change-of-state",
-    "ctx": "Control",
-    "context": "Maybe Owen has never bitten his nails.",
-    "cand_A": "Owen stopped biting his nails.",
-    "cand_B": "Owen doesn't bite his nails."
-   },
-   {
-    "item": "cos-08",
-    "cls": "change-of-state",
-    "ctx": "Support",
-    "context": "Quinn used to run marathons.",
-    "cand_A": "Quinn stopped running marathons.",
-    "cand_B": "Quinn doesn't run marathons."
-   },
-   {
-    "item": "cos-10",
-    "cls": "change-of-state",
-    "ctx": "Control",
-    "context": "Maybe Seb has never gambled.",
-    "cand_A": "Seb stopped gambling.",
-    "cand_B": "Seb doesn't gamble."
-   },
-   {
-    "item": "cos-12",
-    "cls": "change-of-state",
-    "ctx": "Support",
-    "context": "Umar used to watch the news.",
-    "cand_A": "Umar stopped watching the news.",
-    "cand_B": "Umar doesn't watch the news."
-   },
-   {
-    "item": "cos-14",
-    "cls": "change-of-state",
-    "ctx": "Control",
-    "context": "Maybe Will has never driven to work.",
-    "cand_A": "Will stopped driving to work.",
-    "cand_B": "Will doesn't drive to work."
-   },
-   {
-    "item": "poss-01",
-    "cls": "possessive",
-    "ctx": "Control",
-    "context": "Judy has four pies.",
-    "cand_A": "Judy's pie won the contest.",
-    "cand_B": "A pie of Judy's won the contest."
-   },
-   {
-    "item": "poss-03",
-    "cls": "possessive",
-    "ctx": "Support",
-    "context": "Gerald has exactly one photograph.",
-    "cand_A": "Gerald's photograph hangs in the hall.",
-    "cand_B": "A photograph of Gerald's hangs in the hall."
-   },
-   {
-    "item": "poss-05",
-    "cls": "possessive",
-    "ctx": "Control",
-    "context": "Brian has four bikes.",
-    "cand_A": "Brian's bike needs repairing.",
-    "cand_B": "A bike of Brian's needs repairing."
-   },
-   {
-    "item": "poss-07",
-    "cls": "possessive",
-    "ctx": "Support",
-    "context": "David has exactly one car.",
-    "cand_A": "David's car broke down yesterday.",
-    "cand_B": "A car of David's broke down yesterday."
-   },
-   {
-    "item": "poss-09",
-    "cls": "possessive",
-    "ctx": "Control",
-    "context": "Curtis has four hats.",
-    "cand_A": "Curtis's hat blew away.",
-    "cand_B": "A hat of Curtis's blew away."
-   },
-   {
-    "item": "poss-11",
-    "cls": "possessive",
-    "ctx": "Support",
-    "context": "Christopher has exactly one skateboard.",
-    "cand_A": "Christopher's skateboard was left outside.",
-    "cand_B": "A skateboard of Christopher's was left outside."
-   },
-   {
-    "item": "poss-13",
-    "cls": "possessive",
-    "ctx": "Control",
-    "context": "Leslie has four prints.",
-    "cand_A": "Leslie's print faded badly.",
-    "cand_B": "A print of Leslie's faded badly."
-   },
-   {
-    "item": "poss-15",
-    "cls": "possessive",
-    "ctx": "Support",
-    "context": "Pamela has exactly one snake.",
-    "cand_A": "Pamela's snake escaped last night.",
-    "cand_B": "A snake of Pamela's escaped last night."
-   },
-   {
-    "item": "cleft-02",
-    "cls": "cleft",
-    "ctx": "Support",
-    "context": "Someone made the phone call.",
-    "cand_A": "It was Dan who made the phone call.",
-    "cand_B": "Dan made the phone call."
-   },
-   {
-    "item": "cleft-04",
-    "cls": "cleft",
-    "ctx": "Control",
-    "context": "Maybe nobody paid the bill.",
-    "cand_A": "It was Douglas who paid the bill.",
-    "cand_B": "Douglas paid the bill."
-   },
-   {
-    "item": "cleft-06",
-    "cls": "cleft",
-    "ctx": "Support",
-    "context": "Someone opened the gate.",
-    "cand_A": "It was George who opened the gate.",
-    "cand_B": "George opened the gate."
-   },
-   {
-    "item": "cleft-08",
-    "cls": "cleft",
-    "ctx": "Control",
-    "context": "Maybe nobody booked the room.",
-    "cand_A": "It was Suzanne who booked the room.",
-    "cand_B": "Suzanne booked the room."
-   },
-   {
-    "item": "cleft-10",
-    "cls": "cleft",
-    "ctx": "Support",
-    "context": "Someone signed the form.",
-    "cand_A": "It was Andrea who signed the form.",
-    "cand_B": "Andrea signed the form."
-   },
-   {
-    "item": "cleft-12",
-    "cls": "cleft",
-    "ctx": "Control",
-    "context": "Maybe nobody took the photograph.",
-    "cand_A": "It was Nancy who took the photograph.",
-    "cand_B": "Nancy took the photograph."
-   },
-   {
-    "item": "cleft-14",
-    "cls": "cleft",
-    "ctx": "Support",
-    "context": "Someone answered the phone.",
-    "cand_A": "It was Melinda who answered the phone.",
-    "cand_B": "Melinda answered the phone."
-   }
-  ],
-  "3": [
-   {
-    "item": "def-02",
-    "cls": "definiteness",
-    "ctx": "Support",
-    "context": "The shelter has exactly one dog.",
-    "cand_A": "The dog at the shelter is friendly.",
-    "cand_B": "A dog at the shelter is friendly."
-   },
-   {
-    "item": "def-04",
-    "cls": "definiteness",
-    "ctx": "Control",
-    "context": "The garage has three cars.",
-    "cand_A": "The car in the garage is red.",
-    "cand_B": "A car in the garage is red."
-   },
-   {
-    "item": "def-06",
-    "cls": "definiteness",
-    "ctx": "Support",
-    "context": "The classroom has exactly one clock.",
-    "cand_A": "The clock in the classroom is slow.",
-    "cand_B": "A clock in the classroom is slow."
-   },
-   {
-    "item": "def-08",
-    "cls": "definiteness",
-    "ctx": "Control",
-    "context": "The bathroom has three towels.",
-    "cand_A": "The towel in the bathroom is wet.",
-    "cand_B": "A towel in the bathroom is wet."
-   },
-   {
-    "item": "def-10",
-    "cls": "definiteness",
-    "ctx": "Support",
-    "context": "The drawer has exactly one key.",
-    "cand_A": "The key in the drawer is rusty.",
-    "cand_B": "A key in the drawer is rusty."
-   },
-   {
-    "item": "def-12",
-    "cls": "definiteness",
-    "ctx": "Control",
-    "context": "The library has three computers.",
-    "cand_A": "The computer in the library is frozen.",
-    "cand_B": "A computer in the library is frozen."
-   },
-   {
-    "item": "def-14",
-    "cls": "definiteness",
-    "ctx": "Support",
-    "context": "The bedroom has exactly one mirror.",
-    "cand_A": "The mirror in the bedroom is cracked.",
-    "cand_B": "A mirror in the bedroom is cracked."
-   },
-   {
-    "item": "dual-01",
-    "cls": "duality",
-    "ctx": "Support",
-    "context": "Nina has exactly two brothers.",
-    "cand_A": "Both of her brothers are doctors.",
-    "cand_B": "All of her brothers are doctors."
-   },
-   {
-    "item": "dual-03",
-    "cls": "duality",
-    "ctx": "Control",
-    "context": "Priya has six cats.",
-    "cand_A": "Both of her cats are asleep.",
-    "cand_B": "All of her cats are asleep."
-   },
-   {
-    "item": "dual-05",
-    "cls": "duality",
-    "ctx": "Support",
-    "context": "Lena has exactly two children.",
-    "cand_A": "Both of her children are at school.",
-    "cand_B": "All of her children are at school."
-   },
-   {
-    "item": "dual-07",
-    "cls": "duality",
-    "ctx": "Control",
-    "context": "Ruth has six plants.",
-    "cand_A": "Both of her plants have died.",
-    "cand_B": "All of her plants have died."
-   },
-   {
-    "item": "dual-09",
-    "cls": "duality",
-    "ctx": "Support",
-    "context": "Hana has exactly two sons.",
-    "cand_A": "Both of her sons are engineers.",
-    "cand_B": "All of her sons are engineers."
-   },
-   {
-    "item": "dual-11",
-    "cls": "duality",
-    "ctx": "Control",
-    "context": "Ada has six daughters.",
-    "cand_A": "Both of her daughters are married.",
-    "cand_B": "All of her daughters are married."
-   },
-   {
-    "item": "dual-13",
-    "cls": "duality",
-    "ctx": "Support",
-    "context": "Iris has exactly two houses.",
-    "cand_A": "Both of her houses are rented out.",
-    "cand_B": "All of her houses are rented out."
-   },
-   {
-    "item": "dual-15",
-    "cls": "duality",
-    "ctx": "Control",
-    "context": "Mei has six suitcases.",
-    "cand_A": "Both of her suitcases were lost.",
-    "cand_B": "All of her suitcases were lost."
-   },
-   {
-    "item": "add-02",
-    "cls": "additive",
-    "ctx": "Control",
-    "context": "Lisa didn't see Dune.",
-    "cand_A": "Donald saw Dune too.",
-    "cand_B": "Donald saw Dune."
-   },
-   {
-    "item": "add-04",
-    "cls": "additive",
-    "ctx": "Support",
-    "context": "Anna won a prize.",
-    "cand_A": "Kate won a prize too.",
-    "cand_B": "Kate won a prize."
-   },
-   {
-    "item": "add-06",
-    "cls": "additive",
-    "ctx": "Control",
-    "context": "Mia didn't order the soup.",
-    "cand_A": "Josh ordered the soup too.",
-    "cand_B": "Josh ordered the soup."
-   },
-   {
-    "item": "add-08",
-    "cls": "additive",
-    "ctx": "Support",
-    "context": "Chloe voted for the proposal.",
-    "cand_A": "Dan voted for the proposal too.",
-    "cand_B": "Dan voted for the proposal."
-   },
-   {
     "item": "add-10",
     "cls": "additive",
-    "ctx": "Control",
-    "context": "Nora didn't sign the petition.",
-    "cand_A": "Felix signed the petition too.",
-    "cand_B": "Felix signed the petition."
+    "ctx": "Support",
+    "context": "We visited the castle.",
+    "cand_A": "We visited the museum too.",
+    "cand_B": "We visited the museum."
    },
    {
     "item": "add-12",
     "cls": "additive",
-    "ctx": "Support",
-    "context": "Grace joined the gym.",
-    "cand_A": "Owen joined the gym too.",
-    "cand_B": "Owen joined the gym."
+    "ctx": "Control",
+    "context": "Nora painted the fence this year.",
+    "cand_A": "She planted beans too.",
+    "cand_B": "She planted beans."
    },
    {
     "item": "add-14",
     "cls": "additive",
+    "ctx": "Support",
+    "context": "Grace joined the gym in January.",
+    "cand_A": "Owen also joined the gym.",
+    "cand_B": "Owen joined the gym."
+   },
+   {
+    "item": "add-16",
+    "cls": "additive",
     "ctx": "Control",
-    "context": "Hugo didn't buy a ticket.",
-    "cand_A": "Amy bought a ticket too.",
+    "context": "Hugo watched the final at home.",
+    "cand_A": "Amy also bought a ticket.",
     "cand_B": "Amy bought a ticket."
    },
    {
@@ -1154,103 +270,103 @@ const STIMULI = {
     "item": "it-03",
     "cls": "iterative",
     "ctx": "Control",
-    "context": "Before today, Aisha had never cooked a curry.",
-    "cand_A": "She cooked a curry again today.",
-    "cand_B": "She cooked a curry today."
+    "context": "Aisha cooked a stew on Monday.",
+    "cand_A": "She cooked a curry again on Friday.",
+    "cand_B": "She cooked a curry on Friday."
    },
    {
     "item": "it-05",
     "cls": "iterative",
     "ctx": "Support",
-    "context": "Yuki visited Paris yesterday.",
-    "cand_A": "She visited Paris again today.",
-    "cand_B": "She visited Paris today."
+    "context": "Freya visited Paris in May.",
+    "cand_A": "She visited Paris again in June.",
+    "cand_B": "She visited Paris in June."
    },
    {
     "item": "it-07",
     "cls": "iterative",
     "ctx": "Control",
-    "context": "Before today, Clara had never fallen off her bike.",
-    "cand_A": "She fell off her bike again today.",
-    "cand_B": "She fell off her bike today."
+    "context": "Clara fell over in the park last week.",
+    "cand_A": "She fell off her bike again yesterday.",
+    "cand_B": "She fell off her bike yesterday."
    },
    {
     "item": "it-09",
     "cls": "iterative",
     "ctx": "Support",
-    "context": "Lina baked bread yesterday.",
-    "cand_A": "She baked bread again today.",
-    "cand_B": "She baked bread today."
+    "context": "Our dog chewed the sofa last month.",
+    "cand_A": "It chewed the sofa again today.",
+    "cand_B": "It chewed the sofa today."
    },
    {
     "item": "it-11",
     "cls": "iterative",
     "ctx": "Control",
-    "context": "Before today, Fay had never been swimming.",
-    "cand_A": "She went swimming again today.",
-    "cand_B": "She went swimming today."
+    "context": "We painted the hall in October.",
+    "cand_A": "The heating broke again in December.",
+    "cand_B": "The heating broke in December."
    },
    {
     "item": "it-13",
     "cls": "iterative",
     "ctx": "Support",
-    "context": "Maya sang in public yesterday.",
-    "cand_A": "She sang in public again today.",
-    "cand_B": "She sang in public today."
+    "context": "Maya sang at the open-mic night.",
+    "cand_A": "She sang there again last night.",
+    "cand_B": "She sang there last night."
    },
    {
     "item": "it-15",
     "cls": "iterative",
     "ctx": "Control",
-    "context": "Before today, Noor had never ridden a horse.",
-    "cand_A": "She rode a horse again today.",
-    "cand_B": "She rode a horse today."
+    "context": "Our train was cancelled in March.",
+    "cand_A": "Our flight was delayed again in April.",
+    "cand_B": "Our flight was delayed in April."
    },
    {
     "item": "fact-02",
     "cls": "factivity",
     "ctx": "Support",
-    "context": "The key is under the mat.",
-    "cand_A": "Ruth knows that the key is under the mat.",
-    "cand_B": "Ruth believes that the key is under the mat."
+    "context": "The key is under the doormat as usual.",
+    "cand_A": "Ruth knows it's under the doormat.",
+    "cand_B": "Ruth thinks it's under the doormat."
    },
    {
     "item": "fact-04",
     "cls": "factivity",
     "ctx": "Control",
-    "context": "The shop is not closed today, though a rumour says otherwise.",
-    "cand_A": "Bea knows that the shop is closed today.",
-    "cand_B": "Bea believes that the shop is closed today."
+    "context": "The shop might be closed today.",
+    "cand_A": "My mum knows that it's closed.",
+    "cand_B": "My mum thinks that it's closed."
    },
    {
     "item": "fact-06",
     "cls": "factivity",
     "ctx": "Support",
-    "context": "The exam has been postponed.",
-    "cand_A": "Dina knows that the exam has been postponed.",
-    "cand_B": "Dina believes that the exam has been postponed."
+    "context": "The exam has been postponed until June.",
+    "cand_A": "Dina knows it has been postponed.",
+    "cand_B": "Dina believes it has been postponed."
    },
    {
     "item": "fact-08",
     "cls": "factivity",
     "ctx": "Control",
-    "context": "The concert did not sell out, though a rumour says otherwise.",
-    "cand_A": "Fran knows that the concert sold out.",
-    "cand_B": "Fran believes that the concert sold out."
+    "context": "The concert may have sold out already.",
+    "cand_A": "Fran found out that it had sold out.",
+    "cand_B": "Fran heard that it had sold out."
    },
    {
     "item": "fact-10",
     "cls": "factivity",
     "ctx": "Support",
-    "context": "The milk has gone off.",
-    "cand_A": "Hal knows that the milk has gone off.",
-    "cand_B": "Hal believes that the milk has gone off."
+    "context": "The milk has definitely gone off.",
+    "cand_A": "Hal realised that it had gone off.",
+    "cand_B": "Hal thought that it had gone off."
    },
    {
     "item": "fact-12",
     "cls": "factivity",
     "ctx": "Control",
-    "context": "The printer is not broken, though a rumour says otherwise.",
+    "context": "The printer might be broken.",
     "cand_A": "Jay knows that the printer is broken.",
     "cand_B": "Jay believes that the printer is broken."
    },
@@ -1258,377 +374,345 @@ const STIMULI = {
     "item": "fact-14",
     "cls": "factivity",
     "ctx": "Support",
-    "context": "The tickets are free.",
-    "cand_A": "Lou knows that the tickets are free.",
-    "cand_B": "Lou believes that the tickets are free."
+    "context": "The tickets are free this year.",
+    "cand_A": "Lou found out that they're free.",
+    "cand_B": "Lou heard that they're free."
+   },
+   {
+    "item": "fact-16",
+    "cls": "factivity",
+    "ctx": "Control",
+    "context": "Our landlord may have sold the flat.",
+    "cand_A": "My flatmate knows that he's sold it.",
+    "cand_B": "My flatmate thinks that he's sold it."
    },
    {
     "item": "cos-01",
     "cls": "change-of-state",
     "ctx": "Support",
     "context": "Scott used to smoke.",
-    "cand_A": "Scott stopped smoking.",
-    "cand_B": "Scott doesn't smoke."
+    "cand_A": "He stopped smoking.",
+    "cand_B": "He doesn't smoke."
    },
    {
     "item": "cos-03",
     "cls": "change-of-state",
     "ctx": "Control",
-    "context": "Maybe Iris has never played the piano.",
-    "cand_A": "Iris stopped playing the piano.",
-    "cand_B": "Iris doesn't play the piano."
+    "context": "My dad came round for a barbecue.",
+    "cand_A": "He gave up meat.",
+    "cand_B": "He doesn't eat meat."
    },
    {
     "item": "cos-05",
     "cls": "change-of-state",
     "ctx": "Support",
-    "context": "Nell used to eat meat.",
-    "cand_A": "Nell stopped eating meat.",
-    "cand_B": "Nell doesn't eat meat."
+    "context": "Owen used to bite his nails.",
+    "cand_A": "He stopped biting his nails.",
+    "cand_B": "He doesn't bite his nails."
    },
    {
     "item": "cos-07",
     "cls": "change-of-state",
     "ctx": "Control",
-    "context": "Maybe Pia has never gone to church.",
-    "cand_A": "Pia stopped going to church.",
-    "cand_B": "Pia doesn't go to church."
+    "context": "Our teacher had an eye test.",
+    "cand_A": "She stopped wearing glasses.",
+    "cand_B": "She doesn't wear glasses."
    },
    {
     "item": "cos-09",
     "cls": "change-of-state",
     "ctx": "Support",
-    "context": "Rosa used to write poetry.",
-    "cand_A": "Rosa stopped writing poetry.",
-    "cand_B": "Rosa doesn't write poetry."
+    "context": "Tess used to sing in a choir.",
+    "cand_A": "She quit singing in a choir.",
+    "cand_B": "She doesn't sing in a choir."
    },
    {
     "item": "cos-11",
     "cls": "change-of-state",
     "ctx": "Control",
-    "context": "Maybe Tess has never sung in a choir.",
-    "cand_A": "Tess stopped singing in a choir.",
-    "cand_B": "Tess doesn't sing in a choir."
+    "context": "Vera lives next to a park.",
+    "cand_A": "She started jogging.",
+    "cand_B": "She jogs."
    },
    {
     "item": "cos-13",
     "cls": "change-of-state",
     "ctx": "Support",
-    "context": "Vera used to wear glasses.",
-    "cand_A": "Vera stopped wearing glasses.",
-    "cand_B": "Vera doesn't wear glasses."
+    "context": "Umar didn't use to watch the news.",
+    "cand_A": "He started watching the news.",
+    "cand_B": "He watches the news."
    },
    {
     "item": "cos-15",
     "cls": "change-of-state",
     "ctx": "Control",
-    "context": "Maybe Xavi has never taken the bus.",
-    "cand_A": "Xavi stopped taking the bus.",
-    "cand_B": "Xavi doesn't take the bus."
-   },
-   {
-    "item": "poss-02",
-    "cls": "possessive",
-    "ctx": "Control",
-    "context": "Deanna has five ladders.",
-    "cand_A": "Deanna's ladder was stolen.",
-    "cand_B": "A ladder of Deanna's was stolen."
-   },
-   {
-    "item": "poss-04",
-    "cls": "possessive",
-    "ctx": "Support",
-    "context": "Anne has exactly one vase.",
-    "cand_A": "Anne's vase cracked in the move.",
-    "cand_B": "A vase of Anne's cracked in the move."
-   },
-   {
-    "item": "poss-06",
-    "cls": "possessive",
-    "ctx": "Control",
-    "context": "Carol has five sweaters.",
-    "cand_A": "Carol's sweater shrank in the wash.",
-    "cand_B": "A sweater of Carol's shrank in the wash."
-   },
-   {
-    "item": "poss-08",
-    "cls": "possessive",
-    "ctx": "Support",
-    "context": "Sally has exactly one chair.",
-    "cand_A": "Sally's chair collapsed last week.",
-    "cand_B": "A chair of Sally's collapsed last week."
-   },
-   {
-    "item": "poss-10",
-    "cls": "possessive",
-    "ctx": "Control",
-    "context": "Elizabeth has five boxes.",
-    "cand_A": "Elizabeth's box arrived damaged.",
-    "cand_B": "A box of Elizabeth's arrived damaged."
-   },
-   {
-    "item": "poss-12",
-    "cls": "possessive",
-    "ctx": "Support",
-    "context": "Rachelle has written exactly one story.",
-    "cand_A": "Rachelle's story won an award.",
-    "cand_B": "A story of Rachelle's won an award."
-   },
-   {
-    "item": "poss-14",
-    "cls": "possessive",
-    "ctx": "Control",
-    "context": "Kirsten has five forks.",
-    "cand_A": "Kirsten's fork went missing.",
-    "cand_B": "A fork of Kirsten's went missing."
-   },
-   {
-    "item": "cleft-01",
-    "cls": "cleft",
-    "ctx": "Support",
-    "context": "Someone broke the window.",
-    "cand_A": "It was Margaret who broke the window.",
-    "cand_B": "Margaret broke the window."
-   },
-   {
-    "item": "cleft-03",
-    "cls": "cleft",
-    "ctx": "Control",
-    "context": "Maybe nobody found the keys.",
-    "cand_A": "It was Amanda who found the keys.",
-    "cand_B": "Amanda found the keys."
-   },
-   {
-    "item": "cleft-05",
-    "cls": "cleft",
-    "ctx": "Support",
-    "context": "Someone sent the email.",
-    "cand_A": "It was Karla who sent the email.",
-    "cand_B": "Karla sent the email."
-   },
-   {
-    "item": "cleft-07",
-    "cls": "cleft",
-    "ctx": "Control",
-    "context": "Maybe nobody wrote the report.",
-    "cand_A": "It was Helen who wrote the report.",
-    "cand_B": "Helen wrote the report."
-   },
-   {
-    "item": "cleft-09",
-    "cls": "cleft",
-    "ctx": "Support",
-    "context": "Someone locked the door.",
-    "cand_A": "It was Vincent who locked the door.",
-    "cand_B": "Vincent locked the door."
-   },
-   {
-    "item": "cleft-11",
-    "cls": "cleft",
-    "ctx": "Control",
-    "context": "Maybe nobody fixed the printer.",
-    "cand_A": "It was Donald who fixed the printer.",
-    "cand_B": "Donald fixed the printer."
-   },
-   {
-    "item": "cleft-13",
-    "cls": "cleft",
-    "ctx": "Support",
-    "context": "Someone cleaned the kitchen.",
-    "cand_A": "It was Christina who cleaned the kitchen.",
-    "cand_B": "Christina cleaned the kitchen."
-   },
-   {
-    "item": "cleft-15",
-    "cls": "cleft",
-    "ctx": "Control",
-    "context": "Maybe nobody moved the chairs.",
-    "cand_A": "It was Sonia who moved the chairs.",
-    "cand_B": "Sonia moved the chairs."
+    "context": "Nell has a lot of free time.",
+    "cand_A": "She took up knitting.",
+    "cand_B": "She knits."
    }
   ],
-  "4": [
+  "2": [
    {
-    "item": "def-02",
+    "item": "def-01",
     "cls": "definiteness",
     "ctx": "Control",
-    "context": "The shelter has five dogs.",
-    "cand_A": "The dog at the shelter is friendly.",
-    "cand_B": "A dog at the shelter is friendly."
+    "context": "Our kitchen has quite a few windows.",
+    "cand_A": "I opened the window this morning.",
+    "cand_B": "I opened a window this morning."
    },
    {
-    "item": "def-04",
+    "item": "def-03",
     "cls": "definiteness",
     "ctx": "Support",
-    "context": "The garage has exactly one car.",
-    "cand_A": "The car in the garage is red.",
-    "cand_B": "A car in the garage is red."
+    "context": "My office only has one lamp.",
+    "cand_A": "I switched on the lamp.",
+    "cand_B": "I switched on a lamp."
    },
    {
-    "item": "def-06",
+    "item": "def-05",
     "cls": "definiteness",
     "ctx": "Control",
-    "context": "The classroom has five clocks.",
-    "cand_A": "The clock in the classroom is slow.",
-    "cand_B": "A clock in the classroom is slow."
+    "context": "The classroom had quite a few clocks.",
+    "cand_A": "Someone broke the clock.",
+    "cand_B": "Someone broke a clock."
    },
    {
-    "item": "def-08",
+    "item": "def-07",
     "cls": "definiteness",
     "ctx": "Support",
-    "context": "The bathroom has exactly one towel.",
-    "cand_A": "The towel in the bathroom is wet.",
-    "cand_B": "A towel in the bathroom is wet."
+    "context": "The bathroom only had one towel.",
+    "cand_A": "I dried my hands on the towel.",
+    "cand_B": "I dried my hands on a towel."
    },
    {
-    "item": "def-10",
+    "item": "def-09",
     "cls": "definiteness",
     "ctx": "Control",
-    "context": "The drawer has five keys.",
-    "cand_A": "The key in the drawer is rusty.",
-    "cand_B": "A key in the drawer is rusty."
+    "context": "The drawer had dozens of keys in it.",
+    "cand_A": "I tried the key in the lock.",
+    "cand_B": "I tried a key in the lock."
    },
    {
-    "item": "def-12",
+    "item": "def-11",
     "cls": "definiteness",
     "ctx": "Support",
-    "context": "The library has exactly one computer.",
-    "cand_A": "The computer in the library is frozen.",
-    "cand_B": "A computer in the library is frozen."
+    "context": "The library only has one computer.",
+    "cand_A": "Someone was using the computer.",
+    "cand_B": "Someone was using a computer."
    },
    {
-    "item": "def-14",
+    "item": "def-13",
     "cls": "definiteness",
     "ctx": "Control",
-    "context": "The bedroom has five mirrors.",
-    "cand_A": "The mirror in the bedroom is cracked.",
-    "cand_B": "A mirror in the bedroom is cracked."
+    "context": "The bedroom has mirrors on every wall.",
+    "cand_A": "There's a crack in the mirror.",
+    "cand_B": "There's a crack in a mirror."
+   },
+   {
+    "item": "def-15",
+    "cls": "definiteness",
+    "ctx": "Support",
+    "context": "The hotel only had one lift.",
+    "cand_A": "The lift was out of order.",
+    "cand_B": "A lift was out of order."
+   },
+   {
+    "item": "part-02",
+    "cls": "partitive",
+    "ctx": "Control",
+    "context": "My sister has three cats.",
+    "cand_A": "The cat scratched me.",
+    "cand_B": "One of the cats scratched me."
+   },
+   {
+    "item": "part-04",
+    "cls": "partitive",
+    "ctx": "Support",
+    "context": "The team only has one coach.",
+    "cand_A": "I spoke to the coach after the match.",
+    "cand_B": "I spoke to one of the coaches after the match."
+   },
+   {
+    "item": "part-06",
+    "cls": "partitive",
+    "ctx": "Control",
+    "context": "My desk has a lot of drawers.",
+    "cand_A": "The drawer keeps getting stuck.",
+    "cand_B": "One of the drawers keeps getting stuck."
+   },
+   {
+    "item": "part-08",
+    "cls": "partitive",
+    "ctx": "Support",
+    "context": "The printer only has one tray.",
+    "cand_A": "I filled the tray with paper.",
+    "cand_B": "I filled one of the trays with paper."
+   },
+   {
+    "item": "part-10",
+    "cls": "partitive",
+    "ctx": "Control",
+    "context": "The school has several nurses.",
+    "cand_A": "I phoned the nurse this morning.",
+    "cand_B": "I phoned one of the nurses this morning."
+   },
+   {
+    "item": "part-12",
+    "cls": "partitive",
+    "ctx": "Support",
+    "context": "The course only had one exam.",
+    "cand_A": "I failed the exam.",
+    "cand_B": "I failed one of the exams."
+   },
+   {
+    "item": "part-14",
+    "cls": "partitive",
+    "ctx": "Control",
+    "context": "The hotel had three outdoor pools.",
+    "cand_A": "We swam in the pool every day.",
+    "cand_B": "We swam in one of the pools every day."
+   },
+   {
+    "item": "part-16",
+    "cls": "partitive",
+    "ctx": "Support",
+    "context": "The farm only had one tractor.",
+    "cand_A": "My uncle let me drive the tractor.",
+    "cand_B": "My uncle let me drive one of the tractors."
    },
    {
     "item": "dual-01",
     "cls": "duality",
     "ctx": "Control",
-    "context": "Nina has four brothers.",
-    "cand_A": "Both of her brothers are doctors.",
-    "cand_B": "All of her brothers are doctors."
+    "context": "My aunt has a dozen dogs.",
+    "cand_A": "Both of her dogs are very old.",
+    "cand_B": "All of her dogs are very old."
    },
    {
     "item": "dual-03",
     "cls": "duality",
     "ctx": "Support",
-    "context": "Priya has exactly two cats.",
-    "cand_A": "Both of her cats are asleep.",
-    "cand_B": "All of her cats are asleep."
+    "context": "Priya only has two cats.",
+    "cand_A": "She feeds both of her cats twice a day.",
+    "cand_B": "She feeds all of her cats twice a day."
    },
    {
     "item": "dual-05",
     "cls": "duality",
     "ctx": "Control",
-    "context": "Lena has four children.",
-    "cand_A": "Both of her children are at school.",
-    "cand_B": "All of her children are at school."
+    "context": "Our neighbours have eight children.",
+    "cand_A": "Both of their children go to my school.",
+    "cand_B": "All of their children go to my school."
    },
    {
     "item": "dual-07",
     "cls": "duality",
     "ctx": "Support",
-    "context": "Ruth has exactly two plants.",
-    "cand_A": "Both of her plants have died.",
-    "cand_B": "All of her plants have died."
+    "context": "We only ordered two pizzas.",
+    "cand_A": "They were both delicious.",
+    "cand_B": "They were all delicious."
    },
    {
     "item": "dual-09",
     "cls": "duality",
     "ctx": "Control",
-    "context": "Hana has four sons.",
-    "cand_A": "Both of her sons are engineers.",
-    "cand_B": "All of her sons are engineers."
+    "context": "Hana had fifteen exams this term.",
+    "cand_A": "She passed them both.",
+    "cand_B": "She passed them all."
    },
    {
     "item": "dual-11",
     "cls": "duality",
     "ctx": "Support",
-    "context": "Ada has exactly two daughters.",
-    "cand_A": "Both of her daughters are married.",
-    "cand_B": "All of her daughters are married."
+    "context": "Ada only has two grandchildren.",
+    "cand_A": "She sends both of her grandchildren a card every year.",
+    "cand_B": "She sends all of her grandchildren a card every year."
    },
    {
     "item": "dual-13",
     "cls": "duality",
     "ctx": "Control",
-    "context": "Iris has four houses.",
-    "cand_A": "Both of her houses are rented out.",
-    "cand_B": "All of her houses are rented out."
+    "context": "The shop had rows and rows of bikes.",
+    "cand_A": "I tried both of them.",
+    "cand_B": "I tried all of them."
    },
    {
     "item": "dual-15",
     "cls": "duality",
     "ctx": "Support",
-    "context": "Mei has exactly two suitcases.",
-    "cand_A": "Both of her suitcases were lost.",
-    "cand_B": "All of her suitcases were lost."
+    "context": "Mei only packed two suitcases.",
+    "cand_A": "The airline lost both of her suitcases.",
+    "cand_B": "The airline lost all of her suitcases."
    },
    {
     "item": "add-02",
     "cls": "additive",
-    "ctx": "Support",
-    "context": "Lisa saw Dune.",
-    "cand_A": "Donald saw Dune too.",
-    "cand_B": "Donald saw Dune."
+    "ctx": "Control",
+    "context": "John stayed at home.",
+    "cand_A": "Bill came to the party too.",
+    "cand_B": "Bill came to the party."
    },
    {
     "item": "add-04",
     "cls": "additive",
-    "ctx": "Control",
-    "context": "Anna didn't win a prize.",
+    "ctx": "Support",
+    "context": "Anna won a prize at the fair.",
     "cand_A": "Kate won a prize too.",
     "cand_B": "Kate won a prize."
    },
    {
     "item": "add-06",
     "cls": "additive",
-    "ctx": "Support",
-    "context": "Mia ordered the soup.",
-    "cand_A": "Josh ordered the soup too.",
-    "cand_B": "Josh ordered the soup."
+    "ctx": "Control",
+    "context": "Raj wrote the report.",
+    "cand_A": "Emma read the report too.",
+    "cand_B": "Emma read the report."
    },
    {
     "item": "add-08",
     "cls": "additive",
-    "ctx": "Control",
-    "context": "Chloe didn't vote for the proposal.",
-    "cand_A": "Dan voted for the proposal too.",
-    "cand_B": "Dan voted for the proposal."
+    "ctx": "Support",
+    "context": "Omar caught the early train.",
+    "cand_A": "Lucy caught the early train too.",
+    "cand_B": "Lucy caught the early train."
    },
    {
     "item": "add-10",
     "cls": "additive",
-    "ctx": "Support",
-    "context": "Nora signed the petition.",
-    "cand_A": "Felix signed the petition too.",
-    "cand_B": "Felix signed the petition."
+    "ctx": "Control",
+    "context": "We missed the last bus.",
+    "cand_A": "We visited the museum too.",
+    "cand_B": "We visited the museum."
    },
    {
     "item": "add-12",
     "cls": "additive",
-    "ctx": "Control",
-    "context": "Grace didn't join the gym.",
-    "cand_A": "Owen joined the gym too.",
-    "cand_B": "Owen joined the gym."
+    "ctx": "Support",
+    "context": "Nora planted tomatoes this year.",
+    "cand_A": "She planted beans too.",
+    "cand_B": "She planted beans."
    },
    {
     "item": "add-14",
     "cls": "additive",
+    "ctx": "Control",
+    "context": "Grace moved house in January.",
+    "cand_A": "Owen also joined the gym.",
+    "cand_B": "Owen joined the gym."
+   },
+   {
+    "item": "add-16",
+    "cls": "additive",
     "ctx": "Support",
-    "context": "Hugo bought a ticket.",
-    "cand_A": "Amy bought a ticket too.",
+    "context": "Hugo bought a ticket for the final.",
+    "cand_A": "Amy also bought a ticket.",
     "cand_B": "Amy bought a ticket."
    },
    {
     "item": "it-01",
     "cls": "iterative",
     "ctx": "Control",
-    "context": "Before today, Jenna had never been ice skating.",
+    "context": "Jenna went swimming yesterday.",
     "cand_A": "She went ice skating again today.",
     "cand_B": "She went ice skating today."
    },
@@ -1636,97 +720,97 @@ const STIMULI = {
     "item": "it-03",
     "cls": "iterative",
     "ctx": "Support",
-    "context": "Aisha cooked a curry yesterday.",
-    "cand_A": "She cooked a curry again today.",
-    "cand_B": "She cooked a curry today."
+    "context": "Aisha cooked a curry on Monday.",
+    "cand_A": "She cooked a curry again on Friday.",
+    "cand_B": "She cooked a curry on Friday."
    },
    {
     "item": "it-05",
     "cls": "iterative",
     "ctx": "Control",
-    "context": "Before today, Yuki had never visited Paris.",
-    "cand_A": "She visited Paris again today.",
-    "cand_B": "She visited Paris today."
+    "context": "Freya visited Rome in May.",
+    "cand_A": "She visited Paris again in June.",
+    "cand_B": "She visited Paris in June."
    },
    {
     "item": "it-07",
     "cls": "iterative",
     "ctx": "Support",
-    "context": "Clara fell off her bike yesterday.",
-    "cand_A": "She fell off her bike again today.",
-    "cand_B": "She fell off her bike today."
+    "context": "Clara fell off her bike last week.",
+    "cand_A": "She fell off her bike again yesterday.",
+    "cand_B": "She fell off her bike yesterday."
    },
    {
     "item": "it-09",
     "cls": "iterative",
     "ctx": "Control",
-    "context": "Before today, Lina had never baked bread.",
-    "cand_A": "She baked bread again today.",
-    "cand_B": "She baked bread today."
+    "context": "Our dog chewed a shoe last month.",
+    "cand_A": "It chewed the sofa again today.",
+    "cand_B": "It chewed the sofa today."
    },
    {
     "item": "it-11",
     "cls": "iterative",
     "ctx": "Support",
-    "context": "Fay went swimming yesterday.",
-    "cand_A": "She went swimming again today.",
-    "cand_B": "She went swimming today."
+    "context": "The heating broke in October.",
+    "cand_A": "The heating broke again in December.",
+    "cand_B": "The heating broke in December."
    },
    {
     "item": "it-13",
     "cls": "iterative",
     "ctx": "Control",
-    "context": "Before today, Maya had never sung in public.",
-    "cand_A": "She sang in public again today.",
-    "cand_B": "She sang in public today."
+    "context": "Maya danced at the open-mic night.",
+    "cand_A": "She sang there again last night.",
+    "cand_B": "She sang there last night."
    },
    {
     "item": "it-15",
     "cls": "iterative",
     "ctx": "Support",
-    "context": "Noor rode a horse yesterday.",
-    "cand_A": "She rode a horse again today.",
-    "cand_B": "She rode a horse today."
+    "context": "Our flight was delayed in March.",
+    "cand_A": "Our flight was delayed again in April.",
+    "cand_B": "Our flight was delayed in April."
    },
    {
     "item": "fact-02",
     "cls": "factivity",
     "ctx": "Control",
-    "context": "The key is not under the mat, though a rumour says otherwise.",
-    "cand_A": "Ruth knows that the key is under the mat.",
-    "cand_B": "Ruth believes that the key is under the mat."
+    "context": "The key might be under the doormat.",
+    "cand_A": "Ruth knows it's under the doormat.",
+    "cand_B": "Ruth thinks it's under the doormat."
    },
    {
     "item": "fact-04",
     "cls": "factivity",
     "ctx": "Support",
-    "context": "The shop is closed today.",
-    "cand_A": "Bea knows that the shop is closed today.",
-    "cand_B": "Bea believes that the shop is closed today."
+    "context": "The shop is closed all day today.",
+    "cand_A": "My mum knows that it's closed.",
+    "cand_B": "My mum thinks that it's closed."
    },
    {
     "item": "fact-06",
     "cls": "factivity",
     "ctx": "Control",
-    "context": "The exam has not been postponed, though a rumour says otherwise.",
-    "cand_A": "Dina knows that the exam has been postponed.",
-    "cand_B": "Dina believes that the exam has been postponed."
+    "context": "The exam might be postponed until June.",
+    "cand_A": "Dina knows it has been postponed.",
+    "cand_B": "Dina believes it has been postponed."
    },
    {
     "item": "fact-08",
     "cls": "factivity",
     "ctx": "Support",
-    "context": "The concert sold out.",
-    "cand_A": "Fran knows that the concert sold out.",
-    "cand_B": "Fran believes that the concert sold out."
+    "context": "The concert sold out in minutes.",
+    "cand_A": "Fran found out that it had sold out.",
+    "cand_B": "Fran heard that it had sold out."
    },
    {
     "item": "fact-10",
     "cls": "factivity",
     "ctx": "Control",
-    "context": "The milk has not gone off, though a rumour says otherwise.",
-    "cand_A": "Hal knows that the milk has gone off.",
-    "cand_B": "Hal believes that the milk has gone off."
+    "context": "The milk might have gone off.",
+    "cand_A": "Hal realised that it had gone off.",
+    "cand_B": "Hal thought that it had gone off."
    },
    {
     "item": "fact-12",
@@ -1740,193 +824,981 @@ const STIMULI = {
     "item": "fact-14",
     "cls": "factivity",
     "ctx": "Control",
-    "context": "The tickets are not free, though a rumour says otherwise.",
-    "cand_A": "Lou knows that the tickets are free.",
-    "cand_B": "Lou believes that the tickets are free."
+    "context": "The tickets might be free.",
+    "cand_A": "Lou found out that they're free.",
+    "cand_B": "Lou heard that they're free."
+   },
+   {
+    "item": "fact-16",
+    "cls": "factivity",
+    "ctx": "Support",
+    "context": "Our landlord has sold the flat.",
+    "cand_A": "My flatmate knows that he's sold it.",
+    "cand_B": "My flatmate thinks that he's sold it."
    },
    {
     "item": "cos-01",
     "cls": "change-of-state",
     "ctx": "Control",
-    "context": "Maybe Scott has never smoked.",
-    "cand_A": "Scott stopped smoking.",
-    "cand_B": "Scott doesn't smoke."
+    "context": "Someone offered Scott a cigarette.",
+    "cand_A": "He stopped smoking.",
+    "cand_B": "He doesn't smoke."
    },
    {
     "item": "cos-03",
     "cls": "change-of-state",
     "ctx": "Support",
-    "context": "Iris used to play the piano.",
-    "cand_A": "Iris stopped playing the piano.",
-    "cand_B": "Iris doesn't play the piano."
+    "context": "My dad used to eat meat.",
+    "cand_A": "He gave up meat.",
+    "cand_B": "He doesn't eat meat."
    },
    {
     "item": "cos-05",
     "cls": "change-of-state",
     "ctx": "Control",
-    "context": "Maybe Nell has never eaten meat.",
-    "cand_A": "Nell stopped eating meat.",
-    "cand_B": "Nell doesn't eat meat."
+    "context": "Owen was nervous before his interview.",
+    "cand_A": "He stopped biting his nails.",
+    "cand_B": "He doesn't bite his nails."
    },
    {
     "item": "cos-07",
     "cls": "change-of-state",
     "ctx": "Support",
-    "context": "Pia used to go to church.",
-    "cand_A": "Pia stopped going to church.",
-    "cand_B": "Pia doesn't go to church."
+    "context": "Our teacher used to wear glasses.",
+    "cand_A": "She stopped wearing glasses.",
+    "cand_B": "She doesn't wear glasses."
    },
    {
     "item": "cos-09",
     "cls": "change-of-state",
     "ctx": "Control",
-    "context": "Maybe Rosa has never written poetry.",
-    "cand_A": "Rosa stopped writing poetry.",
-    "cand_B": "Rosa doesn't write poetry."
+    "context": "Tess loves classical music.",
+    "cand_A": "She quit singing in a choir.",
+    "cand_B": "She doesn't sing in a choir."
    },
    {
     "item": "cos-11",
     "cls": "change-of-state",
     "ctx": "Support",
-    "context": "Tess used to sing in a choir.",
-    "cand_A": "Tess stopped singing in a choir.",
-    "cand_B": "Tess doesn't sing in a choir."
+    "context": "Vera didn't use to exercise.",
+    "cand_A": "She started jogging.",
+    "cand_B": "She jogs."
    },
    {
     "item": "cos-13",
     "cls": "change-of-state",
     "ctx": "Control",
-    "context": "Maybe Vera has never worn glasses.",
-    "cand_A": "Vera stopped wearing glasses.",
-    "cand_B": "Vera doesn't wear glasses."
+    "context": "Umar has a new television.",
+    "cand_A": "He started watching the news.",
+    "cand_B": "He watches the news."
    },
    {
     "item": "cos-15",
     "cls": "change-of-state",
     "ctx": "Support",
-    "context": "Xavi used to take the bus.",
-    "cand_A": "Xavi stopped taking the bus.",
-    "cand_B": "Xavi doesn't take the bus."
-   },
+    "context": "Nell didn't use to knit.",
+    "cand_A": "She took up knitting.",
+    "cand_B": "She knits."
+   }
+  ],
+  "3": [
    {
-    "item": "poss-02",
-    "cls": "possessive",
+    "item": "def-02",
+    "cls": "definiteness",
     "ctx": "Support",
-    "context": "Deanna has exactly one ladder.",
-    "cand_A": "Deanna's ladder was stolen.",
-    "cand_B": "A ladder of Deanna's was stolen."
+    "context": "The shelter only had one dog.",
+    "cand_A": "We adopted the dog last week.",
+    "cand_B": "We adopted a dog last week."
    },
    {
-    "item": "poss-04",
-    "cls": "possessive",
+    "item": "def-04",
+    "cls": "definiteness",
     "ctx": "Control",
-    "context": "Anne has three vases.",
-    "cand_A": "Anne's vase cracked in the move.",
-    "cand_B": "A vase of Anne's cracked in the move."
+    "context": "Our garden has a lot of trees.",
+    "cand_A": "The tree is dying.",
+    "cand_B": "A tree is dying."
    },
    {
-    "item": "poss-06",
-    "cls": "possessive",
+    "item": "def-06",
+    "cls": "definiteness",
     "ctx": "Support",
-    "context": "Carol has exactly one sweater.",
-    "cand_A": "Carol's sweater shrank in the wash.",
-    "cand_B": "A sweater of Carol's shrank in the wash."
+    "context": "The hallway only has one painting.",
+    "cand_A": "I straightened the painting.",
+    "cand_B": "I straightened a painting."
    },
    {
-    "item": "poss-08",
-    "cls": "possessive",
+    "item": "def-08",
+    "cls": "definiteness",
     "ctx": "Control",
-    "context": "Sally has three chairs.",
-    "cand_A": "Sally's chair collapsed last week.",
-    "cand_B": "A chair of Sally's collapsed last week."
+    "context": "The fridge had a whole bag of pears.",
+    "cand_A": "I ate the pear for lunch.",
+    "cand_B": "I ate a pear for lunch."
    },
    {
-    "item": "poss-10",
-    "cls": "possessive",
+    "item": "def-10",
+    "cls": "definiteness",
     "ctx": "Support",
-    "context": "Elizabeth has exactly one box.",
-    "cand_A": "Elizabeth's box arrived damaged.",
-    "cand_B": "A box of Elizabeth's arrived damaged."
+    "context": "The car park only had one space left.",
+    "cand_A": "We parked in the space by the gate.",
+    "cand_B": "We parked in a space by the gate."
    },
    {
-    "item": "poss-12",
-    "cls": "possessive",
+    "item": "def-12",
+    "cls": "definiteness",
     "ctx": "Control",
-    "context": "Rachelle has written three stories.",
-    "cand_A": "Rachelle's story won an award.",
-    "cand_B": "A story of Rachelle's won an award."
+    "context": "The field had several horses in it.",
+    "cand_A": "The horse came over to the fence.",
+    "cand_B": "A horse came over to the fence."
    },
    {
-    "item": "poss-14",
-    "cls": "possessive",
+    "item": "def-14",
+    "cls": "definiteness",
     "ctx": "Support",
-    "context": "Kirsten has exactly one fork.",
-    "cand_A": "Kirsten's fork went missing.",
-    "cand_B": "A fork of Kirsten's went missing."
+    "context": "The shop only had one till open.",
+    "cand_A": "We queued at the till for ages.",
+    "cand_B": "We queued at a till for ages."
    },
    {
-    "item": "cleft-01",
-    "cls": "cleft",
+    "item": "def-16",
+    "cls": "definiteness",
     "ctx": "Control",
-    "context": "Maybe nobody broke the window.",
-    "cand_A": "It was Margaret who broke the window.",
-    "cand_B": "Margaret broke the window."
+    "context": "Our street has quite a few bakeries.",
+    "cand_A": "I bought bread from the bakery.",
+    "cand_B": "I bought bread from a bakery."
    },
    {
-    "item": "cleft-03",
-    "cls": "cleft",
+    "item": "part-01",
+    "cls": "partitive",
     "ctx": "Support",
-    "context": "Someone found the keys.",
-    "cand_A": "It was Amanda who found the keys.",
-    "cand_B": "Amanda found the keys."
+    "context": "Our street only has one café.",
+    "cand_A": "We had lunch at the café.",
+    "cand_B": "We had lunch at one of the cafés."
    },
    {
-    "item": "cleft-05",
-    "cls": "cleft",
+    "item": "part-03",
+    "cls": "partitive",
     "ctx": "Control",
-    "context": "Maybe nobody sent the email.",
-    "cand_A": "It was Karla who sent the email.",
-    "cand_B": "Karla sent the email."
+    "context": "The flat had three big bedrooms.",
+    "cand_A": "I painted the bedroom blue.",
+    "cand_B": "I painted one of the bedrooms blue."
    },
    {
-    "item": "cleft-07",
-    "cls": "cleft",
+    "item": "part-05",
+    "cls": "partitive",
     "ctx": "Support",
-    "context": "Someone wrote the report.",
-    "cand_A": "It was Helen who wrote the report.",
-    "cand_B": "Helen wrote the report."
+    "context": "The museum only had one guide.",
+    "cand_A": "The guide showed us around.",
+    "cand_B": "One of the guides showed us around."
    },
    {
-    "item": "cleft-09",
-    "cls": "cleft",
+    "item": "part-07",
+    "cls": "partitive",
     "ctx": "Control",
-    "context": "Maybe nobody locked the door.",
-    "cand_A": "It was Vincent who locked the door.",
-    "cand_B": "Vincent locked the door."
+    "context": "The village has quite a few pubs.",
+    "cand_A": "We met in the pub on Friday.",
+    "cand_B": "We met in one of the pubs on Friday."
    },
    {
-    "item": "cleft-11",
-    "cls": "cleft",
+    "item": "part-09",
+    "cls": "partitive",
     "ctx": "Support",
-    "context": "Someone fixed the printer.",
-    "cand_A": "It was Donald who fixed the printer.",
-    "cand_B": "Donald fixed the printer."
+    "context": "The house only has one bathroom.",
+    "cand_A": "The bathroom needs cleaning.",
+    "cand_B": "One of the bathrooms needs cleaning."
    },
    {
-    "item": "cleft-13",
-    "cls": "cleft",
+    "item": "part-11",
+    "cls": "partitive",
     "ctx": "Control",
-    "context": "Maybe nobody cleaned the kitchen.",
-    "cand_A": "It was Christina who cleaned the kitchen.",
-    "cand_B": "Christina cleaned the kitchen."
+    "context": "Our road has dozens of streetlights.",
+    "cand_A": "The streetlight is broken.",
+    "cand_B": "One of the streetlights is broken."
    },
    {
-    "item": "cleft-15",
-    "cls": "cleft",
+    "item": "part-13",
+    "cls": "partitive",
     "ctx": "Support",
-    "context": "Someone moved the chairs.",
-    "cand_A": "It was Sonia who moved the chairs.",
-    "cand_B": "Sonia moved the chairs."
+    "context": "The restaurant only had one waiter.",
+    "cand_A": "The waiter forgot our order.",
+    "cand_B": "One of the waiters forgot our order."
+   },
+   {
+    "item": "part-15",
+    "cls": "partitive",
+    "ctx": "Control",
+    "context": "The band has quite a few singers.",
+    "cand_A": "I got a photo with the singer.",
+    "cand_B": "I got a photo with one of the singers."
+   },
+   {
+    "item": "dual-02",
+    "cls": "duality",
+    "ctx": "Support",
+    "context": "Tom only has two sisters.",
+    "cand_A": "Both of his sisters are teachers.",
+    "cand_B": "All of his sisters are teachers."
+   },
+   {
+    "item": "dual-04",
+    "cls": "duality",
+    "ctx": "Control",
+    "context": "Ruth owns a dozen houses.",
+    "cand_A": "She rents both of her houses out.",
+    "cand_B": "She rents all of her houses out."
+   },
+   {
+    "item": "dual-06",
+    "cls": "duality",
+    "ctx": "Support",
+    "context": "I only bought two plants.",
+    "cand_A": "I killed both of them within a week.",
+    "cand_B": "I killed all of them within a week."
+   },
+   {
+    "item": "dual-08",
+    "cls": "duality",
+    "ctx": "Control",
+    "context": "Sam has a whole wall of guitars.",
+    "cand_A": "He tunes both of his guitars every day.",
+    "cand_B": "He tunes all of his guitars every day."
+   },
+   {
+    "item": "dual-10",
+    "cls": "duality",
+    "ctx": "Support",
+    "context": "Leo only has two flatmates.",
+    "cand_A": "Both of his flatmates are students.",
+    "cand_B": "All of his flatmates are students."
+   },
+   {
+    "item": "dual-12",
+    "cls": "duality",
+    "ctx": "Control",
+    "context": "Ben kept hundreds of chickens.",
+    "cand_A": "A fox took both of his chickens.",
+    "cand_B": "A fox took all of his chickens."
+   },
+   {
+    "item": "dual-14",
+    "cls": "duality",
+    "ctx": "Support",
+    "context": "Jon only brought two laptops.",
+    "cand_A": "Both of the laptops were broken.",
+    "cand_B": "All of the laptops were broken."
+   },
+   {
+    "item": "dual-16",
+    "cls": "duality",
+    "ctx": "Control",
+    "context": "My parents invited the whole street.",
+    "cand_A": "The neighbours both came.",
+    "cand_B": "The neighbours all came."
+   },
+   {
+    "item": "add-01",
+    "cls": "additive",
+    "ctx": "Support",
+    "context": "Lisa saw Dune at the weekend.",
+    "cand_A": "Donald saw Dune too.",
+    "cand_B": "Donald saw Dune."
+   },
+   {
+    "item": "add-03",
+    "cls": "additive",
+    "ctx": "Control",
+    "context": "Priya failed her maths exam.",
+    "cand_A": "Marcus passed his driving test too.",
+    "cand_B": "Marcus passed his driving test."
+   },
+   {
+    "item": "add-05",
+    "cls": "additive",
+    "ctx": "Support",
+    "context": "Mia ordered the soup.",
+    "cand_A": "Josh ordered the soup too.",
+    "cand_B": "Josh ordered the soup."
+   },
+   {
+    "item": "add-07",
+    "cls": "additive",
+    "ctx": "Control",
+    "context": "Chloe spoke against the proposal.",
+    "cand_A": "Dan voted for it too.",
+    "cand_B": "Dan voted for it."
+   },
+   {
+    "item": "add-09",
+    "cls": "additive",
+    "ctx": "Support",
+    "context": "I bought a scarf in the sale.",
+    "cand_A": "I bought a hat too.",
+    "cand_B": "I bought a hat."
+   },
+   {
+    "item": "add-11",
+    "cls": "additive",
+    "ctx": "Control",
+    "context": "My brother plays the piano.",
+    "cand_A": "He speaks Spanish too.",
+    "cand_B": "He speaks Spanish."
+   },
+   {
+    "item": "add-13",
+    "cls": "additive",
+    "ctx": "Support",
+    "context": "Tariq failed his driving test.",
+    "cand_A": "Holly also failed her driving test.",
+    "cand_B": "Holly failed her driving test."
+   },
+   {
+    "item": "add-15",
+    "cls": "additive",
+    "ctx": "Control",
+    "context": "Elif went to a concert.",
+    "cand_A": "Sam also visited his grandparents.",
+    "cand_B": "Sam visited his grandparents."
+   },
+   {
+    "item": "it-02",
+    "cls": "iterative",
+    "ctx": "Support",
+    "context": "Marco climbed the tower last year.",
+    "cand_A": "He climbed the tower again this summer.",
+    "cand_B": "He climbed the tower this summer."
+   },
+   {
+    "item": "it-04",
+    "cls": "iterative",
+    "ctx": "Control",
+    "context": "Pete cycled ten miles on Saturday.",
+    "cand_A": "He ran ten miles again on Sunday.",
+    "cand_B": "He ran ten miles on Sunday."
+   },
+   {
+    "item": "it-06",
+    "cls": "iterative",
+    "ctx": "Support",
+    "context": "The bus was late on Monday.",
+    "cand_A": "The bus was late again on Tuesday.",
+    "cand_B": "The bus was late on Tuesday."
+   },
+   {
+    "item": "it-08",
+    "cls": "iterative",
+    "ctx": "Control",
+    "context": "Rhys lost his wallet on Friday.",
+    "cand_A": "He lost his keys again this morning.",
+    "cand_B": "He lost his keys this morning."
+   },
+   {
+    "item": "it-10",
+    "cls": "iterative",
+    "ctx": "Support",
+    "context": "Adam burned the toast yesterday.",
+    "cand_A": "He burned the toast again this morning.",
+    "cand_B": "He burned the toast this morning."
+   },
+   {
+    "item": "it-12",
+    "cls": "iterative",
+    "ctx": "Control",
+    "context": "Joel forgot his lunch last week.",
+    "cand_A": "He forgot his password again today.",
+    "cand_B": "He forgot his password today."
+   },
+   {
+    "item": "it-14",
+    "cls": "iterative",
+    "ctx": "Support",
+    "context": "Kofi broke a plate on Monday.",
+    "cand_A": "He broke a plate again on Wednesday.",
+    "cand_B": "He broke a plate on Wednesday."
+   },
+   {
+    "item": "it-16",
+    "cls": "iterative",
+    "ctx": "Control",
+    "context": "Noor rode a camel on holiday.",
+    "cand_A": "She rode a horse again at the weekend.",
+    "cand_B": "She rode a horse at the weekend."
+   },
+   {
+    "item": "fact-01",
+    "cls": "factivity",
+    "ctx": "Support",
+    "context": "The meeting was cancelled this morning.",
+    "cand_A": "Sam knows that it was cancelled.",
+    "cand_B": "Sam thinks that it was cancelled."
+   },
+   {
+    "item": "fact-03",
+    "cls": "factivity",
+    "ctx": "Control",
+    "context": "The storm might have passed now.",
+    "cand_A": "Ali knows that it has passed.",
+    "cand_B": "Ali believes that it has passed."
+   },
+   {
+    "item": "fact-05",
+    "cls": "factivity",
+    "ctx": "Support",
+    "context": "The train was delayed by an hour.",
+    "cand_A": "Carl realised that it was delayed.",
+    "cand_B": "Carl thought that it was delayed."
+   },
+   {
+    "item": "fact-07",
+    "cls": "factivity",
+    "ctx": "Control",
+    "context": "The bridge might be closed for repairs.",
+    "cand_A": "Eli knows that the bridge is closed.",
+    "cand_B": "Eli thinks that the bridge is closed."
+   },
+   {
+    "item": "fact-09",
+    "cls": "factivity",
+    "ctx": "Support",
+    "context": "My boss is on holiday this week.",
+    "cand_A": "Everyone knows that she's away.",
+    "cand_B": "Everyone thinks that she's away."
+   },
+   {
+    "item": "fact-11",
+    "cls": "factivity",
+    "ctx": "Control",
+    "context": "The flight may have been cancelled.",
+    "cand_A": "Ivy found out that it was cancelled.",
+    "cand_B": "Ivy heard that it was cancelled."
+   },
+   {
+    "item": "fact-13",
+    "cls": "factivity",
+    "ctx": "Support",
+    "context": "The dog has already been fed today.",
+    "cand_A": "The kids know that it has been fed.",
+    "cand_B": "The kids think that it has been fed."
+   },
+   {
+    "item": "fact-15",
+    "cls": "factivity",
+    "ctx": "Control",
+    "context": "The lift might not be working.",
+    "cand_A": "Max realised that the lift wasn't working.",
+    "cand_B": "Max thought that the lift wasn't working."
+   },
+   {
+    "item": "cos-02",
+    "cls": "change-of-state",
+    "ctx": "Support",
+    "context": "Marta used to drive to work.",
+    "cand_A": "She stopped driving to work.",
+    "cand_B": "She doesn't drive to work."
+   },
+   {
+    "item": "cos-04",
+    "cls": "change-of-state",
+    "ctx": "Control",
+    "context": "Raj came to the café with us.",
+    "cand_A": "He gave up coffee.",
+    "cand_B": "He doesn't drink coffee."
+   },
+   {
+    "item": "cos-06",
+    "cls": "change-of-state",
+    "ctx": "Support",
+    "context": "Pia used to go to church.",
+    "cand_A": "She stopped going to church.",
+    "cand_B": "She doesn't go to church."
+   },
+   {
+    "item": "cos-08",
+    "cls": "change-of-state",
+    "ctx": "Control",
+    "context": "Seb went to Las Vegas.",
+    "cand_A": "He quit gambling.",
+    "cand_B": "He doesn't gamble."
+   },
+   {
+    "item": "cos-10",
+    "cls": "change-of-state",
+    "ctx": "Support",
+    "context": "Will used to take the bus.",
+    "cand_A": "He quit taking the bus.",
+    "cand_B": "He doesn't take the bus."
+   },
+   {
+    "item": "cos-12",
+    "cls": "change-of-state",
+    "ctx": "Control",
+    "context": "My brother lives on his own.",
+    "cand_A": "He started cooking dinner.",
+    "cand_B": "He cooks dinner."
+   },
+   {
+    "item": "cos-14",
+    "cls": "change-of-state",
+    "ctx": "Support",
+    "context": "Xavi didn't use to play golf.",
+    "cand_A": "He took up golf.",
+    "cand_B": "He plays golf."
+   },
+   {
+    "item": "cos-16",
+    "cls": "change-of-state",
+    "ctx": "Control",
+    "context": "Grandpa lives by a river.",
+    "cand_A": "He took up fishing.",
+    "cand_B": "He goes fishing."
+   }
+  ],
+  "4": [
+   {
+    "item": "def-02",
+    "cls": "definiteness",
+    "ctx": "Control",
+    "context": "The shelter had lots of dogs.",
+    "cand_A": "We adopted the dog last week.",
+    "cand_B": "We adopted a dog last week."
+   },
+   {
+    "item": "def-04",
+    "cls": "definiteness",
+    "ctx": "Support",
+    "context": "Our garden only has one tree.",
+    "cand_A": "The tree is dying.",
+    "cand_B": "A tree is dying."
+   },
+   {
+    "item": "def-06",
+    "cls": "definiteness",
+    "ctx": "Control",
+    "context": "The hallway has lots of paintings.",
+    "cand_A": "I straightened the painting.",
+    "cand_B": "I straightened a painting."
+   },
+   {
+    "item": "def-08",
+    "cls": "definiteness",
+    "ctx": "Support",
+    "context": "The fridge only had one pear.",
+    "cand_A": "I ate the pear for lunch.",
+    "cand_B": "I ate a pear for lunch."
+   },
+   {
+    "item": "def-10",
+    "cls": "definiteness",
+    "ctx": "Control",
+    "context": "The car park had lots of spaces left.",
+    "cand_A": "We parked in the space by the gate.",
+    "cand_B": "We parked in a space by the gate."
+   },
+   {
+    "item": "def-12",
+    "cls": "definiteness",
+    "ctx": "Support",
+    "context": "The field only had one horse in it.",
+    "cand_A": "The horse came over to the fence.",
+    "cand_B": "A horse came over to the fence."
+   },
+   {
+    "item": "def-14",
+    "cls": "definiteness",
+    "ctx": "Control",
+    "context": "The shop had four tills open.",
+    "cand_A": "We queued at the till for ages.",
+    "cand_B": "We queued at a till for ages."
+   },
+   {
+    "item": "def-16",
+    "cls": "definiteness",
+    "ctx": "Support",
+    "context": "Our street only has one bakery.",
+    "cand_A": "I bought bread from the bakery.",
+    "cand_B": "I bought bread from a bakery."
+   },
+   {
+    "item": "part-01",
+    "cls": "partitive",
+    "ctx": "Control",
+    "context": "Our street has quite a few cafés.",
+    "cand_A": "We had lunch at the café.",
+    "cand_B": "We had lunch at one of the cafés."
+   },
+   {
+    "item": "part-03",
+    "cls": "partitive",
+    "ctx": "Support",
+    "context": "The flat only had one bedroom.",
+    "cand_A": "I painted the bedroom blue.",
+    "cand_B": "I painted one of the bedrooms blue."
+   },
+   {
+    "item": "part-05",
+    "cls": "partitive",
+    "ctx": "Control",
+    "context": "The museum had lots of guides.",
+    "cand_A": "The guide showed us around.",
+    "cand_B": "One of the guides showed us around."
+   },
+   {
+    "item": "part-07",
+    "cls": "partitive",
+    "ctx": "Support",
+    "context": "The village only has one pub.",
+    "cand_A": "We met in the pub on Friday.",
+    "cand_B": "We met in one of the pubs on Friday."
+   },
+   {
+    "item": "part-09",
+    "cls": "partitive",
+    "ctx": "Control",
+    "context": "The house has three separate bathrooms.",
+    "cand_A": "The bathroom needs cleaning.",
+    "cand_B": "One of the bathrooms needs cleaning."
+   },
+   {
+    "item": "part-11",
+    "cls": "partitive",
+    "ctx": "Support",
+    "context": "Our road only has one streetlight.",
+    "cand_A": "The streetlight is broken.",
+    "cand_B": "One of the streetlights is broken."
+   },
+   {
+    "item": "part-13",
+    "cls": "partitive",
+    "ctx": "Control",
+    "context": "The restaurant had lots of waiters.",
+    "cand_A": "The waiter forgot our order.",
+    "cand_B": "One of the waiters forgot our order."
+   },
+   {
+    "item": "part-15",
+    "cls": "partitive",
+    "ctx": "Support",
+    "context": "The band only has one singer.",
+    "cand_A": "I got a photo with the singer.",
+    "cand_B": "I got a photo with one of the singers."
+   },
+   {
+    "item": "dual-02",
+    "cls": "duality",
+    "ctx": "Control",
+    "context": "Tom has seven sisters.",
+    "cand_A": "Both of his sisters are teachers.",
+    "cand_B": "All of his sisters are teachers."
+   },
+   {
+    "item": "dual-04",
+    "cls": "duality",
+    "ctx": "Support",
+    "context": "Ruth only owns two houses.",
+    "cand_A": "She rents both of her houses out.",
+    "cand_B": "She rents all of her houses out."
+   },
+   {
+    "item": "dual-06",
+    "cls": "duality",
+    "ctx": "Control",
+    "context": "I bought loads of plants.",
+    "cand_A": "I killed both of them within a week.",
+    "cand_B": "I killed all of them within a week."
+   },
+   {
+    "item": "dual-08",
+    "cls": "duality",
+    "ctx": "Support",
+    "context": "Sam only has two guitars.",
+    "cand_A": "He tunes both of his guitars every day.",
+    "cand_B": "He tunes all of his guitars every day."
+   },
+   {
+    "item": "dual-10",
+    "cls": "duality",
+    "ctx": "Control",
+    "context": "Leo has ten flatmates.",
+    "cand_A": "Both of his flatmates are students.",
+    "cand_B": "All of his flatmates are students."
+   },
+   {
+    "item": "dual-12",
+    "cls": "duality",
+    "ctx": "Support",
+    "context": "Ben only kept two chickens.",
+    "cand_A": "A fox took both of his chickens.",
+    "cand_B": "A fox took all of his chickens."
+   },
+   {
+    "item": "dual-14",
+    "cls": "duality",
+    "ctx": "Control",
+    "context": "Jon brought a whole box of laptops.",
+    "cand_A": "Both of the laptops were broken.",
+    "cand_B": "All of the laptops were broken."
+   },
+   {
+    "item": "dual-16",
+    "cls": "duality",
+    "ctx": "Support",
+    "context": "My parents only invited two neighbours.",
+    "cand_A": "The neighbours both came.",
+    "cand_B": "The neighbours all came."
+   },
+   {
+    "item": "add-01",
+    "cls": "additive",
+    "ctx": "Control",
+    "context": "Lisa went to the gym at the weekend.",
+    "cand_A": "Donald saw Dune too.",
+    "cand_B": "Donald saw Dune."
+   },
+   {
+    "item": "add-03",
+    "cls": "additive",
+    "ctx": "Support",
+    "context": "Priya passed her driving test.",
+    "cand_A": "Marcus passed his driving test too.",
+    "cand_B": "Marcus passed his driving test."
+   },
+   {
+    "item": "add-05",
+    "cls": "additive",
+    "ctx": "Control",
+    "context": "Mia ordered the salad.",
+    "cand_A": "Josh ordered the soup too.",
+    "cand_B": "Josh ordered the soup."
+   },
+   {
+    "item": "add-07",
+    "cls": "additive",
+    "ctx": "Support",
+    "context": "Chloe voted for the proposal.",
+    "cand_A": "Dan voted for it too.",
+    "cand_B": "Dan voted for it."
+   },
+   {
+    "item": "add-09",
+    "cls": "additive",
+    "ctx": "Control",
+    "context": "I lost my keys in town.",
+    "cand_A": "I bought a hat too.",
+    "cand_B": "I bought a hat."
+   },
+   {
+    "item": "add-11",
+    "cls": "additive",
+    "ctx": "Support",
+    "context": "My brother speaks French.",
+    "cand_A": "He speaks Spanish too.",
+    "cand_B": "He speaks Spanish."
+   },
+   {
+    "item": "add-13",
+    "cls": "additive",
+    "ctx": "Control",
+    "context": "Tariq passed his theory test.",
+    "cand_A": "Holly also failed her driving test.",
+    "cand_B": "Holly failed her driving test."
+   },
+   {
+    "item": "add-15",
+    "cls": "additive",
+    "ctx": "Support",
+    "context": "Elif visited her grandparents.",
+    "cand_A": "Sam also visited his grandparents.",
+    "cand_B": "Sam visited his grandparents."
+   },
+   {
+    "item": "it-02",
+    "cls": "iterative",
+    "ctx": "Control",
+    "context": "Marco visited the cathedral last year.",
+    "cand_A": "He climbed the tower again this summer.",
+    "cand_B": "He climbed the tower this summer."
+   },
+   {
+    "item": "it-04",
+    "cls": "iterative",
+    "ctx": "Support",
+    "context": "Pete ran ten miles on Saturday.",
+    "cand_A": "He ran ten miles again on Sunday.",
+    "cand_B": "He ran ten miles on Sunday."
+   },
+   {
+    "item": "it-06",
+    "cls": "iterative",
+    "ctx": "Control",
+    "context": "The bus was early on Monday.",
+    "cand_A": "The bus was late again on Tuesday.",
+    "cand_B": "The bus was late on Tuesday."
+   },
+   {
+    "item": "it-08",
+    "cls": "iterative",
+    "ctx": "Support",
+    "context": "Rhys lost his keys on Friday.",
+    "cand_A": "He lost his keys again this morning.",
+    "cand_B": "He lost his keys this morning."
+   },
+   {
+    "item": "it-10",
+    "cls": "iterative",
+    "ctx": "Control",
+    "context": "Adam burned the rice yesterday.",
+    "cand_A": "He burned the toast again this morning.",
+    "cand_B": "He burned the toast this morning."
+   },
+   {
+    "item": "it-12",
+    "cls": "iterative",
+    "ctx": "Support",
+    "context": "Joel forgot his password last week.",
+    "cand_A": "He forgot his password again today.",
+    "cand_B": "He forgot his password today."
+   },
+   {
+    "item": "it-14",
+    "cls": "iterative",
+    "ctx": "Control",
+    "context": "Kofi broke a glass on Monday.",
+    "cand_A": "He broke a plate again on Wednesday.",
+    "cand_B": "He broke a plate on Wednesday."
+   },
+   {
+    "item": "it-16",
+    "cls": "iterative",
+    "ctx": "Support",
+    "context": "Noor rode a horse on holiday.",
+    "cand_A": "She rode a horse again at the weekend.",
+    "cand_B": "She rode a horse at the weekend."
+   },
+   {
+    "item": "fact-01",
+    "cls": "factivity",
+    "ctx": "Control",
+    "context": "I'm not sure the meeting was cancelled.",
+    "cand_A": "Sam knows that it was cancelled.",
+    "cand_B": "Sam thinks that it was cancelled."
+   },
+   {
+    "item": "fact-03",
+    "cls": "factivity",
+    "ctx": "Support",
+    "context": "The storm has passed at last.",
+    "cand_A": "Ali knows that it has passed.",
+    "cand_B": "Ali believes that it has passed."
+   },
+   {
+    "item": "fact-05",
+    "cls": "factivity",
+    "ctx": "Control",
+    "context": "The train may have been delayed.",
+    "cand_A": "Carl realised that it was delayed.",
+    "cand_B": "Carl thought that it was delayed."
+   },
+   {
+    "item": "fact-07",
+    "cls": "factivity",
+    "ctx": "Support",
+    "context": "The bridge is closed for repairs this week.",
+    "cand_A": "Eli knows that the bridge is closed.",
+    "cand_B": "Eli thinks that the bridge is closed."
+   },
+   {
+    "item": "fact-09",
+    "cls": "factivity",
+    "ctx": "Control",
+    "context": "My boss might be on holiday.",
+    "cand_A": "Everyone knows that she's away.",
+    "cand_B": "Everyone thinks that she's away."
+   },
+   {
+    "item": "fact-11",
+    "cls": "factivity",
+    "ctx": "Support",
+    "context": "The flight was cancelled last night.",
+    "cand_A": "Ivy found out that it was cancelled.",
+    "cand_B": "Ivy heard that it was cancelled."
+   },
+   {
+    "item": "fact-13",
+    "cls": "factivity",
+    "ctx": "Control",
+    "context": "The dog may already have been fed.",
+    "cand_A": "The kids know that it has been fed.",
+    "cand_B": "The kids think that it has been fed."
+   },
+   {
+    "item": "fact-15",
+    "cls": "factivity",
+    "ctx": "Support",
+    "context": "The lift isn't working.",
+    "cand_A": "Max realised that the lift wasn't working.",
+    "cand_B": "Max thought that the lift wasn't working."
+   },
+   {
+    "item": "cos-02",
+    "cls": "change-of-state",
+    "ctx": "Control",
+    "context": "Marta lives far from her office.",
+    "cand_A": "She stopped driving to work.",
+    "cand_B": "She doesn't drive to work."
+   },
+   {
+    "item": "cos-04",
+    "cls": "change-of-state",
+    "ctx": "Support",
+    "context": "Raj used to drink coffee.",
+    "cand_A": "He gave up coffee.",
+    "cand_B": "He doesn't drink coffee."
+   },
+   {
+    "item": "cos-06",
+    "cls": "change-of-state",
+    "ctx": "Control",
+    "context": "Pia's parents are very religious.",
+    "cand_A": "She stopped going to church.",
+    "cand_B": "She doesn't go to church."
+   },
+   {
+    "item": "cos-08",
+    "cls": "change-of-state",
+    "ctx": "Support",
+    "context": "Seb used to gamble.",
+    "cand_A": "He quit gambling.",
+    "cand_B": "He doesn't gamble."
+   },
+   {
+    "item": "cos-10",
+    "cls": "change-of-state",
+    "ctx": "Control",
+    "context": "Will lives near the bus station.",
+    "cand_A": "He quit taking the bus.",
+    "cand_B": "He doesn't take the bus."
+   },
+   {
+    "item": "cos-12",
+    "cls": "change-of-state",
+    "ctx": "Support",
+    "context": "My brother didn't use to cook.",
+    "cand_A": "He started cooking dinner.",
+    "cand_B": "He cooks dinner."
+   },
+   {
+    "item": "cos-14",
+    "cls": "change-of-state",
+    "ctx": "Control",
+    "context": "Xavi retired last year.",
+    "cand_A": "He took up golf.",
+    "cand_B": "He plays golf."
+   },
+   {
+    "item": "cos-16",
+    "cls": "change-of-state",
+    "ctx": "Support",
+    "context": "Grandpa didn't use to fish.",
+    "cand_A": "He took up fishing.",
+    "cand_B": "He goes fishing."
    }
   ]
  },
@@ -2025,198 +1897,198 @@ const STIMULI = {
    "item": "fill-11",
    "cls": "filler",
    "ctx": "neg-longer",
-   "context": "The shop was closed.",
-   "cand_A": "Ella could not buy milk.",
-   "cand_B": "Ella could buy milk.",
+   "context": "Everyone walked out of the film.",
+   "cand_A": "It was not very good.",
+   "cand_B": "It was very good.",
    "filler_key": "A"
   },
   {
    "item": "fill-12",
    "cls": "filler",
    "ctx": "neg-longer",
-   "context": "The road was flooded.",
-   "cand_A": "Sam could not drive home.",
-   "cand_B": "Sam could drive home.",
+   "context": "The hotel cost a fortune.",
+   "cand_A": "It was not cheap.",
+   "cand_B": "It was cheap.",
    "filler_key": "A"
   },
   {
    "item": "fill-13",
    "cls": "filler",
    "ctx": "neg-longer",
-   "context": "Lucy had lost her voice.",
-   "cand_A": "She could not sing.",
-   "cand_B": "She could sing.",
+   "context": "The children yawned through the whole play.",
+   "cand_A": "They were not interested.",
+   "cand_B": "They were interested.",
    "filler_key": "A"
   },
   {
    "item": "fill-14",
    "cls": "filler",
    "ctx": "neg-longer",
-   "context": "The printer was out of ink.",
-   "cand_A": "Omar could not print his essay.",
-   "cand_B": "Omar could print his essay.",
+   "context": "Nobody finished the curry.",
+   "cand_A": "It was not very tasty.",
+   "cand_B": "It was very tasty.",
    "filler_key": "A"
   },
   {
    "item": "fill-15",
    "cls": "filler",
    "ctx": "neg-longer",
-   "context": "Hannah missed the last bus.",
-   "cand_A": "She could not get home.",
-   "cand_B": "She could get home.",
+   "context": "The exam paper made me panic.",
+   "cand_A": "It was not easy.",
+   "cand_B": "It was easy.",
    "filler_key": "A"
   },
   {
    "item": "fill-16",
    "cls": "filler",
    "ctx": "neg-longer",
-   "context": "The ice was very thin.",
-   "cand_A": "The children could not skate.",
-   "cand_B": "The children could skate.",
+   "context": "We had to wear coats on the beach.",
+   "cand_A": "The weather was not warm.",
+   "cand_B": "The weather was warm.",
    "filler_key": "A"
   },
   {
    "item": "fill-17",
    "cls": "filler",
    "ctx": "neg-longer",
-   "context": "The concert was sold out.",
-   "cand_A": "Nadia could not get a ticket.",
-   "cand_B": "Nadia could get a ticket.",
+   "context": "The shop had no customers that day.",
+   "cand_A": "It was not busy.",
+   "cand_B": "It was busy.",
    "filler_key": "A"
   },
   {
    "item": "fill-18",
    "cls": "filler",
    "ctx": "neg-longer",
-   "context": "Ben's phone was dead.",
-   "cand_A": "He could not call his sister.",
-   "cand_B": "He could call his sister.",
+   "context": "The printer jammed every five minutes.",
+   "cand_A": "It was not reliable.",
+   "cand_B": "It was reliable.",
    "filler_key": "A"
   },
   {
    "item": "fill-19",
    "cls": "filler",
    "ctx": "neg-shorter",
-   "context": "The café had free tables.",
-   "cand_A": "Jo could sit down.",
-   "cand_B": "Jo could not sit down.",
+   "context": "We laughed the whole way through.",
+   "cand_A": "The show was funny.",
+   "cand_B": "The show was not funny.",
    "filler_key": "A"
   },
   {
    "item": "fill-20",
    "cls": "filler",
    "ctx": "neg-shorter",
-   "context": "The bakery still had bread.",
-   "cand_A": "Tim could buy a loaf.",
-   "cand_B": "Tim could not buy a loaf.",
+   "context": "The café was packed at lunchtime.",
+   "cand_A": "It was busy.",
+   "cand_B": "It was not busy.",
    "filler_key": "A"
   },
   {
    "item": "fill-21",
    "cls": "filler",
    "ctx": "neg-shorter",
-   "context": "Amy found her keys.",
-   "cand_A": "She could open the door.",
-   "cand_B": "She could not open the door.",
+   "context": "My new shoes cost very little.",
+   "cand_A": "They were cheap.",
+   "cand_B": "They were not cheap.",
    "filler_key": "A"
   },
   {
    "item": "fill-22",
    "cls": "filler",
    "ctx": "neg-shorter",
-   "context": "It was sunny.",
-   "cand_A": "The kids could play outside.",
-   "cand_B": "The kids could not play outside.",
+   "context": "The kids ran straight into the sea.",
+   "cand_A": "The water was warm.",
+   "cand_B": "The water was not warm.",
    "filler_key": "A"
   },
   {
    "item": "fill-23",
    "cls": "filler",
    "ctx": "neg-shorter",
-   "context": "The pool was open.",
-   "cand_A": "Zara could swim.",
-   "cand_B": "Zara could not swim.",
+   "context": "Everyone got full marks on the quiz.",
+   "cand_A": "It was easy.",
+   "cand_B": "It was not easy.",
    "filler_key": "A"
   },
   {
    "item": "fill-24",
    "cls": "filler",
    "ctx": "neg-shorter",
-   "context": "Chris fixed his bike.",
-   "cand_A": "He could ride to work.",
-   "cand_B": "He could not ride to work.",
+   "context": "Our neighbours helped us move in.",
+   "cand_A": "They were very kind.",
+   "cand_B": "They were not very kind.",
    "filler_key": "A"
   },
   {
    "item": "fill-25",
    "cls": "filler",
    "ctx": "neg-shorter",
-   "context": "The Wi-Fi was working.",
-   "cand_A": "Ivy could send the email.",
-   "cand_B": "Ivy could not send the email.",
+   "context": "The bus came on time every day.",
+   "cand_A": "It was reliable.",
+   "cand_B": "It was not reliable.",
    "filler_key": "A"
   },
   {
    "item": "fill-26",
    "cls": "filler",
    "ctx": "neg-shorter",
-   "context": "The tickets were cheap.",
-   "cand_A": "Paul could afford one.",
-   "cand_B": "Paul could not afford one.",
+   "context": "I slept for ten hours in the new bed.",
+   "cand_A": "It was comfortable.",
+   "cand_B": "It was not comfortable.",
    "filler_key": "A"
   },
   {
    "item": "fill-27",
    "cls": "filler",
-   "ctx": "tense",
-   "context": "Carl cooked dinner last night.",
-   "cand_A": "Then he washed the dishes.",
-   "cand_B": "Then he washes the dishes.",
+   "ctx": "pronoun",
+   "context": "My sister rang me last night.",
+   "cand_A": "She sounded upset.",
+   "cand_B": "He sounded upset.",
    "filler_key": "A"
   },
   {
    "item": "fill-28",
    "cls": "filler",
-   "ctx": "tense",
-   "context": "Ian stayed in last night.",
-   "cand_A": "He watched a film.",
-   "cand_B": "He watches a film.",
+   "ctx": "pronoun",
+   "context": "My grandfather turned ninety.",
+   "cand_A": "He had a big party.",
+   "cand_B": "She had a big party.",
    "filler_key": "A"
   },
   {
    "item": "fill-29",
    "cls": "filler",
-   "ctx": "tense",
-   "context": "Rosa went to Rome last summer.",
-   "cand_A": "She saw the Colosseum.",
-   "cand_B": "She sees the Colosseum.",
+   "ctx": "pronoun",
+   "context": "My parents moved to Spain.",
+   "cand_A": "They love it there.",
+   "cand_B": "He loves it there.",
    "filler_key": "A"
   },
   {
    "item": "fill-30",
    "cls": "filler",
-   "ctx": "tense",
-   "context": "The storm hit last Friday.",
-   "cand_A": "It knocked down a tree.",
-   "cand_B": "It knocks down a tree.",
+   "ctx": "pronoun",
+   "context": "The twins are in my class.",
+   "cand_A": "They sit near me.",
+   "cand_B": "She sits near me.",
    "filler_key": "A"
   },
   {
    "item": "fill-31",
    "cls": "filler",
-   "ctx": "tense",
-   "context": "Alex had a party on Saturday.",
-   "cand_A": "Twenty friends came.",
-   "cand_B": "Twenty friends come.",
+   "ctx": "pronoun",
+   "context": "My aunt sent me a letter.",
+   "cand_A": "She wrote it by hand.",
+   "cand_B": "He wrote it by hand.",
    "filler_key": "A"
   },
   {
    "item": "fill-32",
    "cls": "filler",
-   "ctx": "tense",
-   "context": "Grace baked a cake this morning.",
-   "cand_A": "Her sons ate it.",
-   "cand_B": "Her sons eat it.",
+   "ctx": "pronoun",
+   "context": "Our old car broke down.",
+   "cand_A": "It needs a new engine.",
+   "cand_B": "They need a new engine.",
    "filler_key": "A"
   },
   {
@@ -2224,8 +2096,8 @@ const STIMULI = {
    "cls": "filler",
    "ctx": "that-optional",
    "context": "Ella looked pale.",
-   "cand_A": "Her friend thought that she was ill.",
-   "cand_B": "Her friend thought she was ill.",
+   "cand_A": "Her friend said that she was ill.",
+   "cand_B": "Her friend said she was ill.",
    "filler_key": null
   },
   {
@@ -2242,8 +2114,8 @@ const STIMULI = {
    "cls": "filler",
    "ctx": "that-optional",
    "context": "The fridge was empty.",
-   "cand_A": "Maya thought that she should go shopping.",
-   "cand_B": "Maya thought she should go shopping.",
+   "cand_A": "Maya decided that she would go shopping.",
+   "cand_B": "Maya decided she would go shopping.",
    "filler_key": null
   },
   {
@@ -2358,22 +2230,13 @@ const STIMULI = {
    "item": "fill-48",
    "cls": "filler",
    "ctx": "particle",
-   "context": "It got dark early.",
-   "cand_A": "Dad switched the lamp on.",
-   "cand_B": "Dad switched on the lamp.",
-   "filler_key": null
-  },
-  {
-   "item": "fill-49",
-   "cls": "filler",
-   "ctx": "particle",
    "context": "Ivan finished his cereal.",
    "cand_A": "He put the bowl away.",
    "cand_B": "He put away the bowl.",
    "filler_key": null
   },
   {
-   "item": "fill-50",
+   "item": "fill-49",
    "cls": "filler",
    "ctx": "particle",
    "context": "The meeting clashed with lunch.",
@@ -2382,16 +2245,7 @@ const STIMULI = {
    "filler_key": null
   },
   {
-   "item": "fill-51",
-   "cls": "filler",
-   "ctx": "particle",
-   "context": "The shoes did not fit.",
-   "cand_A": "Ella took the shoes back.",
-   "cand_B": "Ella took back the shoes.",
-   "filler_key": null
-  },
-  {
-   "item": "fill-52",
+   "item": "fill-50",
    "cls": "filler",
    "ctx": "particle",
    "context": "Max found an old letter.",
@@ -2400,7 +2254,7 @@ const STIMULI = {
    "filler_key": null
   },
   {
-   "item": "fill-53",
+   "item": "fill-51",
    "cls": "filler",
    "ctx": "dative",
    "context": "Mary needed a pen.",
@@ -2409,7 +2263,7 @@ const STIMULI = {
    "filler_key": null
   },
   {
-   "item": "fill-54",
+   "item": "fill-52",
    "cls": "filler",
    "ctx": "dative",
    "context": "Grandma loves photos.",
@@ -2418,7 +2272,7 @@ const STIMULI = {
    "filler_key": null
   },
   {
-   "item": "fill-55",
+   "item": "fill-53",
    "cls": "filler",
    "ctx": "dative",
    "context": "The waiter brought the bill.",
@@ -2427,7 +2281,7 @@ const STIMULI = {
    "filler_key": null
   },
   {
-   "item": "fill-56",
+   "item": "fill-54",
    "cls": "filler",
    "ctx": "dative",
    "context": "Sam's niece turned five.",
@@ -2436,7 +2290,7 @@ const STIMULI = {
    "filler_key": null
   },
   {
-   "item": "fill-57",
+   "item": "fill-55",
    "cls": "filler",
    "ctx": "dative",
    "context": "Noah wrote a long letter.",
@@ -2445,30 +2299,12 @@ const STIMULI = {
    "filler_key": null
   },
   {
-   "item": "fill-58",
-   "cls": "filler",
-   "ctx": "dative",
-   "context": "Chloe baked some cookies.",
-   "cand_A": "She offered her neighbour a cookie.",
-   "cand_B": "She offered a cookie to her neighbour.",
-   "filler_key": null
-  },
-  {
-   "item": "fill-59",
+   "item": "fill-56",
    "cls": "filler",
    "ctx": "dative",
    "context": "The teacher had the exam results.",
    "cand_A": "She showed the class the results.",
    "cand_B": "She showed the results to the class.",
-   "filler_key": null
-  },
-  {
-   "item": "fill-60",
-   "cls": "filler",
-   "ctx": "dative",
-   "context": "Tariq had an old guitar.",
-   "cand_A": "He sold a student the guitar.",
-   "cand_B": "He sold the guitar to a student.",
    "filler_key": null
   }
  ],
@@ -2477,49 +2313,49 @@ const STIMULI = {
    "item": "check-1",
    "cls": "check",
    "ctx": "check",
-   "context": "Ravi bought a blue bicycle.",
-   "cand_A": "Ravi's bicycle is blue.",
-   "cand_B": "Ravi's bicycle is and."
+   "context": "Ravi bought a new bicycle.",
+   "cand_A": "It is blue.",
+   "cand_B": "It is and."
   },
   {
    "item": "check-2",
    "cls": "check",
    "ctx": "check",
-   "context": "The bakery closes at six.",
-   "cand_A": "The bakery closes at six.",
-   "cand_B": "The bakery closes at purple."
+   "context": "I need bread from the bakery.",
+   "cand_A": "It closes at six.",
+   "cand_B": "It closes at purple."
   },
   {
    "item": "check-3",
    "cls": "check",
    "ctx": "check",
    "context": "Nadia was in Rome last week.",
-   "cand_A": "Nadia came back from Rome.",
-   "cand_B": "Nadia came back from slowly."
+   "cand_A": "She came back on Sunday.",
+   "cand_B": "She came back on slowly."
   },
   {
    "item": "check-4",
    "cls": "check",
    "ctx": "check",
-   "context": "A cat is lying in the garden.",
-   "cand_A": "The cat in the garden is asleep.",
-   "cand_B": "The cat in the garden is of."
+   "context": "A cat is lying in our garden.",
+   "cand_A": "It looks very sleepy.",
+   "cand_B": "It looks very under."
   },
   {
    "item": "check-5",
    "cls": "check",
    "ctx": "check",
    "context": "Theo had maths homework.",
-   "cand_A": "Theo finished his homework.",
-   "cand_B": "Theo finished his the."
+   "cand_A": "He finished it quickly.",
+   "cand_B": "He finished it the."
   },
   {
    "item": "check-6",
    "cls": "check",
    "ctx": "check",
    "context": "The train to Leeds leaves at noon.",
-   "cand_A": "The train leaves at noon.",
-   "cand_B": "The train leaves at under."
+   "cand_A": "We need to hurry.",
+   "cand_B": "We need to under."
   }
  ],
  "practice": [
@@ -2527,9 +2363,9 @@ const STIMULI = {
    "item": "prac-1",
    "cls": "practice",
    "ctx": "practice",
-   "context": "Maya has exactly one umbrella.",
-   "cand_A": "Maya's umbrella is broken.",
-   "cand_B": "An umbrella of Maya's is broken."
+   "context": "The café only had one free table.",
+   "cand_A": "We sat at the table by the window.",
+   "cand_B": "We sat at a table by the window."
   },
   {
    "item": "prac-2",

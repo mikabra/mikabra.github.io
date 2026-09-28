@@ -10,8 +10,8 @@
 <script src="https://unpkg.com/@jspsych/plugin-survey-html-form@2.1.0"></script>
 <script src="https://unpkg.com/@jspsych-contrib/plugin-pipe@0.5"></script>
 <link  href="https://unpkg.com/jspsych@8.3.0/css/jspsych.css" rel="stylesheet">
-<script src="stimuli.js?v=b700881c53"></script>
-<script src="exp.js?v=b700881c53"></script>
+<script src="stimuli.js?v=8bfe000891"></script>
+<script src="exp.js?v=8bfe000891"></script>
 <style>
   body { background:#fff; font-family: "Helvetica Neue", Arial, sans-serif; color:#222; }
   .jspsych-content { max-width: 760px; }
@@ -120,13 +120,16 @@ async function main() {
   }
 
   const debrief = `<h2>Thank you</h2>
-      <p class="body">The study looked at how speakers choose between sentences that are equally informative but carry different background assumptions: for example <em>both</em> versus <em>all</em>,
-      or whether to add <em>too</em>. Other rounds looked at everyday choices, such as whether to say
-      <em>that</em> in cases where it is optional. Your choices will be used to test the predictions of a constraint-based model of production.</p>`;
+      <p class="body">The study looked at how speakers choose between sentences that are equally
+      informative but carry different background assumptions: for example <em>both</em> versus
+      <em>all</em>, <em>the</em> versus <em>one of the</em>, or whether to add <em>too</em>. Other
+      rounds looked at everyday choices, such as whether to say <em>that</em> in cases where it is
+      optional. Your choices will be used to test the predictions of a constraint-based model of
+      production.</p>`;
   if (SAVE_MODE === "local") {
     timeline.push({
       type: jsPsychHtmlButtonResponse,
-      stimulus: debrief + `<p class="body">Your data will download as a CSV when you click below. Please send it to Mika,
+      stimulus: debrief + `<p class="body">Your data will download as a CSV when you click below. Please send it to mika.bradley.22@ucl.ac.uk,
         with any notes on what you noticed.</p>`,
       choices: ["Finish and download data"]
     });

@@ -1,17 +1,17 @@
 // Review page: renders every item from stimuli.js with the same frame-and-options view as the
 // experiment, keeps the reviewer's marks in localStorage, and exports them as a CSV.
 (function () {
-  const STORE = 'mp-review-b700881c53';
+  const STORE = 'mp-review-8bfe000891';
   const CLASS_NOTES = {
     'definiteness': ['Definiteness', '<em>the</em> vs <em>a</em>'],
+    'partitive': ['Partitive', '<em>the N</em> vs <em>one of the Ns</em>'],
     'duality': ['Duality', '<em>both</em> vs <em>all</em>'],
-    'additive': ['Additive', 'adding <em>too</em> or not'],
+    'additive': ['Additive', 'adding <em>too</em> or <em>also</em>, or not'],
     'iterative': ['Iterative', 'adding <em>again</em> or not'],
-    'factivity': ['Factivity', '<em>knows</em> vs <em>believes</em>'],
-    'change-of-state': ['Change of state', '<em>stopped V-ing</em> vs <em>doesn\u2019t V</em>'],
-    'possessive': ['Possessive', '<em>X\u2019s N</em> vs <em>a N of X\u2019s</em>'],
-    'cleft': ['Cleft', '<em>It was X who\u2026</em> vs a plain sentence']
+    'factivity': ['Factivity', '<em>know</em>, <em>realise</em>, <em>find out</em> vs <em>think</em>, <em>believe</em>, <em>hear</em>'],
+    'change-of-state': ['Change of state', '<em>stopped</em>, <em>quit</em>, <em>gave up</em>, <em>started</em>, <em>took up</em> vs the plain verb']
   };
+
 
   const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
   let state = {};
